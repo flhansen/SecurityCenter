@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer", "AquaMaintenancer\AquaMaintenancer.csproj", "{2D45FAD1-A283-49B1-B787-1C7D6E3B7271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer.Business", "AquaMaintenancer.Business\AquaMaintenancer.Business.csproj", "{11BD819E-27C8-46FC-8DFE-AA102A131D90}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D45FAD1-A283-49B1-B787-1C7D6E3B7271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D45FAD1-A283-49B1-B787-1C7D6E3B7271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D45FAD1-A283-49B1-B787-1C7D6E3B7271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D45FAD1-A283-49B1-B787-1C7D6E3B7271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11BD819E-27C8-46FC-8DFE-AA102A131D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11BD819E-27C8-46FC-8DFE-AA102A131D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11BD819E-27C8-46FC-8DFE-AA102A131D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11BD819E-27C8-46FC-8DFE-AA102A131D90}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15AB7126-3C94-4EF5-BEE4-D23FE02D7635}
+	EndGlobalSection
+EndGlobal
