@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AquaMaintenancer.Business.Models
 {
-    class ApplicationCollection : ObservableCollection<Application>
+    public class ApplicationCollection : ObservableCollection<Application>
     {
     }
 }

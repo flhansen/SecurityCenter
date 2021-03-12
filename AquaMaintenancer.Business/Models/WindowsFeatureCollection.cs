@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AquaMaintenancer.Business.Models
 {
-    public class AntiVirusCollection : ObservableCollection<AntiVirus>
+    public class WindowsFeatureCollection : ObservableCollection<WindowsFeature>
     {
     }
 }
