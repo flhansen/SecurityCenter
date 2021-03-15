@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer.Business",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer.Data", "AquaMaintenancer.Data\AquaMaintenancer.Data.csproj", "{B85B6D7D-86B2-409A-B40D-5BEBA3453510}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer.UILogic", "AquaMaintenancer.UILogic\AquaMaintenancer.UILogic.csproj", "{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B85B6D7D-86B2-409A-B40D-5BEBA3453510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B85B6D7D-86B2-409A-B40D-5BEBA3453510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B85B6D7D-86B2-409A-B40D-5BEBA3453510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
