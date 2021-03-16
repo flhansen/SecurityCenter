@@ -9,7 +9,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <controls:PrimaryButton>Test Alla!</controls:PrimaryButton>
+            <controls:Card Title="Card Title">
+                <controls:PrimaryButton>Test Alla!</controls:PrimaryButton>
+            </controls:Card>
         </StackPanel>
     </Grid>
 </Window>

@@ -3,6 +3,11 @@
                     xmlns:local="clr-namespace:AquaMaintenancer.Theme.Ressources">
 
     <SolidColorBrush x:Key="PrimaryColor" Color="#2E9BFF" />
+    <SolidColorBrush x:Key="SecondaryColor" Color="#66CA67" />
+    <SolidColorBrush x:Key="TertiaryColor" Color="#5D4ADA" />
+    <SolidColorBrush x:Key="AttentionColor" Color="#F85353" />
+    <SolidColorBrush x:Key="BackgroundColor" Color="#1A191F" />
+    <SolidColorBrush x:Key="BackgroundCardsColor" Color="#20202A" />
     <SolidColorBrush x:Key="TextColor" Color="#FFFFFF" />
 
 </ResourceDictionary>
