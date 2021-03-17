@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
                     xmlns:conv="clr-namespace:AquaMaintenancer.Theme.Converter"
+                    xmlns:prop="clr-namespace:AquaMaintenancer.Theme.CustomProperties"
                     xmlns:local="clr-namespace:AquaMaintenancer.Theme.Styles">
 
     <Style TargetType="{x:Type controls:TextField}">
@@ -13,7 +14,7 @@
             <Setter.Value>
 
                 <ControlTemplate TargetType="{x:Type controls:TextField}">
-                    <StackPanel Orientation="Vertical" >
+                    <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8" >
                         <TextBlock
                             Text="{TemplateBinding Label, Converter={StaticResource UpperCaseConverter}}"
                             FontFamily="{TemplateBinding FontFamily}"
