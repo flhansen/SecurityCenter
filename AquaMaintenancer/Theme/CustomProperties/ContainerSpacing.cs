@@ -30,8 +30,27 @@ namespace AquaMaintenancer.Theme.CustomProperties
                 if (fe == null) continue;
 
                 double spacing = GetSpacing(panel);
-                Thickness margin = new Thickness(0, 0, 0, spacing);
-                fe.Margin = margin;
+
+                if (panel is StackPanel)
+                {
+                    StackPanel sp = panel as StackPanel;
+
+                    if (sp.Orientation == Orientation.Horizontal)
+                    {
+                        Thickness margin = new Thickness(0, 0, spacing, 0);
+                        fe.Margin = margin;
+                    }
+                    else
+                    {
+                        Thickness margin = new Thickness(0, 0, 0, spacing);
+                        fe.Margin = margin;
+                    }
+                }
+                else
+                {
+                    Thickness margin = new Thickness(0, 0, spacing, 0);
+                    fe.Margin = margin;
+                }
             }
         }
 
