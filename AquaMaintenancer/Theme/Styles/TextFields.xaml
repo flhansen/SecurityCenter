@@ -8,6 +8,7 @@
     <Style TargetType="{x:Type controls:TextField}">
         <Style.Resources>
             <conv:UpperCaseConverter x:Key="UpperCaseConverter" />
+            <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
         </Style.Resources>
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
         <Setter Property="FontSize" Value="14" />
@@ -20,6 +21,7 @@
                 <ControlTemplate TargetType="{x:Type controls:TextField}">
                     <StackPanel Width="{TemplateBinding Width}" Orientation="Vertical" prop:ContainerSpacing.Spacing="8" >
                         <TextBlock
+                            Visibility="{TemplateBinding Label, Converter={StaticResource StringToVisibilityConverter}}"
                             Text="{TemplateBinding Label, Converter={StaticResource UpperCaseConverter}}"
                             FontFamily="{TemplateBinding FontFamily}"
                             FontWeight="Bold"
