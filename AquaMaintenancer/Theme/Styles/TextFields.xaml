@@ -27,8 +27,9 @@
                             Foreground="{StaticResource TextColor}" Opacity="0.3" />
                         <Grid x:Name="ContentHost">
                             <Border CornerRadius="3" Background="#000000" Opacity="0.1" />
-                            <Border CornerRadius="3" BorderBrush="#000000" Opacity="0.2" BorderThickness="1" />
+                            <Border x:Name="Border" CornerRadius="3" BorderBrush="#000000" Opacity="0.2" BorderThickness="1" />
                             <TextBox
+                                x:Name="TextBox"
                                 Width="{Binding ActualWidth, ElementName=ContentHost}"
                                 CaretBrush="{TemplateBinding Foreground}"
                                 Text="{TemplateBinding Text}" Opacity="0.8"
@@ -41,6 +42,12 @@
                                 FontSize="{TemplateBinding FontSize}" />
                         </Grid>
                     </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="TextBox" Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TertiaryColor}" />
+                            <Setter TargetName="Border" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
 
             </Setter.Value>
