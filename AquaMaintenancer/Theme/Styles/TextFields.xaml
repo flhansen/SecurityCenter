@@ -10,18 +10,36 @@
             <conv:UpperCaseConverter x:Key="UpperCaseConverter" />
         </Style.Resources>
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Padding" Value="12, 8" />
         <Setter Property="Template">
             <Setter.Value>
 
                 <ControlTemplate TargetType="{x:Type controls:TextField}">
-                    <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8" >
+                    <StackPanel Width="{TemplateBinding Width}" Orientation="Vertical" prop:ContainerSpacing.Spacing="8" >
                         <TextBlock
                             Text="{TemplateBinding Label, Converter={StaticResource UpperCaseConverter}}"
                             FontFamily="{TemplateBinding FontFamily}"
                             FontWeight="Bold"
                             FontSize="12"
                             Foreground="{StaticResource TextColor}" Opacity="0.3" />
-                        <TextBox />
+                        <Grid x:Name="ContentHost">
+                            <Border CornerRadius="3" Background="#000000" Opacity="0.1" />
+                            <Border CornerRadius="3" BorderBrush="#000000" Opacity="0.2" BorderThickness="1" />
+                            <TextBox
+                                Width="{Binding ActualWidth, ElementName=ContentHost}"
+                                CaretBrush="{TemplateBinding Foreground}"
+                                Text="{TemplateBinding Text}" Opacity="0.8"
+                                Foreground="{TemplateBinding Foreground}"
+                                Background="Transparent" 
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                Padding="{TemplateBinding Padding}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontSize="{TemplateBinding FontSize}" />
+                        </Grid>
                     </StackPanel>
                 </ControlTemplate>
 
