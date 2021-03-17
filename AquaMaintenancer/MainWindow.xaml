@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <controls:Card Title="Card Title">
-                <controls:TextField />
+                <controls:TextField Label="Label text" />
             </controls:Card>
         </StackPanel>
     </Grid>
