@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:AquaMaintenancer"
         xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <controls:Card Title="Card Title">
-                <controls:PrimaryButton>Test Alla!</controls:PrimaryButton>
+                <controls:PrimaryButton>Button</controls:PrimaryButton>
             </controls:Card>
         </StackPanel>
     </Grid>

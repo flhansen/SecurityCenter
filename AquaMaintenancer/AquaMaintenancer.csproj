@@ -6,4 +6,73 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Theme\Assets\Fonts\Roboto-Black.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-BlackItalic.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-Bold.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-BoldItalic.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-Italic.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-Light.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-LightItalic.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-Medium.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-MediumItalic.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-Regular.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-Thin.ttf" />
+    <None Remove="Theme\Assets\Fonts\Roboto-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Black.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-BlackItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Bold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-BoldItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Italic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Light.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-LightItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Medium.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-MediumItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-Thin.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Theme\Assets\Fonts\Roboto-ThinItalic.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
