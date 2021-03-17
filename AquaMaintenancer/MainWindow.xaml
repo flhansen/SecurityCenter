@@ -8,10 +8,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <controls:Card Title="Card Title">
-                <controls:TextField Label="Label text" />
-            </controls:Card>
-        </StackPanel>
     </Grid>
 </Window>
