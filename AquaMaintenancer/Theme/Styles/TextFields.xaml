@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
+                    xmlns:local="clr-namespace:AquaMaintenancer.Theme.Styles">
+
+    <Style TargetType="{x:Type controls:TextField}">
+        
+    </Style>
+    
+</ResourceDictionary>
