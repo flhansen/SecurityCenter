@@ -21,9 +21,11 @@ namespace AquaMaintenancer.Theme.Components
     {
         public static Pen PenLabels = new Pen(Brushes.White, 1.0);
         public static Pen PenAxis = new Pen(Brushes.White, 1.0);
-        public static Pen PenGrid = new Pen(Brushes.Gray, 1.0);
+        public static Pen PenGrid = new Pen(Brushes.DarkGray, 1.0);
 
         public double SpacingLabels { get; set; } = 16.0;
+        public List<FormattedText> ValueLabels { get; private set; }
+        public List<FormattedText> CategoryLabels { get; private set; }
 
         private IEnumerable<ChartData> data = new List<ChartData>()
         {
@@ -34,26 +36,48 @@ namespace AquaMaintenancer.Theme.Components
             new ChartData { Values = new List<float>() { 29.0f }, Category = "11.03.2021" },
         };
 
+        public BarChart()
+        {
+            ValueLabels = GetValueLabels(data, 5);
+            CategoryLabels = GetCategoryLabels(data);
+        }
+
         protected override void OnRender(DrawingContext ctx)
         {
-            List<FormattedText> valueLabels = GetValueLabels(data, 5);
-            List<FormattedText> categoryLabels = GetCategoryLabels(data);
+            double categoryLabelsHeight = CalculateCategoryLabelsHeight(CategoryLabels);
+            double valueLabelsWidth = CalculateValueLabelsWidth(ValueLabels);
 
-            double categoryLabelsHeight = CalculateCategoryLabelsHeight(categoryLabels);
-            double valueLabelsWidth = CalculateValueLabelsWidth(valueLabels);
-
-            double categoryLabelsWidth = CalculateCategoryLabelsWidth(categoryLabels, valueLabelsWidth);
-            double valueLabelsHeight = CalculateValueLabelsHeight(valueLabels, categoryLabelsHeight);
+            double categoryLabelsWidth = CalculateCategoryLabelsWidth(CategoryLabels, valueLabelsWidth);
+            double valueLabelsHeight = CalculateValueLabelsHeight(ValueLabels, categoryLabelsHeight);
 
             // Draw the labels on y-axis
-            DrawValueLabels(ctx, valueLabels, valueLabelsHeight, categoryLabelsHeight);
-            DrawCategoryLabels(ctx, categoryLabels, valueLabelsWidth, categoryLabelsWidth);
+            DrawValueLabels(ctx, ValueLabels, valueLabelsHeight, categoryLabelsHeight);
+            DrawCategoryLabels(ctx, CategoryLabels, valueLabelsWidth, categoryLabelsWidth);
+            DrawGridLines(ctx, valueLabelsWidth);
 
             // Draw the x-axis
             ctx.DrawLine(PenLabels, new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight), new System.Windows.Point(ActualWidth, ActualHeight - categoryLabelsHeight));
 
             // Draw the y-axis
             ctx.DrawLine(PenLabels, new System.Windows.Point(valueLabelsWidth, 0), new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight));
+
+        }
+
+        private double Remap(double value, double min1, double max1, double min2, double max2)
+        {
+            return (value - min1) * (max2 - min2) / (max1 - min1) + min2;
+        }
+
+        private double GetValueInChart(double value)
+        {
+            double categoryLabelsHeight = CalculateCategoryLabelsHeight(CategoryLabels);
+
+            double min1 = 0.0;
+            double max1 = ValueLabels.Max(label => double.Parse(label.Text));
+            double min2 = ActualHeight - categoryLabelsHeight;
+            double max2 = ValueLabels.Last().Height / 2.0;
+
+            return Remap(value, min1, max1, min2, max2);
         }
 
         private double CalculateCategoryLabelsWidth(List<FormattedText> labels, double valueLabelsWidth)
@@ -73,7 +97,7 @@ namespace AquaMaintenancer.Theme.Components
 
         private double CalculateValueLabelsHeight(List<FormattedText> labels, double categoryLabelsHeight)
         {
-            return ActualHeight - categoryLabelsHeight - labels.Last().Height;
+            return ActualHeight - categoryLabelsHeight - labels.Last().Height / 2;
         }
 
         private List<FormattedText> GetValueLabels(IEnumerable<ChartData> data, int count)
@@ -96,9 +120,18 @@ namespace AquaMaintenancer.Theme.Components
             return data.Select(d => new FormattedText(d.Category, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, Brushes.White, 1.25)).ToList();
         }
 
-        private double DrawValueLabels(DrawingContext ctx, List<FormattedText> labels, double valueLabelsHeight, double categoryLabelsHeight)
+        private void DrawGridLines(DrawingContext ctx, double valueLabelsWidth)
         {
-            double width = 0.0f;
+            for (int i = 0; i < ValueLabels.Count - 1; i++)
+            {
+                FormattedText label = ValueLabels[i];
+                double y = GetValueInChart(double.Parse(label.Text));
+                ctx.DrawLine(PenGrid, new System.Windows.Point(valueLabelsWidth, y), new System.Windows.Point(ActualWidth, y));
+            }
+        }
+
+        private void DrawValueLabels(DrawingContext ctx, List<FormattedText> labels, double valueLabelsHeight, double categoryLabelsHeight)
+        {
             double maxLabelWidth = labels.Max(l => l.Width);
             double steps = valueLabelsHeight / (labels.Count - 1);
 
@@ -109,25 +142,12 @@ namespace AquaMaintenancer.Theme.Components
                 double y = i * steps;
 
                 ctx.DrawText(label, new System.Windows.Point(x, y));
-
-                if (label.Width > width)
-                    width = label.Width;
             }
-
-            for (int i = 0; i < labels.Count - 1; i++)
-            {
-                double y = i * steps;
-                ctx.DrawLine(PenGrid, new System.Windows.Point(width + SpacingLabels, y), new System.Windows.Point(ActualWidth, y));
-            }
-
-            return width;
         }
 
-        private double DrawCategoryLabels(DrawingContext ctx, List<FormattedText> labels, double valueLabelsWidth, double categoryLabelsWidth)
+        private void DrawCategoryLabels(DrawingContext ctx, List<FormattedText> labels, double valueLabelsWidth, double categoryLabelsWidth)
         {
             int numberLabels = labels.Count;
-
-            double height = 0.0f;
             double steps = categoryLabelsWidth / (numberLabels - 1);
 
             for (int i = 0; i < numberLabels; i++)
@@ -136,12 +156,7 @@ namespace AquaMaintenancer.Theme.Components
 
                 FormattedText label = labels[i];
                 ctx.DrawText(label, new System.Windows.Point(x + valueLabelsWidth, ActualHeight - label.Height));
-
-                if (label.Height > height)
-                    height = label.Height;
             }
-
-            return height;
         }
 
     }
