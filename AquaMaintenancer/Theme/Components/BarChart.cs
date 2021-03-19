@@ -25,10 +25,54 @@ namespace AquaMaintenancer.Theme.Components
 
         public List<Brush> Colors { get; set; } = new List<Brush>();
 
-        public double SpacingLabels { get; set; } = 16.0;
-        public double SpacingBars { get; set; } = 5.0;
-        public double SpacingInside { get; set; } = 15.0;
-        public double BarWidth { get; set; } = 20.0;
+        #region LabelSpacing Property
+        public static readonly DependencyProperty LabelSpacingProperty =
+            DependencyProperty.Register(nameof(LabelSpacing), typeof(double),
+                typeof(BarChart), new PropertyMetadata(16.0));
+
+        public double LabelSpacing
+        {
+            get => (double)GetValue(LabelSpacingProperty);
+            set => SetValue(LabelSpacingProperty, value);
+        }
+        #endregion
+
+        #region BarSpacing Property
+        public static readonly DependencyProperty BarSpacingProperty =
+            DependencyProperty.Register(nameof(BarSpacing), typeof(double),
+                typeof(BarChart), new PropertyMetadata(5.0));
+
+        public double BarSpacing
+        {
+            get => (double)GetValue(BarSpacingProperty);
+            set => SetValue(BarSpacingProperty, value);
+        }
+        #endregion
+
+        #region InsideSpacing Property
+        public static readonly DependencyProperty InsideSpacingProperty =
+            DependencyProperty.Register(nameof(InsideSpacing), typeof(double),
+                typeof(BarChart), new PropertyMetadata(15.0));
+
+        public double InsideSpacing
+        {
+            get => (double)GetValue(InsideSpacingProperty);
+            set => SetValue(InsideSpacingProperty, value);
+        }
+        #endregion
+
+        #region BarWidth Property
+        public static readonly DependencyProperty BarWidthProperty =
+            DependencyProperty.Register(nameof(BarWidth), typeof(double),
+                typeof(BarChart), new PropertyMetadata(20.0));
+
+        public double BarWidth
+        {
+            get => (double)GetValue(BarWidthProperty);
+            set => SetValue(BarWidthProperty, value);
+        }
+        #endregion
+
         public List<FormattedText> ValueLabels { get; private set; }
         public List<FormattedText> CategoryLabels { get; private set; }
 
@@ -101,17 +145,17 @@ namespace AquaMaintenancer.Theme.Components
 
         private double CalculateCategoryLabelsWidth(List<FormattedText> labels, double valueLabelsWidth)
         {
-            return ActualWidth - valueLabelsWidth - labels.Last().Width - 2 * SpacingInside;
+            return ActualWidth - valueLabelsWidth - labels.Last().Width - 2 * InsideSpacing;
         }
 
         private double CalculateCategoryLabelsHeight(List<FormattedText> labels)
         {
-            return labels.Max(label => label.Height) + SpacingLabels;
+            return labels.Max(label => label.Height) + LabelSpacing;
         }
 
         private double CalculateValueLabelsWidth(List<FormattedText> labels)
         {
-            return labels.Max(label => label.Width) + SpacingLabels;
+            return labels.Max(label => label.Width) + LabelSpacing;
         }
 
         private double CalculateValueLabelsHeight(List<FormattedText> labels, double categoryLabelsHeight)
@@ -171,7 +215,7 @@ namespace AquaMaintenancer.Theme.Components
 
             for (int i = 0; i < numberLabels; i++)
             {
-                double x = i * steps + valueLabelsWidth + SpacingInside;
+                double x = i * steps + valueLabelsWidth + InsideSpacing;
 
                 FormattedText label = labels[i];
                 ctx.DrawText(label, new System.Windows.Point(x, ActualHeight - label.Height));
@@ -182,7 +226,7 @@ namespace AquaMaintenancer.Theme.Components
                 for (int j = 0; j < values.Count; j++)
                 {
                     int n = values.Count;
-                    double dx = x - ((n - 1) * SpacingBars + n * BarWidth) / 2 + (BarWidth + SpacingBars) * j + label.Width / 2;
+                    double dx = x - ((n - 1) * BarSpacing + n * BarWidth) / 2 + (BarWidth + BarSpacing) * j + label.Width / 2;
                     double height = GetCanvasValue(values[j]);
 
                     Brush brush = Colors[j % Colors.Count];
