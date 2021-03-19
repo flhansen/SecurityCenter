@@ -19,11 +19,16 @@ namespace AquaMaintenancer.Theme.Components
 
     public class BarChart : Canvas
     {
-        public static Pen PenLabels = new Pen(Brushes.White, 1.0);
-        public static Pen PenAxis = new Pen(Brushes.White, 1.0);
-        public static Pen PenGrid = new Pen(Brushes.DarkGray, 1.0);
+        public Pen PenLabels { get; set; } = new Pen();
+        public Pen PenAxis { get; set; } = new Pen();
+        public Pen PenGrid { get; set; } = new Pen();
+
+        public List<Brush> Colors { get; set; } = new List<Brush>();
 
         public double SpacingLabels { get; set; } = 16.0;
+        public double SpacingBars { get; set; } = 5.0;
+        public double SpacingInside { get; set; } = 15.0;
+        public double BarWidth { get; set; } = 20.0;
         public List<FormattedText> ValueLabels { get; private set; }
         public List<FormattedText> CategoryLabels { get; private set; }
 
@@ -38,6 +43,20 @@ namespace AquaMaintenancer.Theme.Components
 
         public BarChart()
         {
+            BrushConverter bc = new BrushConverter();
+            Colors.Add(bc.ConvertFrom("#5D4ADA") as SolidColorBrush);
+            Colors.Add(bc.ConvertFrom("#66CA67") as SolidColorBrush);
+            Colors.Add(bc.ConvertFrom("#2E9BFF") as SolidColorBrush);
+
+            PenGrid.Brush = bc.ConvertFrom("#FFFFFF") as SolidColorBrush;
+            PenGrid.Brush.Opacity = 0.05;
+
+            PenAxis.Brush = bc.ConvertFrom("#FFFFFF") as SolidColorBrush;
+            PenAxis.Brush.Opacity = 1.0;
+
+            PenLabels.Brush = bc.ConvertFrom("#FFFFFF") as SolidColorBrush;
+            PenLabels.Brush.Opacity = 0.3;
+
             ValueLabels = GetValueLabels(data, 5);
             CategoryLabels = GetCategoryLabels(data);
         }
@@ -51,15 +70,15 @@ namespace AquaMaintenancer.Theme.Components
             double valueLabelsHeight = CalculateValueLabelsHeight(ValueLabels, categoryLabelsHeight);
 
             // Draw the labels on y-axis
+            DrawGridLines(ctx, valueLabelsWidth);
             DrawValueLabels(ctx, ValueLabels, valueLabelsHeight, categoryLabelsHeight);
             DrawCategoryLabels(ctx, CategoryLabels, valueLabelsWidth, categoryLabelsWidth);
-            DrawGridLines(ctx, valueLabelsWidth);
 
             // Draw the x-axis
-            ctx.DrawLine(PenLabels, new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight), new System.Windows.Point(ActualWidth, ActualHeight - categoryLabelsHeight));
+            ctx.DrawLine(PenAxis, new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight), new System.Windows.Point(ActualWidth, ActualHeight - categoryLabelsHeight));
 
             // Draw the y-axis
-            ctx.DrawLine(PenLabels, new System.Windows.Point(valueLabelsWidth, 0), new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight));
+            ctx.DrawLine(PenAxis, new System.Windows.Point(valueLabelsWidth, 0), new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight));
 
         }
 
@@ -68,7 +87,7 @@ namespace AquaMaintenancer.Theme.Components
             return (value - min1) * (max2 - min2) / (max1 - min1) + min2;
         }
 
-        private double GetValueInChart(double value)
+        private double GetCanvasValue(double value)
         {
             double categoryLabelsHeight = CalculateCategoryLabelsHeight(CategoryLabels);
 
@@ -82,7 +101,7 @@ namespace AquaMaintenancer.Theme.Components
 
         private double CalculateCategoryLabelsWidth(List<FormattedText> labels, double valueLabelsWidth)
         {
-            return ActualWidth - valueLabelsWidth - labels.Last().Width;
+            return ActualWidth - valueLabelsWidth - labels.Last().Width - 2 * SpacingInside;
         }
 
         private double CalculateCategoryLabelsHeight(List<FormattedText> labels)
@@ -108,7 +127,7 @@ namespace AquaMaintenancer.Theme.Components
             for (int i = 0; i < count; i++)
             {
                 float yValue = max - i * max / (count - 1);
-                FormattedText label = new FormattedText(yValue.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, Brushes.White, 1.25);
+                FormattedText label = new FormattedText(yValue.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, PenLabels.Brush, 1.25);
                 labels.Add(label);
             }
 
@@ -117,7 +136,7 @@ namespace AquaMaintenancer.Theme.Components
 
         private List<FormattedText> GetCategoryLabels(IEnumerable<ChartData> data)
         {
-            return data.Select(d => new FormattedText(d.Category, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, Brushes.White, 1.25)).ToList();
+            return data.Select(d => new FormattedText(d.Category, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, PenLabels.Brush, 1.25)).ToList();
         }
 
         private void DrawGridLines(DrawingContext ctx, double valueLabelsWidth)
@@ -125,7 +144,7 @@ namespace AquaMaintenancer.Theme.Components
             for (int i = 0; i < ValueLabels.Count - 1; i++)
             {
                 FormattedText label = ValueLabels[i];
-                double y = GetValueInChart(double.Parse(label.Text));
+                double y = GetCanvasValue(double.Parse(label.Text));
                 ctx.DrawLine(PenGrid, new System.Windows.Point(valueLabelsWidth, y), new System.Windows.Point(ActualWidth, y));
             }
         }
@@ -152,10 +171,27 @@ namespace AquaMaintenancer.Theme.Components
 
             for (int i = 0; i < numberLabels; i++)
             {
-                double x = i * steps;
+                double x = i * steps + valueLabelsWidth + SpacingInside;
 
                 FormattedText label = labels[i];
-                ctx.DrawText(label, new System.Windows.Point(x + valueLabelsWidth, ActualHeight - label.Height));
+                ctx.DrawText(label, new System.Windows.Point(x, ActualHeight - label.Height));
+
+                double zero = GetCanvasValue(0);
+                List<float> values = data.First(d => d.Category.Equals(label.Text)).Values.ToList();
+
+                for (int j = 0; j < values.Count; j++)
+                {
+                    int n = values.Count;
+                    double dx = x - ((n - 1) * SpacingBars + n * BarWidth) / 2 + (BarWidth + SpacingBars) * j + label.Width / 2;
+                    double height = GetCanvasValue(values[j]);
+
+                    Brush brush = Colors[j % Colors.Count];
+                    Brush transparentBrush = brush.Clone();
+                    transparentBrush.Opacity = 0.5;
+
+                    ctx.DrawRectangle(transparentBrush, null, new Rect(dx, height, BarWidth, zero - height));
+                    ctx.DrawRectangle(brush, null, new Rect(dx, height, BarWidth, 4));
+                }
             }
         }
 
