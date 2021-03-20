@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace AquaMaintenancer.Theme.Components
 {
-    public class ChartData
+    public class BarChartData
     {
         public IEnumerable<float> Values { get; set; }
         public string Category { get; set; }
@@ -143,13 +143,13 @@ namespace AquaMaintenancer.Theme.Components
             "Fehler"
         };
 
-        private IEnumerable<ChartData> data = new List<ChartData>()
+        private IEnumerable<BarChartData> data = new List<BarChartData>()
         {
-            new ChartData { Values = new List<float>() { 57.0f, 25.0f, 13.0f }, Category = "07.03.2021" },
-            new ChartData { Values = new List<float>() { 13.0f }, Category = "08.03.2021" },
-            new ChartData { Values = new List<float>() { 30.0f }, Category = "09.03.2021" },
-            new ChartData { Values = new List<float>() { 80.0f }, Category = "10.03.2021" },
-            new ChartData { Values = new List<float>() { 29.0f }, Category = "11.03.2021" },
+            new BarChartData { Values = new List<float>() { 57.0f, 25.0f, 13.0f }, Category = "07.03.2021" },
+            new BarChartData { Values = new List<float>() { 13.0f }, Category = "08.03.2021" },
+            new BarChartData { Values = new List<float>() { 30.0f }, Category = "09.03.2021" },
+            new BarChartData { Values = new List<float>() { 80.0f }, Category = "10.03.2021" },
+            new BarChartData { Values = new List<float>() { 29.0f }, Category = "11.03.2021" },
         };
 
         public BarChart()
@@ -203,7 +203,7 @@ namespace AquaMaintenancer.Theme.Components
             return Remap(value, min1, max1, min2, max2);
         }
 
-        private List<FormattedText> GetValueLabels(IEnumerable<ChartData> data, int count)
+        private List<FormattedText> GetValueLabels(IEnumerable<BarChartData> data, int count)
         {
             float max = data.Max(d => d.Values.Max());
             List<FormattedText> labels = new List<FormattedText>();
@@ -218,7 +218,7 @@ namespace AquaMaintenancer.Theme.Components
             return labels;
         }
 
-        private List<FormattedText> GetCategoryLabels(IEnumerable<ChartData> data)
+        private List<FormattedText> GetCategoryLabels(IEnumerable<BarChartData> data)
         {
             return data.Select(d => new FormattedText(d.Category, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), CategoryLabelSize, PenLabels.Brush, 1.25)).ToList();
         }
