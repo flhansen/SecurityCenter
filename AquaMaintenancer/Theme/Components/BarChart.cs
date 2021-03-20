@@ -22,8 +22,18 @@ namespace AquaMaintenancer.Theme.Components
         public Pen PenLabels { get; set; } = new Pen();
         public Pen PenAxis { get; set; } = new Pen();
         public Pen PenGrid { get; set; } = new Pen();
+        public Pen PenLegendLabels { get; set; } = new Pen();
 
         public List<Brush> Colors { get; set; } = new List<Brush>();
+
+        public double LegendEllipsesRadius { get; set; } = 2.5;
+        public double LegendEllipsesSpacing { get; set; } = 8.0;
+        public double LegendLabelSpacing { get; set; } = 12.0;
+        public double LegendSpacing { get; set; } = 64.0;
+        public double LegendLabelSize { get; set; } = 12.0;
+
+        public double ValueLabelSize { get; set; } = 12.0;
+        public double CategoryLabelSize { get; set; } = 12.0;
 
         #region LabelSpacing Property
         public static readonly DependencyProperty LabelSpacingProperty =
@@ -75,6 +85,13 @@ namespace AquaMaintenancer.Theme.Components
 
         public List<FormattedText> ValueLabels { get; private set; }
         public List<FormattedText> CategoryLabels { get; private set; }
+        public List<FormattedText> SubCategoryLegendLabels { get; private set; }
+        public List<string> SubCategories { get; set; } = new List<string>()
+        {
+            "Information",
+            "Warnung",
+            "Fehler"
+        };
 
         private IEnumerable<ChartData> data = new List<ChartData>()
         {
@@ -101,29 +118,35 @@ namespace AquaMaintenancer.Theme.Components
             PenLabels.Brush = bc.ConvertFrom("#FFFFFF") as SolidColorBrush;
             PenLabels.Brush.Opacity = 0.3;
 
+            PenLegendLabels.Brush = bc.ConvertFrom("#FFFFFF") as SolidColorBrush;
+            PenLegendLabels.Brush.Opacity = 1.0;
+
             ValueLabels = GetValueLabels(data, 5);
             CategoryLabels = GetCategoryLabels(data);
+            SubCategoryLegendLabels = GetSubCategoryLabels(SubCategories);
         }
 
         protected override void OnRender(DrawingContext ctx)
         {
             double categoryLabelsHeight = CalculateCategoryLabelsHeight(CategoryLabels);
             double valueLabelsWidth = CalculateValueLabelsWidth(ValueLabels);
+            double legendWidth = CalculateLegendWidth();
 
-            double categoryLabelsWidth = CalculateCategoryLabelsWidth(CategoryLabels, valueLabelsWidth);
+            double categoryLabelsWidth = CalculateCategoryLabelsWidth(CategoryLabels, valueLabelsWidth, legendWidth);
             double valueLabelsHeight = CalculateValueLabelsHeight(ValueLabels, categoryLabelsHeight);
 
             // Draw the labels on y-axis
-            DrawGridLines(ctx, valueLabelsWidth);
+            DrawGridLines(ctx, valueLabelsWidth, legendWidth);
             DrawValueLabels(ctx, ValueLabels, valueLabelsHeight, categoryLabelsHeight);
             DrawCategoryLabels(ctx, CategoryLabels, valueLabelsWidth, categoryLabelsWidth);
 
             // Draw the x-axis
-            ctx.DrawLine(PenAxis, new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight), new System.Windows.Point(ActualWidth, ActualHeight - categoryLabelsHeight));
+            ctx.DrawLine(PenAxis, new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight), new System.Windows.Point(ActualWidth - legendWidth - LegendSpacing, ActualHeight - categoryLabelsHeight));
 
             // Draw the y-axis
             ctx.DrawLine(PenAxis, new System.Windows.Point(valueLabelsWidth, 0), new System.Windows.Point(valueLabelsWidth, ActualHeight - categoryLabelsHeight));
 
+            DrawLegend(ctx, legendWidth);
         }
 
         private double Remap(double value, double min1, double max1, double min2, double max2)
@@ -143,9 +166,15 @@ namespace AquaMaintenancer.Theme.Components
             return Remap(value, min1, max1, min2, max2);
         }
 
-        private double CalculateCategoryLabelsWidth(List<FormattedText> labels, double valueLabelsWidth)
+        private double CalculateLegendWidth()
         {
-            return ActualWidth - valueLabelsWidth - labels.Last().Width - 2 * InsideSpacing;
+            double labelsWidth = SubCategoryLegendLabels.Max(x => x.Width);
+            return labelsWidth + 2 * LegendEllipsesRadius + LegendEllipsesSpacing;
+        }
+
+        private double CalculateCategoryLabelsWidth(List<FormattedText> labels, double valueLabelsWidth, double legendWidth)
+        {
+            return ActualWidth - valueLabelsWidth - labels.Last().Width - 2 * InsideSpacing - legendWidth - LegendSpacing;
         }
 
         private double CalculateCategoryLabelsHeight(List<FormattedText> labels)
@@ -171,7 +200,7 @@ namespace AquaMaintenancer.Theme.Components
             for (int i = 0; i < count; i++)
             {
                 float yValue = max - i * max / (count - 1);
-                FormattedText label = new FormattedText(yValue.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, PenLabels.Brush, 1.25);
+                FormattedText label = new FormattedText(yValue.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), ValueLabelSize, PenLabels.Brush, 1.25);
                 labels.Add(label);
             }
 
@@ -180,16 +209,23 @@ namespace AquaMaintenancer.Theme.Components
 
         private List<FormattedText> GetCategoryLabels(IEnumerable<ChartData> data)
         {
-            return data.Select(d => new FormattedText(d.Category, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), 14, PenLabels.Brush, 1.25)).ToList();
+            return data.Select(d => new FormattedText(d.Category, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), CategoryLabelSize, PenLabels.Brush, 1.25)).ToList();
         }
 
-        private void DrawGridLines(DrawingContext ctx, double valueLabelsWidth)
+        private List<FormattedText> GetSubCategoryLabels(IEnumerable<string> names)
+        {
+            return names.Select(name =>
+                new FormattedText(name, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface("Roboto"), LegendLabelSize, PenLegendLabels.Brush, 1.25)
+            ).ToList();
+        }
+
+        private void DrawGridLines(DrawingContext ctx, double valueLabelsWidth, double legendWidth)
         {
             for (int i = 0; i < ValueLabels.Count - 1; i++)
             {
                 FormattedText label = ValueLabels[i];
                 double y = GetCanvasValue(double.Parse(label.Text));
-                ctx.DrawLine(PenGrid, new System.Windows.Point(valueLabelsWidth, y), new System.Windows.Point(ActualWidth, y));
+                ctx.DrawLine(PenGrid, new System.Windows.Point(valueLabelsWidth, y), new System.Windows.Point(ActualWidth - legendWidth - LegendSpacing, y));
             }
         }
 
@@ -229,13 +265,40 @@ namespace AquaMaintenancer.Theme.Components
                     double dx = x - ((n - 1) * BarSpacing + n * BarWidth) / 2 + (BarWidth + BarSpacing) * j + label.Width / 2;
                     double height = GetCanvasValue(values[j]);
 
-                    Brush brush = Colors[j % Colors.Count];
+                    Brush brush = GetColorForSubCategoryIndex(j);
                     Brush transparentBrush = brush.Clone();
                     transparentBrush.Opacity = 0.5;
 
                     ctx.DrawRectangle(transparentBrush, null, new Rect(dx, height, BarWidth, zero - height));
                     ctx.DrawRectangle(brush, null, new Rect(dx, height, BarWidth, 4));
                 }
+            }
+        }
+
+        private Brush GetColorForSubCategoryIndex(int index)
+        {
+            return Colors[index % Colors.Count];
+        }
+
+        private void DrawLegend(DrawingContext ctx, double legendWidth)
+        {
+            double x = ActualWidth - legendWidth + LegendEllipsesRadius;
+            double y = 0;
+
+            for (int i = 0; i < SubCategoryLegendLabels.Count; i++)
+            {
+                FormattedText subCategory = SubCategoryLegendLabels[i];
+                double ellipseX = x;
+                double ellipseY = y + LegendEllipsesRadius;
+
+                if (2 * LegendEllipsesRadius < subCategory.Height)
+                    ellipseY += subCategory.Height / 2 - LegendEllipsesRadius;
+
+                Brush brush = GetColorForSubCategoryIndex(i);
+                ctx.DrawEllipse(brush, null, new System.Windows.Point(ellipseX, ellipseY), LegendEllipsesRadius, LegendEllipsesRadius);
+
+                ctx.DrawText(subCategory, new System.Windows.Point(x + LegendEllipsesRadius + LegendEllipsesSpacing, y));
+                y += subCategory.Height + LegendLabelSpacing;
             }
         }
 
