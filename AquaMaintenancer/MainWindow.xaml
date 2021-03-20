@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="1000" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Grid>
-        <controls:Card Title="Chart Card" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <controls:BarChart BarSpacing="5" Height="300" Width="800" />
+        <controls:Card Title="Chart Card">
+            <controls:BarChart BarSpacing="5" Height="300" />
         </controls:Card>
     </Grid>
 </Window>
