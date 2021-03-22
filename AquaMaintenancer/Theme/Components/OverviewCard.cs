@@ -64,7 +64,7 @@ namespace AquaMaintenancer.Theme.Components
                 typeof(OverviewCard), new PropertyMetadata());
 
         /// <summary>
-        /// The icon, which describes the information type using the visual channel.
+        /// The icon, which describes the information type.
         /// </summary>
         public FontAwesomeIcon Icon
         {
