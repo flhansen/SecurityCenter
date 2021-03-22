@@ -9,16 +9,17 @@ namespace AquaMaintenancer.Theme.Components
 {
     public class PrimaryButton : Button
     {
-        #region Icon Property
-        public static DependencyProperty IconProperty = 
-            DependencyProperty.Register(nameof(Icon), typeof(FontAwesomeIcon),
-                typeof(PrimaryButton), new PropertyMetadata());
-
+        /// <summary>
+        /// The icon inside the button. If <em>None</em>, it will not be displayed.
+        /// </summary>
         public FontAwesomeIcon Icon
         {
             get => (FontAwesomeIcon)GetValue(IconProperty);
             set => SetValue(IconProperty, value); 
         }
-        #endregion
+
+        public static DependencyProperty IconProperty = 
+            DependencyProperty.Register(nameof(Icon), typeof(FontAwesomeIcon),
+                typeof(PrimaryButton), new PropertyMetadata());
     }
 }

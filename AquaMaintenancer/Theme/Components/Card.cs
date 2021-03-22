@@ -13,6 +13,9 @@ namespace AquaMaintenancer.Theme.Components
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Card), new FrameworkPropertyMetadata(typeof(Card)));
         }
 
+        /// <summary>
+        /// The title of the card.
+        /// </summary>
         public string Title
         {
             get => GetValue(TitleProperty) as string;

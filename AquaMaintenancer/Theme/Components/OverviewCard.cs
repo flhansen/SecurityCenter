@@ -11,6 +11,9 @@ namespace AquaMaintenancer.Theme.Components
     public class OverviewCard : ContentControl
     {
 
+        /// <summary>
+        /// The label, which is below the information value.
+        /// </summary>
         public string Label
         {
             get => (string)GetValue(LabelProperty);
@@ -21,6 +24,9 @@ namespace AquaMaintenancer.Theme.Components
             DependencyProperty.Register(nameof(Label), typeof(string),
                 typeof(OverviewCard), new PropertyMetadata(string.Empty));
 
+        /// <summary>
+        /// The information value to be presented.
+        /// </summary>
         public string Information
         {
             get => (string)GetValue(InformationProperty);
@@ -31,6 +37,9 @@ namespace AquaMaintenancer.Theme.Components
             DependencyProperty.Register(nameof(Information), typeof(string),
                 typeof(OverviewCard), new PropertyMetadata(string.Empty));
 
+        /// <summary>
+        /// The color of the icon.
+        /// </summary>
         public Brush IconColor
         {
             get => (Brush)GetValue(IconColorProperty);
@@ -41,6 +50,9 @@ namespace AquaMaintenancer.Theme.Components
             DependencyProperty.Register(nameof(IconColor), typeof(Brush),
                 typeof(OverviewCard), new PropertyMetadata());
 
+        /// <summary>
+        /// The text color of the information value and label.
+        /// </summary>
         public Brush TextColor
         {
             get => (Brush)GetValue(TextColorProperty);
@@ -51,6 +63,9 @@ namespace AquaMaintenancer.Theme.Components
             DependencyProperty.Register(nameof(TextColor), typeof(Brush),
                 typeof(OverviewCard), new PropertyMetadata());
 
+        /// <summary>
+        /// The icon, which describes the information type using the visual channel.
+        /// </summary>
         public FontAwesomeIcon Icon
         {
             get => (FontAwesomeIcon)GetValue(IconProperty);

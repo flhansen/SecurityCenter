@@ -14,28 +14,32 @@ namespace AquaMaintenancer.Theme.Components
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TextField), new FrameworkPropertyMetadata(typeof(TextField)));
         }
 
-        #region Label Property
-        public static readonly DependencyProperty LabelProperty =
-            DependencyProperty.Register(nameof(Label), typeof(string),
-                typeof(TextField), new PropertyMetadata(string.Empty));
-
+        #region Properties
+        /// <summary>
+        /// The label of the TextField. If <em>string.Empty</em>, it will not be displayed.
+        /// </summary>
         public string Label
         {
             get => GetValue(LabelProperty) as string;
             set => SetValue(LabelProperty, value);
         }
-        #endregion
 
-        #region Icon Property
-        public static readonly DependencyProperty IconProperty = 
-            DependencyProperty.Register("Icon", typeof(FontAwesomeIcon),
-                typeof(TextField), new FrameworkPropertyMetadata());
+        public static readonly DependencyProperty LabelProperty =
+            DependencyProperty.Register(nameof(Label), typeof(string),
+                typeof(TextField), new PropertyMetadata(string.Empty));
 
+        /// <summary>
+        /// The icon inside the TextField. If <em>None</em>, it will not be displayed.
+        /// </summary>
         public FontAwesomeIcon Icon
         {
             get => (FontAwesomeIcon)GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
+
+        public static readonly DependencyProperty IconProperty = 
+            DependencyProperty.Register("Icon", typeof(FontAwesomeIcon),
+                typeof(TextField), new FrameworkPropertyMetadata());
         #endregion
 
     }
