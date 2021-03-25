@@ -267,12 +267,16 @@ namespace AquaMaintenancer.Theme.Components
         public List<FormattedText> ValueLabels { get; private set; }
         public List<FormattedText> CategoryLabels { get; private set; }
         public List<FormattedText> SubCategoryLegendLabels { get; private set; }
-        public List<string> SubCategories { get; set; } = new List<string>()
+
+        public IEnumerable<string> SubCategories
         {
-            "Information",
-            "Warnung",
-            "Fehler"
-        };
+            get => (IEnumerable<string>)GetValue(SubCategoriesProperty);
+            set => SetValue(SubCategoriesProperty, value);
+        }
+
+        public readonly DependencyProperty SubCategoriesProperty =
+            DependencyProperty.Register(nameof(SubCategories), typeof(IEnumerable<string>),
+                typeof(BarChart), new PropertyMetadata(new List<string>(), HandleChartPropertyChanged));
 
         public BarChart()
         {

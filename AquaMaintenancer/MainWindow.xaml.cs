@@ -25,6 +25,9 @@ namespace AquaMaintenancer
         public MainWindow()
         {
             InitializeComponent();
+
+            List<string> subCats = new List<string>() { "Pimmel", "Leber", "Wurst" };
+            Chart.SubCategories = subCats;
         }
     }
 }
