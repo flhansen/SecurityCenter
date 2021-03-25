@@ -4,27 +4,40 @@
                     xmlns:fa="http://schemas.fontawesome.io/icons/"
                     xmlns:prop="clr-namespace:AquaMaintenancer.Theme.CustomProperties"
                     xmlns:conv="clr-namespace:AquaMaintenancer.Theme.Converter"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:AquaMaintenancer.Theme.Components">
 
     <Style TargetType="{x:Type controls:PrimaryButton}">
         <Style.Resources>
             <conv:IconToVisibilityConverter x:Key="IconToVisibilityConverter" />
+            <conv:BrushBrightnessConverter x:Key="BrushBrightnessConverter" />
         </Style.Resources>
         <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
         <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="16,5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:PrimaryButton}">
-                
-                    <Border Background="{TemplateBinding Background}" CornerRadius="3" Padding="{TemplateBinding Padding}">
-                        <StackPanel Orientation="Horizontal" prop:ContainerSpacing.Spacing="8">
-                            <fa:ImageAwesome Visibility="{TemplateBinding Icon, Converter={StaticResource IconToVisibilityConverter}}" Icon="{TemplateBinding Icon}" Height="12" Foreground="{TemplateBinding Foreground}"/>
-                            <TextBlock VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}" />
-                        </StackPanel>
-                    </Border>
+
+                    <Grid>
+                        <Border Background="#000000" CornerRadius="3" />
+                        <Border x:Name="HoverBorder" Background="{TemplateBinding Background}" CornerRadius="3" />
+                        <Border Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal" prop:ContainerSpacing.Spacing="8">
+                                <fa:ImageAwesome Visibility="{TemplateBinding Icon, Converter={StaticResource IconToVisibilityConverter}}" Icon="{TemplateBinding Icon}" Height="12" Foreground="{TemplateBinding Foreground}"/>
+                                <TextBlock VerticalAlignment="Center" FontSize="{TemplateBinding FontSize}" Text="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HoverBorder" Property="Opacity" Value="0.9" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                     
                 </ControlTemplate>
             </Setter.Value>
