@@ -91,7 +91,6 @@ namespace AquaMaintenancer.Theme.Components
         public Pen PenAxis { get; set; } = new Pen();
         public Pen PenGrid { get; set; } = new Pen();
         public Pen PenLegendLabels { get; set; } = new Pen();
-        public List<Brush> Colors { get; set; } = new List<Brush>();
         public BarChartBounds Bounds { get; private set; }
 
         #region Framework Properties
@@ -106,6 +105,16 @@ namespace AquaMaintenancer.Theme.Components
             // Force the chart to redraw everything
             chart.InvalidateVisual();
         }
+
+        public IEnumerable<Brush> Colors
+        {
+            get => (IEnumerable<Brush>)GetValue(ColorsProperty);
+            set => SetValue(ColorsProperty, value);
+        }
+
+        public readonly DependencyProperty ColorsProperty =
+            DependencyProperty.Register(nameof(Colors), typeof(IEnumerable<Brush>),
+                typeof(BarChart), new PropertyMetadata(new List<Brush>(), HandleChartPropertyChanged));
 
         /// <summary>
         /// The data to be plotted.
@@ -281,11 +290,6 @@ namespace AquaMaintenancer.Theme.Components
         public BarChart()
         {
             BrushConverter bc = new BrushConverter();
-
-            // Define the colors used to fill the bars
-            Colors.Add(bc.ConvertFrom("#5D4ADA") as SolidColorBrush);
-            Colors.Add(bc.ConvertFrom("#66CA67") as SolidColorBrush);
-            Colors.Add(bc.ConvertFrom("#2E9BFF") as SolidColorBrush);
 
             // Define the colors used to draw the chart
             PenGrid.Brush = bc.ConvertFrom("#FFFFFF") as SolidColorBrush;
@@ -528,9 +532,16 @@ namespace AquaMaintenancer.Theme.Components
         /// <returns></returns>
         private Brush GetColorForSubCategoryIndex(int index)
         {
-            // Use the modulo operator to make sure that the
-            // color is always one of the defined colors.
-            return Colors[index % Colors.Count];
+            Brush brush = Brushes.White;
+
+            if (Colors.Count() > 0)
+            {
+                // Use the modulo operator to make sure that the
+                // color is always one of the defined colors.
+                brush = Colors.ElementAt(index % Colors.Count());
+            }
+
+            return brush;
         }
 
         /// <summary>

@@ -9,8 +9,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Grid>
-        <controls:Card>
-            <controls:BarChart x:Name="Chart" Height="300" />
-        </controls:Card>
     </Grid>
 </Window>
