@@ -106,6 +106,9 @@ namespace AquaMaintenancer.Theme.Components
             chart.InvalidateVisual();
         }
 
+        /// <summary>
+        /// The colors used to fill bars of the chart.
+        /// </summary>
         public IEnumerable<Brush> Colors
         {
             get => (IEnumerable<Brush>)GetValue(ColorsProperty);
@@ -271,12 +274,10 @@ namespace AquaMaintenancer.Theme.Components
         public static readonly DependencyProperty BarWidthProperty =
             DependencyProperty.Register(nameof(BarWidth), typeof(double),
                 typeof(BarChart), new PropertyMetadata(20.0, HandleChartPropertyChanged));
-        #endregion
 
-        public List<FormattedText> ValueLabels { get; private set; }
-        public List<FormattedText> CategoryLabels { get; private set; }
-        public List<FormattedText> SubCategoryLegendLabels { get; private set; }
-
+        /// <summary>
+        /// Names of the sub categories.
+        /// </summary>
         public IEnumerable<string> SubCategories
         {
             get => (IEnumerable<string>)GetValue(SubCategoriesProperty);
@@ -286,6 +287,12 @@ namespace AquaMaintenancer.Theme.Components
         public readonly DependencyProperty SubCategoriesProperty =
             DependencyProperty.Register(nameof(SubCategories), typeof(IEnumerable<string>),
                 typeof(BarChart), new PropertyMetadata(new List<string>(), HandleChartPropertyChanged));
+
+        #endregion
+
+        public List<FormattedText> ValueLabels { get; private set; }
+        public List<FormattedText> CategoryLabels { get; private set; }
+        public List<FormattedText> SubCategoryLegendLabels { get; private set; }
 
         public BarChart()
         {
