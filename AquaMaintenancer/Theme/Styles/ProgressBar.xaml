@@ -10,16 +10,21 @@
                 <ControlTemplate TargetType="{x:Type controls:ProgressBar}">
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="{StaticResource TextColor}" >Test</Label>
-                        <Border x:Name="PART_Track"
-                                CornerRadius="2"
-                                BorderThickness="1"
-                                BorderBrush="{TemplateBinding Background}"/>
-                        <Border x:Name="PART_Indicator"
-                                CornerRadius="2"
-                                BorderThickness="1"
-                                HorizontalAlignment="Left"
-                                BorderBrush="{TemplateBinding Foreground}"
-                                Margin="0,-1,0,1" />
+                        <Grid>
+                            <Border x:Name="Indicator_background"
+                                    CornerRadius="2"
+                                    Height="8"
+                                    BorderThickness="1"
+                                    BorderBrush="{TemplateBinding Background}"/>
+                            <Border x:Name="Indicator"
+                                    CornerRadius="2"
+                                    BorderThickness="1"
+                                    Height="8"
+                                    Width="{TemplateBinding Value}"
+                                    HorizontalAlignment="Left"
+                                    BorderBrush="{TemplateBinding Foreground}"
+                                    Margin="0,-1,0,1" />
+                        </Grid>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
