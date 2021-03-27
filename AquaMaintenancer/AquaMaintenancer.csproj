@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AquaMaintenancer.Utilities\AquaMaintenancer.Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Theme\Assets\Fonts\Roboto-Black.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

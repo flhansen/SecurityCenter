@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer.Data", "Aq
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AquaMaintenancer.UILogic", "AquaMaintenancer.UILogic\AquaMaintenancer.UILogic.csproj", "{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquaMaintenancer.Utilities", "AquaMaintenancer.Utilities\AquaMaintenancer.Utilities.csproj", "{D7E5F7C9-7C6F-4FE9-9C35-69CC13663B0D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0224ED89-7CC7-45D7-8DCB-E0A13B6586E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7E5F7C9-7C6F-4FE9-9C35-69CC13663B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7E5F7C9-7C6F-4FE9-9C35-69CC13663B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7E5F7C9-7C6F-4FE9-9C35-69CC13663B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7E5F7C9-7C6F-4FE9-9C35-69CC13663B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

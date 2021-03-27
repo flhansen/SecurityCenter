@@ -10,7 +10,6 @@
     <Style TargetType="{x:Type controls:PrimaryButton}">
         <Style.Resources>
             <conv:IconToVisibilityConverter x:Key="IconToVisibilityConverter" />
-            <conv:BrushBrightnessConverter x:Key="BrushBrightnessConverter" />
         </Style.Resources>
         <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
         <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
