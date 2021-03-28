@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Grid>
-        <controls:ProgressBar x:Name="pgb" Width="200" Height="100"></controls:ProgressBar>
+        <controls:AquaProgressBar x:Name="pgb" Width="200" Height="100"></controls:AquaProgressBar>
     </Grid>
 </Window>

@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace AquaMaintenancer.Theme.Components
 {
-    public class ProgressBar : ContentControl
+    public class AquaProgressBar : ContentControl
     {
         private static Border indicator;
-        static ProgressBar()
+        static AquaProgressBar()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(AquaProgressBar), new FrameworkPropertyMetadata(typeof(AquaProgressBar)));
         }
-        public float Value 
-        { 
-            get => (float)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, Value);
+        public double Value
+        {
+            get => (double)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-            nameof(Value), typeof(float), typeof(ProgressBar), 
-            new PropertyMetadata(float.NaN, HandlePropertyChanged));
-        
+            nameof(Value), typeof(double), typeof(AquaProgressBar),
+            new PropertyMetadata(double.NaN, HandlePropertyChanged));
+
         private static void HandlePropertyChanged(object d, DependencyPropertyChangedEventArgs e)
         {
-            indicator.Width = (double)e.NewValue;
-            indicator.InvalidateVisual();
+            if (indicator != null)
+            {
+                indicator.Width = (double)e.NewValue;
+                indicator.InvalidateVisual();
+            }
         }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
