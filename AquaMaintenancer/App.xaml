@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Theme/Styles/Buttons.xaml" />
                 <ResourceDictionary Source="Theme/Styles/AquaProgressBar.xaml" />
                 <ResourceDictionary Source="Theme/Styles/Cards.xaml" />
+                <ResourceDictionary Source="Theme/Styles/UserComponent.xaml" />
                 <ResourceDictionary Source="Theme/Styles/TextFields.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
