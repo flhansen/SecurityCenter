@@ -32,6 +32,17 @@ namespace AquaMaintenancer.Theme.Components
                 indicator.InvalidateVisual();
             }
         }
+
+        public string LoadingInfo
+        {
+            get => (string)GetValue(LoadingInfoProperty);
+            set => SetValue(LoadingInfoProperty, value);
+        }
+
+        public static readonly DependencyProperty LoadingInfoProperty = DependencyProperty.Register(
+            nameof(LoadingInfo), typeof(string), typeof(AquaProgressBar),
+            new PropertyMetadata(string.Empty));
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
