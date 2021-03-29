@@ -7,7 +7,5 @@
         xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
-    <Grid>
-        <controls:AquaProgressBar x:Name="pgb" LoadingInfo="test" Width="200" Height="100"></controls:AquaProgressBar>
-    </Grid>
+   
 </Window>

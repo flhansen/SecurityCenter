@@ -24,20 +24,6 @@ namespace AquaMaintenancer
         public MainWindow()
         {
             InitializeComponent();
-
-            double val = 0f;
-
-            new Thread(() =>
-                {
-                    while (val <= 95)
-                    {
-                        Thread.Sleep(100);
-                        val += 5;
-                        Dispatcher.Invoke(new Action(() => pgb.Value = val));
-                    }
-
-                }).Start();
-
         }
     }
 }
