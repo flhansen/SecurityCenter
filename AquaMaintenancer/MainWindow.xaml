@@ -7,6 +7,5 @@
         xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
-    <Grid>
-    </Grid>
+   
 </Window>
