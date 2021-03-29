@@ -11,7 +11,7 @@
                     <StackPanel Orientation="Vertical">
                         <Label Foreground="{StaticResource TextColor}" >Test</Label>
                         <Grid>
-                            <Border x:Name="Indicator_background"
+                            <Border x:Name="Path"
                                     CornerRadius="2"
                                     Height="8"
                                     BorderThickness="1"
@@ -22,6 +22,7 @@
                                     Height="8"
                                     Width="{TemplateBinding Value}"
                                     HorizontalAlignment="Left"
+                                    Background="{TemplateBinding Foreground}"
                                     BorderBrush="{TemplateBinding Foreground}"
                                     Margin="0,-1,0,1" />
                         </Grid>

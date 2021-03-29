@@ -8,6 +8,7 @@ namespace AquaMaintenancer.Theme.Components
 {
     public class AquaProgressBar : ContentControl
     {
+        private static Border path;
         private static Border indicator;
         static AquaProgressBar()
         {
@@ -25,9 +26,9 @@ namespace AquaMaintenancer.Theme.Components
 
         private static void HandlePropertyChanged(object d, DependencyPropertyChangedEventArgs e)
         {
-            if (indicator != null)
+            if (indicator != null || path != null)
             {
-                indicator.Width = (double)e.NewValue;
+                indicator.Width = (double)e.NewValue * (path.ActualWidth / 100);
                 indicator.InvalidateVisual();
             }
         }
@@ -35,8 +36,9 @@ namespace AquaMaintenancer.Theme.Components
         {
             base.OnApplyTemplate();
             indicator = GetTemplateChild("Indicator") as Border;
+            path = GetTemplateChild("Path") as Border;
 
-            if (indicator == null)
+            if (indicator == null || path == null)
             {
                 throw new NullReferenceException("Templatepart not found");
             }

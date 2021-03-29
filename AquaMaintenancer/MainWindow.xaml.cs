@@ -29,7 +29,7 @@ namespace AquaMaintenancer
 
             new Thread(() =>
                 {
-                    while (val <= 100)
+                    while (val <= 95)
                     {
                         Thread.Sleep(100);
                         val += 5;
