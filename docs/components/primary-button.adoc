@@ -1,0 +1,15 @@
+= PrimaryButton
+Inherits from https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.button?view=net-5.0[`+Button+`].
+
+[cols="1,1,1,3"]
+|===
+|*Name*
+|*Type*
+|*Default*
+|*Description*
+
+|`+Icon+`
+|`+FontAwesomeIcon+`
+|`+FontAwesomeIcon.None+`
+|The icon inside the button. If _None_, it will not be displayed.
+|===

@@ -1,0 +1,70 @@
+= BarChart
+Inherits from https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas?view=net-5.0[`+Canvas+`].
+
+[cols="1,1,1,3"]
+|===
+|*Name*
+|*Type*
+|*Default*
+|*Description*
+
+|`+BarSpacing+`
+|`+double+`
+|`+5.0+`
+|The spacing between related bars.
+
+|`+BarWidth+`
+|`+double+`
+|`+20.0+`
+|The width of every bar inside the chart.
+
+|`+CategoryLabelSize+`
+|`+double+`
+|`+12.0+`
+|The font size of category labels (x-axis).
+
+|`+Data+`
+|`+IEnumerable<BarChartData>+`
+|Empty `+List+`
+|The data to be plotted.
+
+|`+InnerSpacing+`
+|`+double+`
+|`+15.0+`
+|The spacing inside the graph.
+
+|`+LabelSpacing+`
+|`+double+`
+|`+16.0+`
+|The spacing between the axes and its labels.
+
+|`+LegendEllipsesRadius+`
+|`+double+`
+|`+2.5+`
+|The radius of colored ellipses inside the legend.
+
+|`+LegendEllipsesSpacing+`
+|`+double+`
+|`+8.0+`
+|The spacing between legend labels and colored ellipses.
+
+|`+LegendLabelSize+`
+|`+double+`
+|`+12.0+`
+|The font size of labels inside the legend.
+
+|`+LegendLabelSpacing+`
+|`+double+`
+|`+12.0+`
+|The vertical spacing between every label of the legend.
+
+|`+LegendSpacing+`
+|`+double+`
+|`+64.0+`
+|The spacing between the legend and the graph.
+
+|`+ValueLabelSize+`
+|`+double+`
+|`+12.0+`
+|The font size of value labels (y-axis).
+|===
