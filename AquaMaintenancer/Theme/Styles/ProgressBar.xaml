@@ -19,26 +19,23 @@
                         <TextBlock Foreground="{StaticResource TextColor}"
                                    Visibility="{TemplateBinding LoadingInfo, Converter={StaticResource StringToVisibilityConverter}}"
                                    Text="{TemplateBinding LoadingInfo, Converter={StaticResource UpperCaseConverter}}"
-                                   FontFamily="{TemplateBinding FontFamily}"
+                                   FontFamily="{StaticResource Roboto}"
                                    FontWeight="Bold"
                                    FontSize="12"
-                                   FontStyle="Normal"
-                                   Opacity="0.3"></TextBlock>
+                                   Opacity="0.3">
+                        </TextBlock>
                         <Grid>
                             <Border x:Name="Path"
                                     CornerRadius="3"
                                     Height="8"
-                                    BorderThickness="1"
-                                    BorderBrush="{TemplateBinding Background}"/>
+                                    Background="#000"
+                                    Opacity="0.3" />
                             <Border x:Name="Indicator"
                                     CornerRadius="3"
-                                    BorderThickness="1"
                                     Height="8"
                                     Width="{TemplateBinding Value}"
                                     HorizontalAlignment="Left"
-                                    Background="{TemplateBinding Foreground}"
-                                    BorderBrush="{TemplateBinding Foreground}"
-                                    Margin="0,-1,0,1" />
+                                    Background="{TemplateBinding Foreground}" />
                         </Grid>
                     </StackPanel>
                 </ControlTemplate>
