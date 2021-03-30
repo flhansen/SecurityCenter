@@ -14,6 +14,9 @@ namespace AquaMaintenancer.Theme.Components
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
         }
+        /// <summary>
+        /// The fillvalue of the progressbar. Value between 0.0 and 100.0
+        /// </summary>
         public double Value
         {
             get => (double)GetValue(ValueProperty);
@@ -29,7 +32,9 @@ namespace AquaMaintenancer.Theme.Components
             ProgressBar pgb = d as ProgressBar;
             pgb.ChangeProgressValue((double)e.NewValue);
         }
-
+        /// <summary>
+        /// The displayed text above the progressbar.
+        /// </summary>
         public string LoadingInfo
         {
             get => (string)GetValue(LoadingInfoProperty);
@@ -39,7 +44,11 @@ namespace AquaMaintenancer.Theme.Components
         public static readonly DependencyProperty LoadingInfoProperty = DependencyProperty.Register(
             nameof(LoadingInfo), typeof(string), typeof(ProgressBar),
             new PropertyMetadata(string.Empty));
-
+        
+        /// <summary>
+        /// Converts the given value to the ui-value
+        /// </summary>
+        /// <param name="value"></param>
         private void ChangeProgressValue(double value)
         {
             if (indicator != null || path != null)
@@ -48,6 +57,10 @@ namespace AquaMaintenancer.Theme.Components
                 indicator.InvalidateVisual();
             }
         }
+
+        /// <summary>
+        /// Gets the ui-elements and stored them.
+        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
