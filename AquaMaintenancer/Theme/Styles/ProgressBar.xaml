@@ -4,7 +4,7 @@
                     xmlns:conv="clr-namespace:AquaMaintenancer.Theme.Converter"
                     xmlns:prop="clr-namespace:AquaMaintenancer.Theme.CustomProperties">
 
-    <Style TargetType="{x:Type controls:AquaProgressBar}">
+    <Style TargetType="{x:Type controls:ProgressBar}">
         <Style.Resources>
             <conv:UpperCaseConverter x:Key="UpperCaseConverter" />
             <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
@@ -14,7 +14,7 @@
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type controls:AquaProgressBar}">
+                <ControlTemplate TargetType="{x:Type controls:ProgressBar}">
                     <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
                         <TextBlock Foreground="{StaticResource TextColor}"
                                    Visibility="{TemplateBinding LoadingInfo, Converter={StaticResource StringToVisibilityConverter}}"
