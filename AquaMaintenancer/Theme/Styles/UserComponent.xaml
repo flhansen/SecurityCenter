@@ -20,15 +20,35 @@
                                 <Brush />
                             </Ellipse.Fill>-->
                         </Ellipse>
-                        <StackPanel Grid.Column="1" 
-                                    Orientation="Vertical" 
-                                    prop:ContainerSpacing.Spacing="4"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                            <TextBlock Foreground="{StaticResource TextColor}">Klaus Dieter</TextBlock>
-                            <TextBlock Foreground="{StaticResource TextColor}">Hauswirtschafter</TextBlock>
-                        </StackPanel>
-                        <Image Grid.Column="2" />
+                        <Border Grid.Column="1" Padding="20,0">
+                            <StackPanel Orientation="Vertical" 
+                                        prop:ContainerSpacing.Spacing="4"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <TextBlock Foreground="{StaticResource TextColor}">Klaus Dieter</TextBlock>
+                                <TextBlock Foreground="{StaticResource TextColor}">Hauswirtschafter</TextBlock>
+                            </StackPanel>
+                        </Border>
+
+                        <Image Grid.Column="2" RenderTransformOrigin="0.5,0.5">
+                            <Image.RenderTransform>
+                                <RotateTransform x:Name="AnimRotateTransform" Angle="0" />
+                            </Image.RenderTransform>
+                            <Image.Triggers>
+                                <EventTrigger RoutedEvent="=MouseDown">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
+                                                             Storyboard.TargetProperty="Angle"
+                                                             By="10"
+                                                             To="180"
+                                                             Duration="0:0:0.5"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Image.Triggers>
+                        </Image>
+
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
