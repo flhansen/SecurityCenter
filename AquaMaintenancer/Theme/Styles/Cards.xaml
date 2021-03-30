@@ -26,7 +26,11 @@
                             </Grid.RowDefinitions>
                             <Border Grid.Row="0" Padding="16, 10">
                                 <StackPanel>
-                                    <TextBlock Text="{TemplateBinding Title}" Foreground="{StaticResource TextColor}" FontWeight="Bold" FontSize="12" FontFamily="{StaticResource Roboto}" />
+                                    <TextBlock Text="{TemplateBinding Title}" 
+                                               Foreground="{StaticResource TextColor}" 
+                                               FontWeight="Bold" 
+                                               FontSize="12" 
+                                               FontFamily="{StaticResource Roboto}" />
                                 </StackPanel>
                             </Border>
                             <Border Grid.Row="1" Background="{StaticResource TextColor}" Opacity="0.1" />
