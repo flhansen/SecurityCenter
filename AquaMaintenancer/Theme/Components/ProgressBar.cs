@@ -6,13 +6,13 @@ using System.Windows.Controls;
 
 namespace AquaMaintenancer.Theme.Components
 {
-    public class AquaProgressBar : ContentControl
+    public class ProgressBar : ContentControl
     {
-        private static Border path;
-        private static Border indicator;
-        static AquaProgressBar()
+        private Border path;
+        private Border indicator;
+        static ProgressBar()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(AquaProgressBar), new FrameworkPropertyMetadata(typeof(AquaProgressBar)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
         }
         public double Value
         {
@@ -21,16 +21,13 @@ namespace AquaMaintenancer.Theme.Components
         }
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-            nameof(Value), typeof(double), typeof(AquaProgressBar),
+            nameof(Value), typeof(double), typeof(ProgressBar),
             new PropertyMetadata(double.NaN, HandlePropertyChanged));
 
         private static void HandlePropertyChanged(object d, DependencyPropertyChangedEventArgs e)
         {
-            if (indicator != null || path != null)
-            {
-                indicator.Width = (double)e.NewValue * (path.ActualWidth / 100);
-                indicator.InvalidateVisual();
-            }
+            ProgressBar pgb = d as ProgressBar;
+            pgb.ChangeProgressValue((double)e.NewValue);
         }
 
         public string LoadingInfo
@@ -40,9 +37,17 @@ namespace AquaMaintenancer.Theme.Components
         }
 
         public static readonly DependencyProperty LoadingInfoProperty = DependencyProperty.Register(
-            nameof(LoadingInfo), typeof(string), typeof(AquaProgressBar),
+            nameof(LoadingInfo), typeof(string), typeof(ProgressBar),
             new PropertyMetadata(string.Empty));
 
+        private void ChangeProgressValue(double value)
+        {
+            if (indicator != null || path != null)
+            {
+                indicator.Width = value * (path.ActualWidth / 100);
+                indicator.InvalidateVisual();
+            }
+        }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
