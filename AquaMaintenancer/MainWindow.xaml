@@ -9,19 +9,4 @@
         xmlns:vm="clr-namespace:AquaMaintenancer.UILogic.ViewModels;assembly=AquaMaintenancer.UILogic"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
-
-    <controls:Card Title="ListView Example" Padding="0, 0, 0, 8" VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
-        <controls:ListView ItemsSource="{Binding TestViewModels}" AutoGenerateColumns="False" IsReadOnly="True" Height="150">
-            <controls:ListView.Columns>
-                <DataGridTextColumn Header="Header 1" Binding="{Binding Prop1}" />
-                <DataGridTextColumn Header="Header 2" Binding="{Binding Prop2}" />
-                <DataGridTextColumn Header="Header 3" Binding="{Binding Prop3}" />
-                <DataGridTextColumn Header="Header 4" Binding="{Binding Prop4}" />
-                <DataGridTextColumn Header="Header 5" Binding="{Binding Prop5}" />
-            </controls:ListView.Columns>
-        </controls:ListView>
-    </controls:Card>
 </Window>
