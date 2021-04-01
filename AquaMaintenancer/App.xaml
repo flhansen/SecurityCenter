@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Theme/Styles/ProgressBar.xaml" />
                 <ResourceDictionary Source="Theme/Styles/TextFields.xaml" />
                 <ResourceDictionary Source="Theme/Styles/Lists.xaml" />
+                <ResourceDictionary Source="Theme/Styles/ScrollBars.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

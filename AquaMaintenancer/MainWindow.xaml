@@ -14,7 +14,7 @@
     </Window.DataContext>
 
     <controls:Card Title="ListView Example" Padding="0, 0, 0, 8" VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
-        <controls:ListView ItemsSource="{Binding TestViewModels}" AutoGenerateColumns="False" IsReadOnly="True">
+        <controls:ListView ItemsSource="{Binding TestViewModels}" AutoGenerateColumns="False" IsReadOnly="True" Height="150">
             <controls:ListView.Columns>
                 <DataGridTextColumn Header="Header 1" Binding="{Binding Prop1}" />
                 <DataGridTextColumn Header="Header 2" Binding="{Binding Prop2}" />
