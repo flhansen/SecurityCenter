@@ -6,7 +6,22 @@
         xmlns:local="clr-namespace:AquaMaintenancer"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
+        xmlns:vm="clr-namespace:AquaMaintenancer.UILogic.ViewModels;assembly=AquaMaintenancer.UILogic"
         mc:Ignorable="d"
-
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+
+    <controls:Card Title="ListView Example">
+        <controls:ListView ItemsSource="{Binding TestViewModels}" AutoGenerateColumns="False">
+            <controls:ListView.Columns>
+                <DataGridTextColumn Header="Header1" Binding="{Binding Prop1}" />
+                <DataGridTextColumn Header="Header2" Binding="{Binding Prop2}" />
+                <DataGridTextColumn Header="Header3" Binding="{Binding Prop3}" />
+                <DataGridTextColumn Header="Header4" Binding="{Binding Prop4}" />
+                <DataGridTextColumn Header="Header5" Binding="{Binding Prop5}" />
+            </controls:ListView.Columns>
+        </controls:ListView>
+    </controls:Card>
 </Window>

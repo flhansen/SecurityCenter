@@ -54,7 +54,7 @@
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplicationCollection.cs" />
     <Compile Include="Models\Service.cs" />
-    <Compile Include="Models\ServiceProfile.cs" />
+    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

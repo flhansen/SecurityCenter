@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AquaMaintenancer.UILogic\AquaMaintenancer.UILogic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Theme\Assets\Fonts\Roboto-Black.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
