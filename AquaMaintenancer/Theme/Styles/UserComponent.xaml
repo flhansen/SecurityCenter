@@ -48,7 +48,11 @@
                                 </EventTrigger>
                             </Image.Triggers>
                         </Image>
-
+                        <Popup x:Name="userPopup" PopupAnimation="Scroll">
+                            <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
+                                
+                            </StackPanel>
+                        </Popup>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
