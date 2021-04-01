@@ -34,7 +34,7 @@
                                 </StackPanel>
                             </Border>
                             <Border Grid.Row="1" Background="{StaticResource TextColor}" Opacity="0.1" />
-                            <Border Grid.Row="2" Padding="16">
+                            <Border Grid.Row="2" Padding="{TemplateBinding Padding}">
                                 <ContentPresenter />
                             </Border>
                         </Grid>

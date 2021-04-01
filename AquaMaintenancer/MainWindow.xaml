@@ -13,14 +13,14 @@
         <vm:MainWindowViewModel />
     </Window.DataContext>
 
-    <controls:Card Title="ListView Example">
-        <controls:ListView ItemsSource="{Binding TestViewModels}" AutoGenerateColumns="False">
+    <controls:Card Title="ListView Example" Padding="0, 0, 0, 8" VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
+        <controls:ListView ItemsSource="{Binding TestViewModels}" AutoGenerateColumns="False" IsReadOnly="True">
             <controls:ListView.Columns>
-                <DataGridTextColumn Header="Header1" Binding="{Binding Prop1}" />
-                <DataGridTextColumn Header="Header2" Binding="{Binding Prop2}" />
-                <DataGridTextColumn Header="Header3" Binding="{Binding Prop3}" />
-                <DataGridTextColumn Header="Header4" Binding="{Binding Prop4}" />
-                <DataGridTextColumn Header="Header5" Binding="{Binding Prop5}" />
+                <DataGridTextColumn Header="Header 1" Binding="{Binding Prop1}" />
+                <DataGridTextColumn Header="Header 2" Binding="{Binding Prop2}" />
+                <DataGridTextColumn Header="Header 3" Binding="{Binding Prop3}" />
+                <DataGridTextColumn Header="Header 4" Binding="{Binding Prop4}" />
+                <DataGridTextColumn Header="Header 5" Binding="{Binding Prop5}" />
             </controls:ListView.Columns>
         </controls:ListView>
     </controls:Card>
