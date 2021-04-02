@@ -33,17 +33,23 @@
 
                         <fa:ImageAwesome Grid.Column="2" RenderTransformOrigin="0.5,0.5" Icon="CaretDown" Width="13" Height="13" Foreground="White">
                             <fa:ImageAwesome.RenderTransform>
-                                <RotateTransform x:Name="AnimRotateTransform" Angle="0" />
+                                <ScaleTransform x:Name="AnimRotateTransform" />
                             </fa:ImageAwesome.RenderTransform>
                             <fa:ImageAwesome.Triggers>
                                 <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate">
                                     <BeginStoryboard>
-                                        <Storyboard x:Name="RotateCaret">
+                                        <Storyboard x:Name="Carot">
                                             <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
-                                                             Storyboard.TargetProperty="Angle"
+                                                             x:Name="RotateForth"
+                                                             Storyboard.TargetProperty="ScaleY"
                                                              AutoReverse="False"
-                                                             From="0"
-                                                             To="180"
+                                                             To="-1"
+                                                             Duration="0:0:0.5"/>
+                                            <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
+                                                             x:Name="RotateBack"
+                                                             Storyboard.TargetProperty="ScaleY"
+                                                             AutoReverse="False"
+                                                             To="1"
                                                              Duration="0:0:0.5"/>
                                         </Storyboard>
                                     </BeginStoryboard>
