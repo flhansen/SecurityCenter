@@ -36,13 +36,13 @@
                                 <RotateTransform x:Name="AnimRotateTransform" Angle="0" />
                             </fa:ImageAwesome.RenderTransform>
                             <fa:ImageAwesome.Triggers>
-                                <EventTrigger RoutedEvent="MouseDown">
+                                <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate">
                                     <BeginStoryboard>
-                                        <Storyboard>
+                                        <Storyboard x:Name="RotateCaret">
                                             <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
                                                              Storyboard.TargetProperty="Angle"
                                                              AutoReverse="False"
-                                                             By="10"
+                                                             From="0"
                                                              To="180"
                                                              Duration="0:0:0.5"/>
                                         </Storyboard>
