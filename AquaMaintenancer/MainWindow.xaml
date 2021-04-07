@@ -10,6 +10,8 @@
 
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Grid>
-        <controls:UserComponent></controls:UserComponent>
+        <controls:UserComponent>
+            <controls:MenuItem Content="Test"></controls:MenuItem>
+        </controls:UserComponent>
     </Grid>
 </Window>

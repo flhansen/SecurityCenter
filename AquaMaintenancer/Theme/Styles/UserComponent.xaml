@@ -6,66 +6,71 @@
 
 <Style TargetType="{x:Type controls:UserComponent}">
         <Setter Property="Width" Value="250" />
-        <Setter Property="Height" Value="50" />
+        <Setter Property="Height" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:UserComponent}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="48" />
-                            <ColumnDefinition Width="auto" />
-                            <ColumnDefinition Width="48" />
-                        </Grid.ColumnDefinitions>
-                        <Ellipse Grid.Column="0" Height="48" Width="48" Fill="Gray">
-                            <!--<Ellipse.Fill>
-                                <Brush />
-                            </Ellipse.Fill>-->
-                        </Ellipse>
-                        <Border Grid.Column="1" Padding="20,0">
-                            <StackPanel Orientation="Vertical" 
-                                        prop:ContainerSpacing.Spacing="4"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center">
-                                <TextBlock Foreground="{StaticResource TextColor}">Klaus Dieter</TextBlock>
-                                <TextBlock Foreground="{StaticResource TextColor}">Hauswirtschafter</TextBlock>
-                            </StackPanel>
-                        </Border>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="48" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Grid.Column="0" Height="48" Width="48" Fill="Gray">
+                                <!--<Ellipse.Fill>
+                                    <Brush />
+                                </Ellipse.Fill>-->
+                            </Ellipse>
+                            <Border Grid.Column="1" Padding="20,0">
+                                <StackPanel Orientation="Vertical" 
+                                            prop:ContainerSpacing.Spacing="4"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Foreground="{StaticResource TextColor}">Klaus Dieter</TextBlock>
+                                    <TextBlock Foreground="{StaticResource TextColor}">Hauswirtschafter</TextBlock>
+                                </StackPanel>
+                            </Border>
 
-                        <fa:ImageAwesome Grid.Column="2" RenderTransformOrigin="0.5,0.5" Icon="CaretDown" Width="13" Height="13" Foreground="White">
-                            <fa:ImageAwesome.RenderTransform>
-                                <ScaleTransform x:Name="AnimRotateTransform" />
-                            </fa:ImageAwesome.RenderTransform>
-                            <fa:ImageAwesome.Triggers>
-                                <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="Carot">
-                                            <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
-                                                             x:Name="RotateForth"
-                                                             Storyboard.TargetProperty="ScaleY"
-                                                             AutoReverse="False"
-                                                             To="-1"
-                                                             Duration="0:0:0.5"/>
-                                            <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
-                                                             x:Name="RotateBack"
-                                                             Storyboard.TargetProperty="ScaleY"
-                                                             AutoReverse="False"
-                                                             To="1"
-                                                             Duration="0:0:0.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </fa:ImageAwesome.Triggers>
-                        </fa:ImageAwesome>
-                        <Popup x:Name="userPopup" PopupAnimation="Scroll">
-                            <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
-                                <Border Height="30"
-                                        Width="60"
-                                        Background="White">
-                                    
-                                </Border> 
-                            </StackPanel>
-                        </Popup>
-                    </Grid>
+                            <fa:ImageAwesome Grid.Column="2" RenderTransformOrigin="0.5,0.5" Icon="CaretDown" Width="13" Height="13" Foreground="White">
+                                <fa:ImageAwesome.RenderTransform>
+                                    <ScaleTransform x:Name="AnimRotateTransform" />
+                                </fa:ImageAwesome.RenderTransform>
+                                <fa:ImageAwesome.Triggers>
+                                    <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="Carot">
+                                                <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
+                                                                 x:Name="RotateForth"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 AutoReverse="False"
+                                                                 To="-1"
+                                                                 Duration="0:0:0.5"/>
+                                                <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
+                                                                 x:Name="RotateBack"
+                                                                 Storyboard.TargetProperty="ScaleY"
+                                                                 AutoReverse="False"
+                                                                 To="1"
+                                                                 Duration="0:0:0.5"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </fa:ImageAwesome.Triggers>
+                            </fa:ImageAwesome>
+                            <Popup x:Name="userPopup" PopupAnimation="Scroll">
+                                <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
+                                    <Border Height="30"
+                                            Width="60"
+                                            Background="White">
+                                        
+                                    </Border> 
+                                </StackPanel>
+                            </Popup>
+                        </Grid>
+                        <StackPanel Visibility="Visible">
+                            <ContentPresenter HorizontalAlignment="Left" />
+                        </StackPanel>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
