@@ -8,7 +8,6 @@ using System.Windows.Media.Animation;
 
 namespace AquaMaintenancer.Theme.Components
 {
-    public enum RotationStatus { Back = 0, Forth = 1 };
 
     public class UserComponentData
     {
@@ -17,7 +16,7 @@ namespace AquaMaintenancer.Theme.Components
         public string Position { get; set; }
         public string PicturePath { get; set; }
     }
-    public class UserComponent : ContentControl
+    public class UserComponent :ContentControl
     {
     }
 }

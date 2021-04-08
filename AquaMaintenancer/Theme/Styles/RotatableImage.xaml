@@ -6,16 +6,17 @@
     <Style TargetType="{x:Type controls:RotatableImage}">
         <Setter Property="Width" Value="18" />
         <Setter Property="Foreground" Value="White" />
-        <Setter Property="Icon" Value="CarotDown" />
+        <Setter Property="Icon" Value="CaretDown" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:RotatableImage}">
+
                     <fa:ImageAwesome Icon="{TemplateBinding Icon}" >
                         <fa:ImageAwesome.RenderTransform>
                             <ScaleTransform x:Name="AnimRotateTransform" />
                         </fa:ImageAwesome.RenderTransform>
                         <fa:ImageAwesome.Triggers>
-                            <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate" >
+                            <EventTrigger RoutedEvent="controls:RotatableImage.OnClickRotate" >
                                 <BeginStoryboard>
                                     <Storyboard x:Name="Carot">
                                         <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
@@ -36,6 +37,7 @@
                         </fa:ImageAwesome.Triggers>
                     </fa:ImageAwesome>
                 </ControlTemplate> 
+
             </Setter.Value>
         </Setter>
     </Style>

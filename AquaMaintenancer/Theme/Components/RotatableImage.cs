@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace AquaMaintenancer.Theme.Components
 {
-    public class RotatableImage : ImageAwesome
+    public enum RotationStatus { Back = 0, Forth = 1 };
+    public class RotatableImage : ContentControl
     {
         private DoubleAnimation RotateForth;
         private DoubleAnimation RotateBack;
@@ -62,5 +64,19 @@ namespace AquaMaintenancer.Theme.Components
                 throw new NullReferenceException("Animations not found.");
             }
         }
+        
+        /// <summary>
+        /// The icon inside the button. If <em>None</em>, it will not be displayed.
+        /// </summary>
+        public FontAwesomeIcon Icon
+        {
+            get => (FontAwesomeIcon)GetValue(IconProperty);
+            set => SetValue(IconProperty, value); 
+        }
+
+        public static readonly DependencyProperty IconProperty = 
+            DependencyProperty.Register(nameof(Icon), typeof(FontAwesomeIcon),
+                typeof(RotatableImage), new PropertyMetadata());
+
     }
 }

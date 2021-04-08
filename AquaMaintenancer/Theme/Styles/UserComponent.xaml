@@ -4,7 +4,7 @@
                     xmlns:prop="clr-namespace:AquaMaintenancer.Theme.CustomProperties"
                     xmlns:fa="http://schemas.fontawesome.io/icons/" >
 
-<Style TargetType="{x:Type controls:UserComponent}">
+    <Style TargetType="{x:Type controls:UserComponent}">
         <Setter Property="Width" Value="250" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Template">
@@ -57,7 +57,7 @@
                                     </EventTrigger>
                                 </fa:ImageAwesome.Triggers>
                             </fa:ImageAwesome>-->
-                            <Popup x:Name="userPopup" PopupAnimation="Scroll">
+                            <!--<Popup x:Name="userPopup" PopupAnimation="Scroll">
                                 <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
                                     <Border Height="30"
                                             Width="60"
@@ -65,7 +65,7 @@
                                         
                                     </Border> 
                                 </StackPanel>
-                            </Popup>
+                            </Popup>-->
                         </Grid>
                         <StackPanel Visibility="Visible">
                             <ContentPresenter HorizontalAlignment="Left" />

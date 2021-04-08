@@ -10,8 +10,8 @@
                 <ResourceDictionary Source="Theme/Ressources/Fonts.xaml" />
                 <ResourceDictionary Source="Theme/Styles/Buttons.xaml" />
                 <ResourceDictionary Source="Theme/Styles/Cards.xaml" />
-                <ResourceDictionary Source="Theme/Styles/RotatableImage.xaml" />
                 <ResourceDictionary Source="Theme/Styles/UserComponent.xaml" />
+                <ResourceDictionary Source="Theme/Styles/RotatableImage.xaml" />
                 <ResourceDictionary Source="Theme/Styles/MenuItem.xaml" />
                 <ResourceDictionary Source="Theme/Styles/ProgressBar.xaml" />
                 <ResourceDictionary Source="Theme/Styles/TextFields.xaml" />
