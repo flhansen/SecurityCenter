@@ -37,7 +37,7 @@
                                     <ScaleTransform x:Name="AnimRotateTransform" />
                                 </fa:ImageAwesome.RenderTransform>
                                 <fa:ImageAwesome.Triggers>
-                                    <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate">
+                                    <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate" >
                                         <BeginStoryboard>
                                             <Storyboard x:Name="Carot">
                                                 <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
