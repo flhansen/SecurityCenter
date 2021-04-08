@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
+                    xmlns:fa="http://schemas.fontawesome.io/icons/">
+
+    <Style TargetType="{x:Type controls:RotatableImage}">
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Icon" Value="CarotDown" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:RotatableImage}">
+                    <fa:ImageAwesome Icon="{TemplateBinding Icon}" >
+                        <fa:ImageAwesome.RenderTransform>
+                            <ScaleTransform x:Name="AnimRotateTransform" />
+                        </fa:ImageAwesome.RenderTransform>
+                        <fa:ImageAwesome.Triggers>
+                            <EventTrigger RoutedEvent="controls:UserComponent.OnClickRotate" >
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="Carot">
+                                        <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
+                                                         x:Name="RotateForth"
+                                                         Storyboard.TargetProperty="ScaleY"
+                                                         AutoReverse="False"
+                                                         To="-1"
+                                                         Duration="0:0:0.5"/>
+                                        <DoubleAnimation Storyboard.TargetName="AnimRotateTransform"
+                                                         x:Name="RotateBack"
+                                                         Storyboard.TargetProperty="ScaleY"
+                                                         AutoReverse="False"
+                                                         To="1"
+                                                         Duration="0:0:0.5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </fa:ImageAwesome.Triggers>
+                    </fa:ImageAwesome>
+                </ControlTemplate> 
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
