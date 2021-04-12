@@ -34,7 +34,7 @@
                             <controls:RotatableImage Grid.Column="2" Width="13"></controls:RotatableImage> 
                         </Grid>
                         <StackPanel Visibility="Visible">
-                            <ContentPresenter HorizontalAlignment="Left" />
+                            <ContentPresenter x:Name="Test" HorizontalAlignment="Left" Width="{TemplateBinding Width}"/>
                         </StackPanel>
                     </StackPanel>
                 </ControlTemplate>
