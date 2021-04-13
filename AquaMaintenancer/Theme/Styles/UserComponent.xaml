@@ -2,9 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
                     xmlns:prop="clr-namespace:AquaMaintenancer.Theme.CustomProperties"
-                    xmlns:fa="http://schemas.fontawesome.io/icons/" >
+                    xmlns:fa="http://schemas.fontawesome.io/icons/"
+                    xmlns:conv="clr-namespace:AquaMaintenancer.Theme.Converter" >
 
     <Style TargetType="{x:Type controls:UserComponent}">
+        <Style.Resources>
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        </Style.Resources>
         <Setter Property="Width" Value="250" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Template">
@@ -31,10 +35,13 @@
                                     <TextBlock Foreground="{StaticResource TextColor}">Hauswirtschafter</TextBlock>
                                 </StackPanel>
                             </Border>
-                            <controls:RotatableImage Grid.Column="2" Width="13"></controls:RotatableImage> 
+                            <controls:RotatableImage x:Name="OpeningIcon" Grid.Column="2" Width="13"></controls:RotatableImage> 
                         </Grid>
                         <StackPanel Visibility="Visible">
-                            <ContentPresenter x:Name="Test" HorizontalAlignment="Left" Width="{TemplateBinding Width}"/>
+                            <ContentPresenter x:Name="Test" 
+                                              HorizontalAlignment="Left" 
+                                              Width="{TemplateBinding Width}"
+                                              Visibility="{Binding ElementName=OpeningIcon, Path=IsOpened, Converter={StaticResource BoolToVisibilityConverter}}"/>
                         </StackPanel>
                     </StackPanel>
                 </ControlTemplate>
