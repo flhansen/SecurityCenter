@@ -6,7 +6,38 @@
         xmlns:local="clr-namespace:AquaMaintenancer"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
+        xmlns:props="clr-namespace:AquaMaintenancer.Theme.CustomProperties"
         xmlns:vm="clr-namespace:AquaMaintenancer.UILogic.ViewModels;assembly=AquaMaintenancer.UILogic"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <controls:SideMenu Width="275" Grid.Column="0">
+            <controls:SideMenuSection>
+                <StackPanel Orientation="Horizontal" Margin="24, 0, 0, 0" props:ContainerSpacing.Spacing="24">
+                    <fa:ImageAwesome Icon="Tint" Foreground="{StaticResource PrimaryColor}" Height="24" />
+                    <TextBlock Foreground="{StaticResource TextColor}" FontSize="18">Aqua Security Center</TextBlock>
+                </StackPanel>
+            </controls:SideMenuSection>
+
+            <controls:SideMenuSection>
+                <controls:VerticalMenu Orientation="Vertical">
+                    <TextBlock Foreground="{StaticResource TextColor}" FontSize="12" FontWeight="Bold" Padding="24, 0, 0, 8">Allgemein</TextBlock>
+                    <controls:VerticalMenuItem Title="Dashboard" Icon="Dashboard" />
+                    <controls:VerticalMenuItem IsSelected="True" Title="Anwendungen" Icon="Photo" />
+                    <controls:VerticalMenuItem Title="Dienste" Icon="Cogs" />
+                    <controls:VerticalMenuItem Title="Updated" Icon="Wrench" />
+                </controls:VerticalMenu>
+            </controls:SideMenuSection>
+        </controls:SideMenu>
+
+        <controls:Card Title="Test Card" Grid.Column="1" Margin="48" />
+    </Grid>
+    
 </Window>
