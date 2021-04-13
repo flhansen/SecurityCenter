@@ -66,7 +66,7 @@ namespace AquaMaintenancer.Theme.Components
         }
         
         /// <summary>
-        /// The icon inside the button. If <em>None</em>, it will not be displayed.
+        /// The icon to rotate. If <em>None</em>, it will not be displayed.
         /// </summary>
         public FontAwesomeIcon Icon
         {
@@ -77,6 +77,23 @@ namespace AquaMaintenancer.Theme.Components
         public static readonly DependencyProperty IconProperty = 
             DependencyProperty.Register(nameof(Icon), typeof(FontAwesomeIcon),
                 typeof(RotatableImage), new PropertyMetadata());
+
+
+        public bool IsOpened
+        {
+            get => (bool)GetValue(IsOpenedProperty);
+            set => SetValue(IsOpenedProperty, value);
+        }
+
+        public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register(
+            nameof(IsOpened), typeof(bool), typeof(RotatableImage),
+            new PropertyMetadata(false, HandlePropertyChanged));
+
+        private static void HandlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            RotatableImage ri = d as RotatableImage;
+            ri.SetValue(IsOpenedProperty, !(bool)ri.GetValue(IsOpenedProperty));
+        }
 
     }
 }
