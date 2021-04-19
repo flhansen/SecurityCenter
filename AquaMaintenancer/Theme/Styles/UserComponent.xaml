@@ -9,39 +9,53 @@
         <Style.Resources>
             <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         </Style.Resources>
-        <Setter Property="Width" Value="250" />
+        <Setter Property="Width" Value="275" />
         <Setter Property="Height" Value="Auto" />
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:UserComponent}">
+
+
                     <StackPanel Orientation="Vertical">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="48" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="48" />
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Grid.Column="0" Height="48" Width="48" Fill="Gray">
-                                <!--<Ellipse.Fill>
-                                    <Brush />
-                                </Ellipse.Fill>-->
-                            </Ellipse>
-                            <Border Grid.Column="1" Padding="20,0">
-                                <StackPanel Orientation="Vertical" 
-                                            prop:ContainerSpacing.Spacing="4"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center">
-                                    <TextBlock Foreground="{StaticResource TextColor}">Klaus Dieter</TextBlock>
-                                    <TextBlock Foreground="{StaticResource TextColor}">Hauswirtschafter</TextBlock>
-                                </StackPanel>
-                            </Border>
-                            <controls:RotatableImage x:Name="OpeningIcon" Grid.Column="2" Width="13"></controls:RotatableImage> 
-                        </Grid>
-                        <StackPanel Visibility="Visible">
+                        <Border Background="Transparent" HorizontalAlignment="Center" Padding="0,24">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="48" />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0" Height="48" Width="48" Fill="Gray">
+                                    <!--<Ellipse.Fill>
+                                            <Brush />
+                                        </Ellipse.Fill>-->
+                                </Ellipse>
+                                <Border Grid.Column="1" Padding="20,0">
+                                    <StackPanel Orientation="Vertical" 
+                                                    prop:ContainerSpacing.Spacing="4"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center">
+                                        <TextBlock Foreground="{StaticResource TextColor}" FontFamily="{TemplateBinding FontFamily}">Klaus Dieter</TextBlock>
+                                        <TextBlock Foreground="{StaticResource TextColor}" FontFamily="{TemplateBinding FontFamily}">Hauswirtschafter</TextBlock>
+                                    </StackPanel>
+                                </Border>
+                                <controls:RotatableImage x:Name="OpeningIcon" Grid.Column="2" Width="13" HorizontalAlignment="Right"></controls:RotatableImage>
+                            </Grid>
+                        </Border>
+                        <Separator Opacity="0.05"
+                                   Background="#FFFFFF"
+                                   Width="Auto"
+                                   Visibility="{TemplateBinding IsOpened, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <StackPanel Visibility="{TemplateBinding IsOpened, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock Foreground="{StaticResource TextColor}" 
+                                       FontWeight="Bold"
+                                       FontSize="12"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       Padding="25,24,0,6">Nutzeroptionen</TextBlock>
                             <ContentPresenter x:Name="Test" 
-                                              HorizontalAlignment="Left" 
-                                              Width="{TemplateBinding Width}"
-                                              Visibility="{Binding ElementName=OpeningIcon, Path=IsOpened, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                  HorizontalAlignment="Left" 
+                                                  Width="{TemplateBinding Width}" />
+                            <!--Visibility="{TemplateBinding IsOpened, Converter={StaticResource BoolToVisibilityConverter}}"-->
                         </StackPanel>
                     </StackPanel>
                 </ControlTemplate>

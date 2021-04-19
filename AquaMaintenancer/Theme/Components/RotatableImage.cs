@@ -17,45 +17,40 @@ namespace AquaMaintenancer.Theme.Components
         private Storyboard Sb;
         private RotationStatus RotationDirection = RotationStatus.Forth;
 
-        //public static readonly RoutedEvent OnClickRotateEvent = EventManager.RegisterRoutedEvent(
-        //    "OnClickRotate", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(RotatableImage));
+        public static readonly RoutedEvent OnClickRotateEvent = EventManager.RegisterRoutedEvent(
+            "OnClickRotate", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(RotatableImage));
 
-        //public event RoutedEventHandler OnClickRotate
-        //{
-        //    add => AddHandler(OnClickRotateEvent, value);
-        //    remove => RemoveHandler(OnClickRotateEvent, value);
-        //}
-
-        private void OnClickScaleIcon(object sender, RoutedEventArgs e)
+        public event RoutedEventHandler OnClickRotate
         {
-
+            add => AddHandler(OnClickRotateEvent, value);
+            remove => RemoveHandler(OnClickRotateEvent, value);
         }
+       
+        void RaiseRotateEvent()
+        {
+            RoutedEventArgs newEventArgs = new RoutedEventArgs(OnClickRotateEvent);
+            RaiseEvent(newEventArgs);
 
-        //void RaiseRotateEvent()
-        //{
-        //    RoutedEventArgs newEventArgs = new RoutedEventArgs(OnClickRotateEvent);
-        //    RaiseEvent(newEventArgs);
+            Sb.Stop();
 
-        //    Sb.Stop();
+            if (RotationDirection == RotationStatus.Forth)
+            {
+                Sb.Children.Add(RotateForth);
+                RotationDirection = RotationStatus.Back;
+            }
+            else
+            {
+                Sb.Children.Add(RotateBack);
+                RotationDirection = RotationStatus.Forth;
+            }
 
-        //    if (RotationDirection == RotationStatus.Forth)
-        //    {
-        //        Sb.Children.Add(RotateForth);
-        //        RotationDirection = RotationStatus.Back;
-        //    }
-        //    else
-        //    {
-        //        Sb.Children.Add(RotateBack);
-        //        RotationDirection = RotationStatus.Forth;
-        //    }
-
-        //    Sb.Begin(); 
-        //}
-        //protected override void OnMouseDown(MouseButtonEventArgs e)
-        //{
-        //    base.OnMouseDown(e);
-        //    RaiseRotateEvent();
-        //}
+            Sb.Begin();
+        }
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            RaiseRotateEvent();
+        }
 
         public override void OnApplyTemplate()
         {
@@ -68,6 +63,7 @@ namespace AquaMaintenancer.Theme.Components
             {
                 throw new NullReferenceException("Animations not found.");
             }
+
         }
         
         /// <summary>
@@ -84,21 +80,6 @@ namespace AquaMaintenancer.Theme.Components
                 typeof(RotatableImage), new PropertyMetadata());
 
 
-        public bool IsOpened
-        {
-            get => (bool)GetValue(IsOpenedProperty);
-            set => SetValue(IsOpenedProperty, value);
-        }
-
-        public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register(
-            nameof(IsOpened), typeof(bool), typeof(RotatableImage),
-            new PropertyMetadata(false, HandlePropertyChanged));
-
-        private static void HandlePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            RotatableImage ri = d as RotatableImage;
-            ri.SetValue(IsOpenedProperty, !(bool)ri.GetValue(IsOpenedProperty));
-        }
-
+        
     }
 }
