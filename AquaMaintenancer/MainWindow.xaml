@@ -9,4 +9,5 @@
         xmlns:vm="clr-namespace:AquaMaintenancer.UILogic.ViewModels;assembly=AquaMaintenancer.UILogic"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
+    
 </Window>
