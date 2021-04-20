@@ -9,9 +9,5 @@
         mc:Ignorable="d"
 
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
-    <StackPanel Orientation="Vertical">
-        <controls:UserComponent>
-            <controls:MenuItem Icon="Apple" Content="Test"></controls:MenuItem>
-        </controls:UserComponent>
-    </StackPanel>
+    
 </Window>
