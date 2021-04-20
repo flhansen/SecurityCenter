@@ -10,6 +10,10 @@ using System.Windows.Media.Animation;
 namespace AquaMaintenancer.Theme.Components
 {
     public enum RotationStatus { Back = 0, Forth = 1 };
+
+    /// <summary>
+    /// Has to be refactored on a later date! It's working as intended.
+    /// </summary>
     public class RotatableImage : ContentControl
     {
         private DoubleAnimation RotateForth;

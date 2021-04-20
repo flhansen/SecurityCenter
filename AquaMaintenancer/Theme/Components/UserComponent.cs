@@ -24,7 +24,10 @@ namespace AquaMaintenancer.Theme.Components
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(UserComponent), new FrameworkPropertyMetadata(typeof(UserComponent)));
         }
-
+        
+        /// <summary>
+        /// The user information to display.
+        /// </summary>
         public UserComponentData User
         {
             get => (UserComponentData)GetValue(UserProperty);
@@ -35,12 +38,21 @@ namespace AquaMaintenancer.Theme.Components
             nameof(User), typeof(UserComponentData), typeof(UserComponent),
             new PropertyMetadata(null, HandleUserChanged));
 
+        /// <summary>
+        /// Changes userinformation if the property changes. 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
         private static void HandleUserChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             UserComponent uc = d as UserComponent;
             uc.SetUserData(e.NewValue as UserComponentData);
         }
 
+        /// <summary>
+        /// Adds the data to the elements.
+        /// </summary>
+        /// <param name="UserData"></param>
         private void SetUserData(UserComponentData UserData)
         {
             string FullName = string.Join(" ", UserData.FirstName, UserData.LastName);
@@ -49,6 +61,9 @@ namespace AquaMaintenancer.Theme.Components
             PositionBlock.Text = UserData.Position;
         } 
 
+        /// <summary>
+        /// Property who the visibility of the menu is bound to.
+        /// </summary>
         public bool IsOpened
         {
             get => (bool)GetValue(IsOpenedProperty);
@@ -59,6 +74,9 @@ namespace AquaMaintenancer.Theme.Components
             nameof(IsOpened), typeof(bool), typeof(UserComponent),
             new PropertyMetadata(false));
 
+        /// <summary>
+        /// Requesting the user data elements and fill them with default values
+        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -75,10 +93,14 @@ namespace AquaMaintenancer.Theme.Components
             ri.OnClickRotate += OpenClose;
         }
 
+        /// <summary>
+        /// Changes the value of the DependencyPorperty
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenClose(object sender, RoutedEventArgs e)
         {
             IsOpened = !IsOpened;
-            Console.WriteLine(IsOpened);
         }
     }
 }
