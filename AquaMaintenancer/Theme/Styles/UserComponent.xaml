@@ -35,8 +35,8 @@
                                                     prop:ContainerSpacing.Spacing="4"
                                                     HorizontalAlignment="Center"
                                                     VerticalAlignment="Center">
-                                        <TextBlock Foreground="{StaticResource TextColor}" FontFamily="{TemplateBinding FontFamily}">Klaus Dieter</TextBlock>
-                                        <TextBlock Foreground="{StaticResource TextColor}" FontFamily="{TemplateBinding FontFamily}">Hauswirtschafter</TextBlock>
+                                        <TextBlock x:Name="UserName" Foreground="{StaticResource TextColor}" FontFamily="{TemplateBinding FontFamily}"></TextBlock>
+                                        <TextBlock x:Name="UserPosition" Foreground="{StaticResource TextColor}" FontFamily="{TemplateBinding FontFamily}"></TextBlock>
                                     </StackPanel>
                                 </Border>
                                 <controls:RotatableImage x:Name="OpeningIcon" Grid.Column="2" Width="13" HorizontalAlignment="Right"></controls:RotatableImage>
@@ -55,7 +55,6 @@
                             <ContentPresenter x:Name="Test" 
                                                   HorizontalAlignment="Left" 
                                                   Width="{TemplateBinding Width}" />
-                            <!--Visibility="{TemplateBinding IsOpened, Converter={StaticResource BoolToVisibilityConverter}}"-->
                         </StackPanel>
                     </StackPanel>
                 </ControlTemplate>

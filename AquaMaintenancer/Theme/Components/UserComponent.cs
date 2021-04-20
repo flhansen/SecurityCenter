@@ -11,27 +11,43 @@ namespace AquaMaintenancer.Theme.Components
 
     public class UserComponentData
     {
-        public string FirstName { get; set; }
-        public string LastName{ get; set; }
-        public string Position { get; set; }
+        public string FirstName { get; set; } = "Max";
+        public string LastName { get; set; } = "Mustermann";
+        public string Position { get; set; } = "Mustermacher";
         public string PicturePath { get; set; }
     }
     public class UserComponent : ContentControl
     {
+        private TextBlock NameBlock;
+        private TextBlock PositionBlock;
         static UserComponent()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(UserComponent), new FrameworkPropertyMetadata(typeof(UserComponent)));
         }
 
-        public UserComponentData Data
+        public UserComponentData User
         {
-            get => (UserComponentData)GetValue(DataProperty);
-            set => SetValue(DataProperty, value);
+            get => (UserComponentData)GetValue(UserProperty);
+            set => SetValue(UserProperty, value);
         }
 
-        public static DependencyProperty DataProperty = DependencyProperty.Register(
-            nameof(Data), typeof(UserComponentData), typeof(UserComponent),
-            new PropertyMetadata(null));
+        public static DependencyProperty UserProperty = DependencyProperty.Register(
+            nameof(User), typeof(UserComponentData), typeof(UserComponent),
+            new PropertyMetadata(null, HandleUserChanged));
+
+        private static void HandleUserChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            UserComponent uc = d as UserComponent;
+            uc.SetUserData(e.NewValue as UserComponentData);
+        }
+
+        private void SetUserData(UserComponentData UserData)
+        {
+            string FullName = string.Join(" ", UserData.FirstName, UserData.LastName);
+            NameBlock.Text = FullName;
+
+            PositionBlock.Text = UserData.Position;
+        } 
 
         public bool IsOpened
         {
@@ -46,7 +62,16 @@ namespace AquaMaintenancer.Theme.Components
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            NameBlock = GetTemplateChild("UserName") as TextBlock;
+            PositionBlock = GetTemplateChild("UserPosition") as TextBlock;
             RotatableImage ri = GetTemplateChild("OpeningIcon") as RotatableImage;
+
+            if (NameBlock == null || PositionBlock == null || ri == null)
+            {
+                throw new Exception("Missing userelements or iconreference");
+            }
+
+            SetUserData(new UserComponentData());
             ri.OnClickRotate += OpenClose;
         }
 
