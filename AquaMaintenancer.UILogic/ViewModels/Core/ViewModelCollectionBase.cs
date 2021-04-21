@@ -9,7 +9,7 @@ using System.Text;
 namespace AquaMaintenancer.UILogic.ViewModels.Core
 {
     public abstract class ViewModelCollectionBase<TViewModel, TModel> : ObservableCollection<TViewModel>, INotifyPropertyChanged
-        where TViewModel : ViewModelBase<TModel>
+        where TViewModel : ViewModel<TModel>
         where TModel : class
     {
         public ObservableCollection<TModel> Collection { get; private set; }

@@ -6,15 +6,9 @@ using System.Text;
 
 namespace AquaMaintenancer.UILogic.ViewModels.Core
 {
-    public abstract class ViewModelBase<TModel> : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public TModel Model { get; private set; }
-
-        public ViewModelBase(TModel model)
-        {
-            Model = model;
-        }
 
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
         {
