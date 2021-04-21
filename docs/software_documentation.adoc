@@ -1,0 +1,11 @@
+= Security Center: Software Documentation
+:toc: left
+
+== Architecture
+== Components
+
+=== xref:components/bar-chart.adoc[BarChart]
+=== xref:components/card.adoc[Card]
+=== xref:components/overview-card.adoc[OverviewCard]
+=== xref:components/primary-button.adoc[PrimaryButton]
+=== xref:components/text-field.adoc[TextField]

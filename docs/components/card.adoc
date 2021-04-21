@@ -1,0 +1,15 @@
+= Card
+Inherits from https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.contentcontrol?view=net-5.0[`+ContentControl+`].
+
+[cols="1,1,1,3"]
+|===
+|*Name*
+|*Type*
+|*Default*
+|*Description*
+
+|`+Title+`
+|`+string+`
+|`+string.Empty+`
+|The title of the card.
+|===
