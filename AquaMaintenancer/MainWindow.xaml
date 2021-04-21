@@ -11,9 +11,6 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
-<<<<<<< HEAD
-=======
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -41,6 +38,5 @@
 
         <controls:Card Title="Test Card" Grid.Column="1" Margin="48" />
     </Grid>
->>>>>>> menu
     
 </Window>
