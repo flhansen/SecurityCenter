@@ -6,12 +6,16 @@
         xmlns:controls="clr-namespace:AquaMaintenancer.Theme.Components"
         xmlns:props="clr-namespace:AquaMaintenancer.Theme.CustomProperties"
         xmlns:vm="clr-namespace:AquaMaintenancer.UILogic.ViewModels;assembly=AquaMaintenancer.UILogic"
+        xmlns:conv="clr-namespace:AquaMaintenancer.Theme.Converter"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
+        Title="MainWindow" Height="600" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <conv:PageViewModelToBoolConverter x:Key="PageViewModelToBoolConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -29,10 +33,53 @@
             <controls:SideMenuSection>
                 <controls:VerticalMenu Orientation="Vertical">
                     <TextBlock Foreground="{StaticResource TextColor}" FontSize="12" FontWeight="Bold" Padding="24, 0, 0, 8">Allgemein</TextBlock>
-                    <controls:VerticalMenuItem Title="Dashboard" Icon="Dashboard" />
-                    <controls:VerticalMenuItem IsSelected="True" Title="Anwendungen" Icon="Photo" />
-                    <controls:VerticalMenuItem Title="Dienste" Icon="Cogs" />
-                    <controls:VerticalMenuItem Title="Updated" Icon="Wrench" />
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:DashboardPageViewModel}}"
+                        Title="Dashboard"
+                        Icon="Dashboard"
+                        Command="{Binding DashboardPageSelectionCommand}" />
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:ApplicationPageViewModel}}"
+                        Title="Anwendungen"
+                        Icon="Photo"
+                        Command="{Binding ApplicationPageSelectionCommand}" />
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:ServicePageViewModel}}"
+                        Title="Dienste"
+                        Icon="Cogs"
+                        Command="{Binding ServicePageSelectionCommand}" />
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:UpdatePageViewModel}}"
+                        Title="Updated"
+                        Icon="Wrench"
+                        Command="{Binding UpdatePageSelectionCommand}" />
+                </controls:VerticalMenu>
+            </controls:SideMenuSection>
+            <controls:SideMenuSection>
+                <controls:VerticalMenu Orientation="Vertical">
+                    <TextBlock Foreground="{StaticResource TextColor}" FontSize="12" FontWeight="Bold" Padding="24, 0, 0, 8">Sicherheit</TextBlock>
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:FirewallPageViewModel}}"
+                        Title="Firewall"
+                        Icon="Shield"
+                        Command="{Binding FirewallPageSelectionCommand}" />
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:PortPageViewModel}}"
+                        Title="Ports"
+                        Icon="Plug"
+                        Command="{Binding PortPageSelectionCommand}" />
                 </controls:VerticalMenu>
             </controls:SideMenuSection>
         </controls:SideMenu>
