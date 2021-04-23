@@ -12,6 +12,7 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             Services = new ServiceCollectionViewModel(SystemAccess.GetServices());
+            SystemInformation = new SystemInformationViewModel(SystemAccess.GetSystemInformation());
         }
 
         private ApplicationCollectionViewModel applications;
@@ -26,6 +27,13 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => services;
             set => SetProperty(ref services, value);
+        }
+
+        private SystemInformationViewModel systemInformation;
+        public SystemInformationViewModel SystemInformation
+        {
+            get => systemInformation;
+            set => SetProperty(ref systemInformation, value);
         }
     }
 }
