@@ -9,7 +9,7 @@
         xmlns:conv="clr-namespace:AquaMaintenancer.Theme.Converter"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
+        Title="MainWindow" Height="1024" Width="1440" Background="{StaticResource BackgroundColor}" TextOptions.TextFormattingMode="Ideal">
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
@@ -84,7 +84,46 @@
             </controls:SideMenuSection>
         </controls:SideMenu>
 
-        <controls:Card Title="Test Card" Grid.Column="1" Margin="48" />
+        <Border Grid.Column="1" Padding="48">
+            <StackPanel props:ContainerSpacing.Spacing="48" Orientation="Vertical">
+                <StackPanel props:ContainerSpacing.Spacing="48" Orientation="Horizontal">
+                    <controls:Card Title="Systeminformationen" Width="448" FontFamily="{StaticResource Roboto}" FontSize="14">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="0" Margin="0, 0, 24, 8">Rechnername</TextBlock>
+                            <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="0">DESKTOP-32DJ39</TextBlock>
+
+                            <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="1" Margin="0, 0, 24, 8">Benutzername</TextBlock>
+                            <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="1">Florian</TextBlock>
+
+                            <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="2" Margin="0, 0, 24, 8">Betriebssystem</TextBlock>
+                            <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="2">Windows Home</TextBlock>
+
+                            <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="3" Margin="0, 0, 24, 8">Hersteller</TextBlock>
+                            <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="3">-</TextBlock>
+
+                            <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="4" Margin="0, 0, 24, 8">Architektur</TextBlock>
+                            <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="4">64 Bit</TextBlock>
+
+                            <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="5" Margin="0, 0, 24, 0">Speicher</TextBlock>
+                            <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="5">32 GB</TextBlock>
+                        </Grid>
+                    </controls:Card>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
     
 </Window>
