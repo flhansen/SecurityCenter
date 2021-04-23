@@ -20,6 +20,21 @@
         <DataTemplate DataType="{x:Type vm:DashboardPageViewModel}">
             <local:DashboardPage />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ApplicationPageViewModel}">
+            <local:ApplicationPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ServicePageViewModel}">
+            <local:ServicePage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:UpdatePageViewModel}">
+            <local:UpdatePage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FirewallPageViewModel}">
+            <local:FirewallPage />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PortPageViewModel}">
+            <local:PortPage />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
