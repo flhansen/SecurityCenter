@@ -7,5 +7,6 @@ namespace AquaMaintenancer.UILogic.ViewModels
 {
     public class DashboardPageViewModel : ViewModelBase
     {
+
     }
 }
