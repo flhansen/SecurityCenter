@@ -85,9 +85,20 @@
         </controls:SideMenu>
 
         <Border Grid.Column="1" Padding="48">
-            <StackPanel props:ContainerSpacing.Spacing="48" Orientation="Vertical">
-                <StackPanel props:ContainerSpacing.Spacing="48" Orientation="Horizontal">
-                    <controls:Card Title="Systeminformationen" Width="448" FontFamily="{StaticResource Roboto}" FontSize="14">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <controls:Card Grid.Column="0" Title="Systeminformationen" FontFamily="{StaticResource Roboto}" FontSize="14">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -121,8 +132,35 @@
                             <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="5">32 GB</TextBlock>
                         </Grid>
                     </controls:Card>
-                </StackPanel>
-            </StackPanel>
+
+                    <controls:OverviewCard Margin="48, 0, 0, 0" Grid.Column="1" Information="152" Icon="Photo" Label="Anwendungen" />
+                    <controls:OverviewCard Margin="48, 0, 0, 0" Grid.Column="2" Information="42" Icon="Cogs" IconColor="{StaticResource TertiaryColor}" Label="Laufende Dienste" />
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0, 48, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="8*" />
+                    </Grid.ColumnDefinitions>
+                    <controls:Card Title="Ereignisdiagramm" Grid.Column="0" Margin="0, 0, 48, 0">
+                    </controls:Card>
+
+                    <controls:Card Title="Ereignisprotokoll" Grid.Column="1" Padding="0">
+                        <controls:ListView>
+                            <controls:ListView.Columns>
+                                <DataGridTextColumn Header="Zeitpunkt" />
+                                <DataGridTextColumn Header="Quelle" />
+                                <DataGridTextColumn Header="Ebene" />
+                                <DataGridTextColumn Header="Nachricht" />
+                            </controls:ListView.Columns>
+                        </controls:ListView>
+                    </controls:Card>
+                </Grid>
+
+                <controls:Card Grid.Row="2" Margin="0, 48, 0, 0" Title="Ereignisübersicht">
+                    <controls:BarChart Height="350" />
+                </controls:Card>
+            </Grid>
         </Border>
     </Grid>
     
