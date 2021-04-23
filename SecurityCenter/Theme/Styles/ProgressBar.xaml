@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+                    xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
+                    xmlns:prop="clr-namespace:SecurityCenter.Theme.CustomProperties">
+
+    <Style TargetType="{x:Type controls:ProgressBar}">
+        <Style.Resources>
+            <conv:UpperCaseConverter x:Key="UpperCaseConverter" />
+            <conv:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+        </Style.Resources>
+        <Setter Property="Background" Value="{StaticResource BackgroundCardsColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ProgressBar}">
+                    <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
+                        <TextBlock Foreground="{StaticResource TextColor}"
+                                   Visibility="{TemplateBinding LoadingInfo, Converter={StaticResource StringToVisibilityConverter}}"
+                                   Text="{TemplateBinding LoadingInfo, Converter={StaticResource UpperCaseConverter}}"
+                                   FontFamily="{StaticResource Roboto}"
+                                   FontWeight="Bold"
+                                   FontSize="12"
+                                   Opacity="0.3">
+                        </TextBlock>
+                        <Grid>
+                            <Border x:Name="Path"
+                                    CornerRadius="3"
+                                    Height="8"
+                                    Background="#000"
+                                    Opacity="0.3" />
+                            <Border x:Name="Indicator"
+                                    CornerRadius="3"
+                                    Height="8"
+                                    Width="{TemplateBinding Value}"
+                                    HorizontalAlignment="Left"
+                                    Background="{TemplateBinding Foreground}" />
+                        </Grid>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
