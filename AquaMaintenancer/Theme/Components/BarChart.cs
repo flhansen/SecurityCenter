@@ -115,7 +115,7 @@ namespace AquaMaintenancer.Theme.Components
             set => SetValue(ColorsProperty, value);
         }
 
-        public readonly DependencyProperty ColorsProperty =
+        public static readonly DependencyProperty ColorsProperty =
             DependencyProperty.Register(nameof(Colors), typeof(IEnumerable<Brush>),
                 typeof(BarChart), new PropertyMetadata(new List<Brush>(), HandleChartPropertyChanged));
 
@@ -284,7 +284,7 @@ namespace AquaMaintenancer.Theme.Components
             set => SetValue(SubCategoriesProperty, value);
         }
 
-        public readonly DependencyProperty SubCategoriesProperty =
+        public static readonly DependencyProperty SubCategoriesProperty =
             DependencyProperty.Register(nameof(SubCategories), typeof(IEnumerable<string>),
                 typeof(BarChart), new PropertyMetadata(new List<string>(), HandleChartPropertyChanged));
 
