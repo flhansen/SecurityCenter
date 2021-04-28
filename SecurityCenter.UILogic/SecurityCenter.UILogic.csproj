@@ -59,6 +59,8 @@
     <Compile Include="ViewModels\ServiceViewModel.cs" />
     <Compile Include="ViewModels\SystemInformationViewModel.cs" />
     <Compile Include="ViewModels\UpdatePageViewModel.cs" />
+    <Compile Include="ViewModels\WindowsEventCollectionViewModel.cs" />
+    <Compile Include="ViewModels\WindowsEventViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

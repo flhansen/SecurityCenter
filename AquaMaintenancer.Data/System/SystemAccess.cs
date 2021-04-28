@@ -161,34 +161,32 @@ namespace AquaMaintenancer.Data.System
             return antiViruses;
         }
 
-        public static WindowsEventCollection GetEvents()
+        public static WindowsEventCollection GetEvents(int count)
         {
             WindowsEventCollection events = new WindowsEventCollection();
-            EventLog[] eventLogs = EventLog.GetEventLogs();
+            EventLog log = new EventLog("Security");
 
-            foreach (EventLog log in eventLogs)
+            try
             {
-                try
+                for (int i = 0; i < log.Entries.Count && i < count; i++)
                 {
-                    foreach (EventLogEntry entry in log.Entries)
+                    EventLogEntry entry = log.Entries[i];
+                    WindowsEvent e = new WindowsEvent
                     {
-                        WindowsEvent e = new WindowsEvent
-                        {
-                            TimeGenerated = entry.TimeGenerated,
-                            EntryType = entry.EntryType,
-                            Index = entry.Index,
-                            InstanceId = entry.InstanceId,
-                            Message = entry.Message,
-                            Source = entry.Source
-                        };
+                        TimeGenerated = entry.TimeGenerated,
+                        EntryType = entry.EntryType,
+                        Index = entry.Index,
+                        InstanceId = entry.InstanceId,
+                        Message = entry.Message,
+                        Source = entry.Source
+                    };
 
-                        events.Add(e);
-                    }
+                    events.Add(e);
                 }
-                catch
-                {
+            }
+            catch
+            {
 
-                }
             }
 
             return events;

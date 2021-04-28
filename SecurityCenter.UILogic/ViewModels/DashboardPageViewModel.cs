@@ -1,8 +1,12 @@
-﻿using AquaMaintenancer.Data.System;
+﻿using AquaMaintenancer.Business.Models;
+using AquaMaintenancer.Data.System;
 using SecurityCenter.UILogic.ViewModels.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -13,6 +17,8 @@ namespace SecurityCenter.UILogic.ViewModels
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             Services = new ServiceCollectionViewModel(SystemAccess.GetServices());
             SystemInformation = new SystemInformationViewModel(SystemAccess.GetSystemInformation());
+
+            LoadWindowsEventsAsync();
         }
 
         private ApplicationCollectionViewModel applications;
@@ -34,6 +40,21 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => systemInformation;
             set => SetProperty(ref systemInformation, value);
+        }
+
+        private WindowsEventCollectionViewModel windowsEvents;
+        public WindowsEventCollectionViewModel WindowsEvents
+        {
+            get => windowsEvents;
+            set => SetProperty(ref windowsEvents, value);
+        }
+
+        private void LoadWindowsEventsAsync()
+        {
+            Task.Run(() => {
+                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(5);
+                WindowsEvents = new WindowsEventCollectionViewModel(windowsEvents);
+            });
         }
     }
 }

@@ -7,6 +7,9 @@
                     xmlns:local="clr-namespace:SecurityCenter.Theme.Styles">
 
     <Style TargetType="{x:Type controls:Card}">
+        <Style.Resources>
+            <conv:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
+        </Style.Resources>
         <Setter Property="Padding" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
@@ -22,7 +25,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="1" />
-                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="{TemplateBinding FitContent, Converter={StaticResource BoolToGridLengthConverter}, ConverterParameter=1}" />
                             </Grid.RowDefinitions>
                             <Border Grid.Row="0" Padding="16, 10">
                                 <StackPanel>
@@ -34,8 +37,8 @@
                                 </StackPanel>
                             </Border>
                             <Border Grid.Row="1" Background="{StaticResource TextColor}" Opacity="0.1" />
-                            <Border Grid.Row="2" Padding="{TemplateBinding Padding}">
-                                <ContentPresenter />
+                            <Border Grid.Row="2" Padding="{TemplateBinding Padding}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <ContentPresenter x:Name="PART_ContentContainer" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                             </Border>
                         </Grid>
                     </Grid>

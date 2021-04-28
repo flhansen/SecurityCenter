@@ -68,13 +68,13 @@
                 <controls:Card Title="Ereignisdiagramm" Grid.Column="0" Margin="0, 0, 48, 0">
                 </controls:Card>
 
-                <controls:Card Title="Ereignisprotokoll" Grid.Column="1" Padding="0">
-                    <controls:ListView>
+                <controls:Card Title="Ereignisprotokoll" Grid.Column="1" Padding="0" FitContent="False">
+                    <controls:ListView AutoGenerateColumns="False" ItemsSource="{Binding WindowsEvents}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Card}}, Path=ActualContentHeight}">
                         <controls:ListView.Columns>
-                            <DataGridTextColumn Header="Zeitpunkt" />
-                            <DataGridTextColumn Header="Quelle" />
-                            <DataGridTextColumn Header="Ebene" />
-                            <DataGridTextColumn Header="Nachricht" />
+                            <DataGridTextColumn Header="Zeitpunkt" Binding="{Binding Time}" />
+                            <DataGridTextColumn Header="Quelle" Binding="{Binding Source}" />
+                            <DataGridTextColumn Header="Ebene" Binding="{Binding EntryType}" />
+                            <DataGridTextColumn Header="Nachricht" Binding="{Binding Message}" />
                         </controls:ListView.Columns>
                     </controls:ListView>
                 </controls:Card>
