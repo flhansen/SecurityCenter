@@ -52,7 +52,7 @@ namespace SecurityCenter.UILogic.ViewModels
         private void LoadWindowsEventsAsync()
         {
             Task.Run(() => {
-                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(5);
+                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(100);
                 WindowsEvents = new WindowsEventCollectionViewModel(windowsEvents);
             });
         }

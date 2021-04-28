@@ -163,25 +163,32 @@ namespace AquaMaintenancer.Data.System
 
         public static WindowsEventCollection GetEvents(int count)
         {
+            string[] logNames = { "Security", "Application", "System" };
             WindowsEventCollection events = new WindowsEventCollection();
-            EventLog log = new EventLog("Security");
+
+            int n = count / logNames.Length;
 
             try
             {
-                for (int i = 0; i < log.Entries.Count && i < count; i++)
+                foreach (string logName in logNames)
                 {
-                    EventLogEntry entry = log.Entries[i];
-                    WindowsEvent e = new WindowsEvent
-                    {
-                        TimeGenerated = entry.TimeGenerated,
-                        EntryType = entry.EntryType,
-                        Index = entry.Index,
-                        InstanceId = entry.InstanceId,
-                        Message = entry.Message,
-                        Source = entry.Source
-                    };
+                    EventLog log = new EventLog(logName);
 
-                    events.Add(e);
+                    for (int i = 0; i < log.Entries.Count && i < n; i++)
+                    {
+                        EventLogEntry entry = log.Entries[i];
+                        WindowsEvent e = new WindowsEvent
+                        {
+                            TimeGenerated = entry.TimeGenerated,
+                            EntryType = entry.EntryType,
+                            Index = entry.Index,
+                            InstanceId = entry.InstanceId,
+                            Message = entry.Message,
+                            Source = entry.Source
+                        };
+
+                        events.Add(e);
+                    }
                 }
             }
             catch
