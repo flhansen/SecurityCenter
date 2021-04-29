@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace SecurityCenter.Theme.Components
 {
-    public class Card : ContentControl
+    public class Card : ContentControl, INotifyPropertyChanged
     {
         static Card()
         {
@@ -44,7 +46,11 @@ namespace SecurityCenter.Theme.Components
         public double ActualContentHeight
         {
             get => (double)GetValue(ActualContentHeightProperty);
-            private set => SetValue(ActualContentHeightProperty, value);
+            private set
+            {
+                SetValue(ActualContentHeightProperty, value);
+                NotifyPropertyChanged();
+            }
         }
 
         public static readonly DependencyProperty ActualContentHeightProperty =
@@ -60,5 +66,12 @@ namespace SecurityCenter.Theme.Components
         public static readonly DependencyProperty FitContentProperty =
             DependencyProperty.Register(nameof(FitContent), typeof(bool),
                 typeof(Card), new PropertyMetadata(true));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -84,7 +84,7 @@
                 </controls:Card>
             </Grid>
 
-            <controls:Card Grid.Row="2" Margin="0, 48, 0, 0" Title="Ereignisübersicht">
+            <controls:Card Grid.Row="2" Margin="0, 48, 0, 0" Title="Ereignisübersicht" FitContent="False">
                 <controls:BarChart Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Card}}, Path=ActualContentHeight}" SubCategories="{Binding BarChartSubCategories}" Data="{Binding WindowsEvents, Converter={StaticResource WindowsEventToBarChartDataConverter}}" />
             </controls:Card>
         </Grid>
