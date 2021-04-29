@@ -23,9 +23,9 @@ namespace SecurityCenter.UILogic.ViewModels
             return input.Substring(0, length) + "...";
         }
 
-        public string Time
+        public DateTime Time
         {
-            get => Model.TimeGenerated.ToString();
+            get => Model.TimeGenerated;
         }
 
         public string Message

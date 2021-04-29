@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -161,6 +162,56 @@ namespace AquaMaintenancer.Data.System
             return antiViruses;
         }
 
+        public static WindowsEventCollection GetEvents(DateTime until)
+        {
+            string[] logNames = { "Security", "Application", "System" };
+            WindowsEventCollection events = new WindowsEventCollection();
+
+            string FormattedDateTime = string.Format("{0}-{1}-{2}T{3}:{4}:{5}.000000000Z",
+            DateTime.Now.Year,
+            DateTime.Now.Month.ToString("D2"),
+            DateTime.Now.AddDays(-1).Day.ToString("D2"),
+            DateTime.Now.Hour.ToString("D2"),
+            DateTime.Now.Minute.ToString("D2"),
+            DateTime.Now.Second.ToString("D2"));
+
+            string LogSource = @"Application";
+            string Query = "*[System[TimeCreated[@SystemTime >= '" + FormattedDateTime + "']]]";
+
+            var queryResult = new EventLogQuery(LogSource, PathType.LogName, Query);
+            var reader = new EventLogReader(queryResult);
+
+            try
+            {
+                foreach (string logName in logNames)
+                {
+                    EventLog log = new EventLog(logName);
+
+                    for (int i = log.Entries.Count - 1; i > 0 && events.Count <= n; i--)
+                    {
+                        EventLogEntry entry = log.Entries[i];
+                        WindowsEvent e = new WindowsEvent
+                        {
+                            TimeGenerated = entry.TimeGenerated,
+                            EntryType = entry.EntryType,
+                            Index = entry.Index,
+                            InstanceId = entry.InstanceId,
+                            Message = entry.Message,
+                            Source = entry.Source
+                        };
+
+                        events.Add(e);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return events;
+        }
+
         public static WindowsEventCollection GetEvents(int count)
         {
             string[] logNames = { "Security", "Application", "System" };
@@ -174,7 +225,7 @@ namespace AquaMaintenancer.Data.System
                 {
                     EventLog log = new EventLog(logName);
 
-                    for (int i = 0; i < log.Entries.Count && i < n; i++)
+                    for (int i = log.Entries.Count - 1; i > 0 && events.Count <= n; i--)
                     {
                         EventLogEntry entry = log.Entries[i];
                         WindowsEvent e = new WindowsEvent

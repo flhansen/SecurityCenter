@@ -547,7 +547,7 @@ namespace SecurityCenter.Theme.Components
         {
             Brush brush = Brushes.White;
 
-            if (Colors.Count() > 0)
+            if (Colors != null && Colors.Count() > 0)
             {
                 // Use the modulo operator to make sure that the
                 // color is always one of the defined colors.

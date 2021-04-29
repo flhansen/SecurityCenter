@@ -85,6 +85,7 @@
     <Compile Include="Theme\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\IconToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\PageViewModelToBoolConverter.cs" />
+    <Compile Include="Theme\Converter\StringListToBrushListConverter.cs" />
     <Compile Include="Theme\Converter\StringToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\UpperCaseConverter.cs" />
     <Compile Include="Theme\Converter\WindowsEventToBarChartDataConverter.cs" />

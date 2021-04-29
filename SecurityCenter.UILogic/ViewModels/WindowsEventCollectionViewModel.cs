@@ -11,6 +11,11 @@ namespace SecurityCenter.UILogic.ViewModels
 {
     public class WindowsEventCollectionViewModel : ViewModelCollectionBase<WindowsEventViewModel, WindowsEvent>
     {
+        public WindowsEventCollectionViewModel() : base(new List<WindowsEventViewModel>())
+        {
+
+        }
+
         public WindowsEventCollectionViewModel(ObservableCollection<WindowsEvent> windowsEvents) : base(windowsEvents)
         {
 

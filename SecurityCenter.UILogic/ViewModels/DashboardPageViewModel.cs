@@ -18,7 +18,7 @@ namespace SecurityCenter.UILogic.ViewModels
             Services = new ServiceCollectionViewModel(SystemAccess.GetServices());
             SystemInformation = new SystemInformationViewModel(SystemAccess.GetSystemInformation());
             BarChartSubCategories = new List<string>() { "Error", "Information", "Warning" };
-            BarChartColors = new List<string>() { "" };
+            BarChartColors = new List<string>() { "#5D4ADA", "#66CA67", "#2E9BFF" };
 
             LoadWindowsEventsAsync();
         }
@@ -44,7 +44,7 @@ namespace SecurityCenter.UILogic.ViewModels
             set => SetProperty(ref systemInformation, value);
         }
 
-        private WindowsEventCollectionViewModel windowsEvents;
+        private WindowsEventCollectionViewModel windowsEvents = new WindowsEventCollectionViewModel();
         public WindowsEventCollectionViewModel WindowsEvents
         {
             get => windowsEvents;
@@ -58,7 +58,7 @@ namespace SecurityCenter.UILogic.ViewModels
             set => SetProperty(ref barChartSubCategories, value);
         }
 
-        private List<string> barChartColors;
+        private List<string> barChartColors = new List<string>();
         public List<string> BarChartColors
         {
             get => barChartColors;
@@ -68,7 +68,8 @@ namespace SecurityCenter.UILogic.ViewModels
         private void LoadWindowsEventsAsync()
         {
             Task.Run(() => {
-                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(100);
+                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(1000);
+                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(DateTime.Now.AddDays(-7));
                 WindowsEvents = new WindowsEventCollectionViewModel(windowsEvents);
             });
         }

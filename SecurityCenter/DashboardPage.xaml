@@ -10,6 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800" SnapsToDevicePixels="True">
     <UserControl.Resources>
         <conv:WindowsEventToBarChartDataConverter x:Key="WindowsEventToBarChartDataConverter" />
+        <conv:StringListToBrushListConverter x:Key="StringListToBrushListConverter" />
     </UserControl.Resources>
     <Border Grid.Column="1" Padding="48">
         <Grid>
@@ -85,7 +86,7 @@
             </Grid>
 
             <controls:Card Grid.Row="2" Margin="0, 48, 0, 0" Title="Ereignisübersicht" FitContent="False">
-                <controls:BarChart Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Card}}, Path=ActualContentHeight}" SubCategories="{Binding BarChartSubCategories}" Data="{Binding WindowsEvents, Converter={StaticResource WindowsEventToBarChartDataConverter}}" />
+                <controls:BarChart Colors="{Binding BarChartColors, Converter={StaticResource StringListToBrushListConverter}}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Card}}, Path=ActualContentHeight}" SubCategories="{Binding BarChartSubCategories}" Data="{Binding WindowsEvents, Converter={StaticResource WindowsEventToBarChartDataConverter}}" />
             </controls:Card>
         </Grid>
     </Border>

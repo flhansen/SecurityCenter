@@ -14,13 +14,20 @@ namespace SecurityCenter.Theme.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            WindowsEventCollectionViewModel events = value as WindowsEventCollectionViewModel;
             BarChartData[] data = new BarChartData[7];
+            WindowsEventCollectionViewModel events = value as WindowsEventCollectionViewModel;
 
             for (int i = 0; i < data.Length; i++)
             {
+                DateTime targetDate = DateTime.Now.AddDays(-data.Length + i + 1);
+                var relatedEvents = events.Where(vm => vm.Time.Day == targetDate.Day && vm.Time.Month == targetDate.Month && vm.Time.Year == targetDate.Year);
+                var relatedErrors = relatedEvents.Where(vm => vm.EntryType.Equals("Error"));
+                var relatedInformation = relatedEvents.Where(vm => vm.EntryType.Equals("Information"));
+                var relatedWarnings = relatedEvents.Where(vm => vm.EntryType.Equals("Warning"));
+
                 data[i] = new BarChartData();
-                data[i].Category = DateTime.Now.AddDays(-data.Length + i + 1).ToString("dd.MM.yyyy");
+                data[i].Category = targetDate.ToString("dd.MM.yyyy");
+                data[i].Values = new List<float>() { relatedErrors.Count(), relatedInformation.Count(), relatedWarnings.Count() };
             }
 
             return data;
