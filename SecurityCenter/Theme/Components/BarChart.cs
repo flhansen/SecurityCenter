@@ -13,8 +13,8 @@ namespace SecurityCenter.Theme.Components
 {
     public class BarChartData
     {
-        public IEnumerable<float> Values { get; set; }
-        public string Category { get; set; }
+        public IEnumerable<float> Values { get; set; } = new List<float>();
+        public string Category { get; set; } = string.Empty;
     }
 
     public class BarChartBounds
@@ -359,7 +359,12 @@ namespace SecurityCenter.Theme.Components
             float max = 0.0f;
 
             if (Data.Count() > 0)
-                max = Data.Max(d => d.Values.Max());
+                max = Data.Max(d => {
+                    if (d.Values.Count() == 0)
+                        return 0;
+
+                    return d.Values.Max();
+                });
 
             List<FormattedText> labels = new List<FormattedText>();
 

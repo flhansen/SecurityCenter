@@ -17,6 +17,8 @@ namespace SecurityCenter.UILogic.ViewModels
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             Services = new ServiceCollectionViewModel(SystemAccess.GetServices());
             SystemInformation = new SystemInformationViewModel(SystemAccess.GetSystemInformation());
+            BarChartSubCategories = new List<string>() { "Error", "Information", "Warning" };
+            BarChartColors = new List<string>() { "" };
 
             LoadWindowsEventsAsync();
         }
@@ -47,6 +49,20 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => windowsEvents;
             set => SetProperty(ref windowsEvents, value);
+        }
+
+        private List<string> barChartSubCategories;
+        public List<string> BarChartSubCategories
+        {
+            get => barChartSubCategories;
+            set => SetProperty(ref barChartSubCategories, value);
+        }
+
+        private List<string> barChartColors;
+        public List<string> BarChartColors
+        {
+            get => barChartColors;
+            set => SetProperty(ref barChartColors, value);
         }
 
         private void LoadWindowsEventsAsync()

@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:WindowsEventToBarChartDataConverter x:Key="WindowsEventToBarChartDataConverter" />
+    </UserControl.Resources>
     <Border Grid.Column="1" Padding="48">
         <Grid>
             <Grid.RowDefinitions>
@@ -81,7 +85,7 @@
             </Grid>
 
             <controls:Card Grid.Row="2" Margin="0, 48, 0, 0" Title="Ereignisübersicht">
-                <controls:BarChart Height="350" />
+                <controls:BarChart Height="350" SubCategories="{Binding BarChartSubCategories}" Data="{Binding WindowsEvents, Converter={StaticResource WindowsEventToBarChartDataConverter}}" />
             </controls:Card>
         </Grid>
     </Border>

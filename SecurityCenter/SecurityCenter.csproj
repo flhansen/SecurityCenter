@@ -87,6 +87,7 @@
     <Compile Include="Theme\Converter\PageViewModelToBoolConverter.cs" />
     <Compile Include="Theme\Converter\StringToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\UpperCaseConverter.cs" />
+    <Compile Include="Theme\Converter\WindowsEventToBarChartDataConverter.cs" />
     <Compile Include="Theme\CustomProperties\ContainerSpacing.cs" />
     <Compile Include="UpdatePage.xaml.cs">
       <DependentUpon>UpdatePage.xaml</DependentUpon>
