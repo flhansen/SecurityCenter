@@ -12,5 +12,25 @@ namespace SecurityCenter.UILogic.ViewModels
         {
 
         }
+
+        public string Name
+        {
+            get => Model.Name;
+        }
+
+        public string Manufacturer
+        {
+            get => Model.Publisher;
+        }
+
+        public string InstallationPath
+        {
+            get => Model.ExecutablePath;
+        }
+
+        public string Version
+        {
+            get => Model.Version;
+        }
     }
 }

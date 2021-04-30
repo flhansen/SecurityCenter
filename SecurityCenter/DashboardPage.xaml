@@ -12,7 +12,7 @@
         <conv:WindowsEventToBarChartDataConverter x:Key="WindowsEventToBarChartDataConverter" />
         <conv:StringListToBrushListConverter x:Key="StringListToBrushListConverter" />
     </UserControl.Resources>
-    <Border Grid.Column="1" Padding="48">
+    <Border Padding="48">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -74,7 +74,7 @@
                 </controls:Card>
 
                 <controls:Card Title="Ereignisprotokoll" Grid.Column="1" Padding="0" FitContent="False">
-                    <controls:ListView AutoGenerateColumns="False" ItemsSource="{Binding WindowsEvents}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Card}}, Path=ActualContentHeight}">
+                    <controls:ListView AutoGenerateColumns="False" ItemsSource="{Binding WindowsEvents}">
                         <controls:ListView.Columns>
                             <DataGridTextColumn Header="Zeitpunkt" Binding="{Binding TimeString}">
                             </DataGridTextColumn>
