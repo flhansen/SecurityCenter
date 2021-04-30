@@ -194,7 +194,6 @@ namespace AquaMaintenancer.Data.System
                     };
 
                     records.Add(windowsEvent);
-                    Trace.WriteLine(records.Count);
                 }
             }
 

@@ -318,7 +318,6 @@ namespace SecurityCenter.Theme.Components
         protected override void OnRender(DrawingContext ctx)
         {
             Bounds = new BarChartBounds(this);
-            Trace.WriteLine(Bounds.YAxisHeight);
 
             DrawGridLines(ctx);
             DrawYAxis(ctx);
