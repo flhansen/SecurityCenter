@@ -41,9 +41,14 @@ namespace SecurityCenter.UILogic.ViewModels
             get => Model.TimeGenerated.ToShortDateString();
         }
 
-        public string Message
+        public string MessageShort
         {
             get => Shorten(Model.Message, 20);
+        }
+        
+        public string Message
+        {
+            get => Model.Message;
         }
 
         public string Source
