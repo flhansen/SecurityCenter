@@ -76,7 +76,7 @@
                 <controls:Card Title="Ereignisprotokoll" Grid.Column="1" Padding="0" FitContent="False">
                     <controls:ListView AutoGenerateColumns="False" ItemsSource="{Binding WindowsEvents}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:Card}}, Path=ActualContentHeight}">
                         <controls:ListView.Columns>
-                            <DataGridTextColumn Header="Zeitpunkt" Binding="{Binding Time}" />
+                            <DataGridTextColumn Header="Zeitpunkt" Binding="{Binding TimeString}" />
                             <DataGridTextColumn Header="Quelle" Binding="{Binding Source}" />
                             <DataGridTextColumn Header="Ebene" Binding="{Binding EntryType}" />
                             <DataGridTextColumn Header="Nachricht" Binding="{Binding Message}" />

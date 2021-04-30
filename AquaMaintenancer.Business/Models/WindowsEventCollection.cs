@@ -11,5 +11,15 @@ namespace AquaMaintenancer.Business.Models
     {
         public string LogDisplayName { get; set; }
         public string LogName { get; set; }
+
+        public WindowsEventCollection() : base()
+        {
+
+        }
+
+        public WindowsEventCollection(IEnumerable<WindowsEvent> events) : base(events)
+        {
+
+        }
     }
 }

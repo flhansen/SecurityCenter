@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Globalization;
@@ -165,89 +166,39 @@ namespace AquaMaintenancer.Data.System
         public static WindowsEventCollection GetEvents(DateTime until)
         {
             string[] logNames = { "Security", "Application", "System" };
-            WindowsEventCollection events = new WindowsEventCollection();
+            WindowsEventCollection records = new WindowsEventCollection();
 
-            string FormattedDateTime = string.Format("{0}-{1}-{2}T{3}:{4}:{5}.000000000Z",
-            DateTime.Now.Year,
-            DateTime.Now.Month.ToString("D2"),
-            DateTime.Now.AddDays(-1).Day.ToString("D2"),
-            DateTime.Now.Hour.ToString("D2"),
-            DateTime.Now.Minute.ToString("D2"),
-            DateTime.Now.Second.ToString("D2"));
+            string formattedDateTime = string.Format("{0}-{1}-{2}T{3}:{4}:{5}.000000000Z",
+            until.Year,
+            until.Month.ToString("D2"),
+            until.Day.ToString("D2"),
+            until.Hour.ToString("D2"),
+            until.Minute.ToString("D2"),
+            until.Second.ToString("D2"));
 
-            string LogSource = @"Application";
-            string Query = "*[System[TimeCreated[@SystemTime >= '" + FormattedDateTime + "']]]";
+            string query = $"*[System[TimeCreated[@SystemTime >= '{formattedDateTime}'] and (Level=1 or Level=2 or Level=3)]]";
 
-            var queryResult = new EventLogQuery(LogSource, PathType.LogName, Query);
-            var reader = new EventLogReader(queryResult);
-
-            try
+            foreach (string logName in logNames)
             {
-                foreach (string logName in logNames)
+                var queryResult = new EventLogQuery(logName, PathType.LogName, query);
+                var reader = new EventLogReader(queryResult);
+
+                for (var e = reader.ReadEvent(); e != null; e = reader.ReadEvent())
                 {
-                    EventLog log = new EventLog(logName);
-
-                    for (int i = log.Entries.Count - 1; i > 0 && events.Count <= n; i--)
+                    WindowsEvent windowsEvent = new WindowsEvent
                     {
-                        EventLogEntry entry = log.Entries[i];
-                        WindowsEvent e = new WindowsEvent
-                        {
-                            TimeGenerated = entry.TimeGenerated,
-                            EntryType = entry.EntryType,
-                            Index = entry.Index,
-                            InstanceId = entry.InstanceId,
-                            Message = entry.Message,
-                            Source = entry.Source
-                        };
+                        TimeGenerated = (DateTime)e.TimeCreated,
+                        EntryType = e.LevelDisplayName,
+                        Message = e.FormatDescription(),
+                        Level = (byte)e.Level
+                    };
 
-                        events.Add(e);
-                    }
+                    records.Add(windowsEvent);
+                    Trace.WriteLine(records.Count);
                 }
             }
-            catch
-            {
 
-            }
-
-            return events;
-        }
-
-        public static WindowsEventCollection GetEvents(int count)
-        {
-            string[] logNames = { "Security", "Application", "System" };
-            WindowsEventCollection events = new WindowsEventCollection();
-
-            int n = count / logNames.Length;
-
-            try
-            {
-                foreach (string logName in logNames)
-                {
-                    EventLog log = new EventLog(logName);
-
-                    for (int i = log.Entries.Count - 1; i > 0 && events.Count <= n; i--)
-                    {
-                        EventLogEntry entry = log.Entries[i];
-                        WindowsEvent e = new WindowsEvent
-                        {
-                            TimeGenerated = entry.TimeGenerated,
-                            EntryType = entry.EntryType,
-                            Index = entry.Index,
-                            InstanceId = entry.InstanceId,
-                            Message = entry.Message,
-                            Source = entry.Source
-                        };
-
-                        events.Add(e);
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-
-            return events;
+            return records;
         }
 
         public static SystemInformation GetSystemInformation()

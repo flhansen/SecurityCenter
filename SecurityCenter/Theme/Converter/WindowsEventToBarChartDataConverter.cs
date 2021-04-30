@@ -21,13 +21,13 @@ namespace SecurityCenter.Theme.Converter
             {
                 DateTime targetDate = DateTime.Now.AddDays(-data.Length + i + 1);
                 var relatedEvents = events.Where(vm => vm.Time.Day == targetDate.Day && vm.Time.Month == targetDate.Month && vm.Time.Year == targetDate.Year);
-                var relatedErrors = relatedEvents.Where(vm => vm.EntryType.Equals("Error"));
-                var relatedInformation = relatedEvents.Where(vm => vm.EntryType.Equals("Information"));
-                var relatedWarnings = relatedEvents.Where(vm => vm.EntryType.Equals("Warning"));
+                var relatedCriticals = relatedEvents.Where(vm => vm.Level == 1);
+                var relatedErrors = relatedEvents.Where(vm => vm.Level == 2);
+                var relatedWarnings = relatedEvents.Where(vm => vm.Level == 3);
 
                 data[i] = new BarChartData();
                 data[i].Category = targetDate.ToString("dd.MM.yyyy");
-                data[i].Values = new List<float>() { relatedErrors.Count(), relatedInformation.Count(), relatedWarnings.Count() };
+                data[i].Values = new List<float>() { relatedCriticals.Count(), relatedErrors.Count(), relatedWarnings.Count() };
             }
 
             return data;

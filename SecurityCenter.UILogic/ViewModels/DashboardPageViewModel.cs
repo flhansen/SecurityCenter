@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -17,7 +19,7 @@ namespace SecurityCenter.UILogic.ViewModels
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             Services = new ServiceCollectionViewModel(SystemAccess.GetServices());
             SystemInformation = new SystemInformationViewModel(SystemAccess.GetSystemInformation());
-            BarChartSubCategories = new List<string>() { "Error", "Information", "Warning" };
+            BarChartSubCategories = new List<string>() { "Kritisch", "Fehler", "Warnung" };
             BarChartColors = new List<string>() { "#5D4ADA", "#66CA67", "#2E9BFF" };
 
             LoadWindowsEventsAsync();
@@ -68,8 +70,8 @@ namespace SecurityCenter.UILogic.ViewModels
         private void LoadWindowsEventsAsync()
         {
             Task.Run(() => {
-                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(1000);
-                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(DateTime.Now.AddDays(-7));
+                WindowsEventCollection windowsEvents = SystemAccess.GetEvents(DateTime.Now.AddDays(-6));
+                windowsEvents = new WindowsEventCollection(windowsEvents.OrderByDescending(e => e.TimeGenerated).ToList());
                 WindowsEvents = new WindowsEventCollectionViewModel(windowsEvents);
             });
         }

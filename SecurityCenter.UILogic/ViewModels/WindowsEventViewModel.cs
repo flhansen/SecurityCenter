@@ -17,6 +17,9 @@ namespace SecurityCenter.UILogic.ViewModels
 
         private string Shorten(string input, int length)
         {
+            if (input == null)
+                return "";
+
             if (input.Length <= length)
                 return input;
 
@@ -26,6 +29,16 @@ namespace SecurityCenter.UILogic.ViewModels
         public DateTime Time
         {
             get => Model.TimeGenerated;
+        }
+
+        public byte Level
+        {
+            get => Model.Level;
+        }
+
+        public string TimeString
+        {
+            get => Model.TimeGenerated.ToShortDateString();
         }
 
         public string Message

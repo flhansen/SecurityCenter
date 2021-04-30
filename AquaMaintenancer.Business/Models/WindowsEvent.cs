@@ -10,10 +10,11 @@ namespace AquaMaintenancer.Business.Models
     public class WindowsEvent
     {
         public DateTime TimeGenerated { get; set; }
-        public EventLogEntryType EntryType { get; set; }
+        public string EntryType { get; set; }
         public long InstanceId { get; set; }
         public string Message { get; set; }
         public string Source { get; set; }
         public int Index { get; set; }
+        public byte Level { get; set; }
     }
 }
