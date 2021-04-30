@@ -9,5 +9,14 @@ namespace AquaMaintenancer.Business.Models
 {
     public class ServiceCollection : ObservableCollection<Service>
     {
+        public ServiceCollection() : base()
+        {
+
+        }
+
+        public ServiceCollection(IEnumerable<Service> services) : base(services)
+        {
+
+        }
     }
 }

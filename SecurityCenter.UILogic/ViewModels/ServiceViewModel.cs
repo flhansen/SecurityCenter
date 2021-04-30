@@ -12,5 +12,26 @@ namespace SecurityCenter.UILogic.ViewModels
         {
 
         }
+
+        public string Name
+        {
+            get => Model.ServiceName;
+        }
+
+        public string Description
+        {
+            get => Model.DisplayName;
+        }
+
+        public string StartType
+        {
+            get => Model.StartMode.ToString();
+        }
+
+        public string Status
+        {
+            get => Model.Status.ToString();
+        }
+        
     }
 }
