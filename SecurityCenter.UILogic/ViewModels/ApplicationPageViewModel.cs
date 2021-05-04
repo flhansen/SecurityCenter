@@ -3,6 +3,8 @@ using SecurityCenter.UILogic.ViewModels.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Diagnostics;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -12,6 +14,7 @@ namespace SecurityCenter.UILogic.ViewModels
         public ApplicationPageViewModel()
         {
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
+            FilteredApplications = Applications.AsEnumerable();
         }
 
         private ApplicationCollectionViewModel applications;
@@ -19,6 +22,26 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => applications;
             set => SetProperty(ref applications, value);
+        }
+
+        private IEnumerable<ApplicationViewModel> filteredApplications;
+        public IEnumerable<ApplicationViewModel> FilteredApplications
+        {
+            get => filteredApplications;
+            set => SetProperty(ref filteredApplications, value);
+        }
+
+        private string filterText;
+        public string FilterText
+        {
+            get => filterText;
+            set
+            {
+                SetProperty(ref filterText, value);
+
+                string[] tokens = filterText.Split(' ');
+                FilteredApplications = Applications.Where(a => tokens.Any(t => a.Name.Contains(t)));
+            }
         }
     }
 }

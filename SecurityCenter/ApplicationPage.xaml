@@ -15,9 +15,9 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
                 <Border Padding="24" HorizontalAlignment="Left" Grid.Row="0">
-                    <controls:TextField Label="Filter" Icon="Search" />
+                    <controls:TextField Label="Filter" Icon="Search" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="400" />
                 </Border>
-                <controls:ListView ItemsSource="{Binding Applications}" AutoGenerateColumns="False" Grid.Row="1">
+                <controls:ListView ItemsSource="{Binding FilteredApplications}" AutoGenerateColumns="False" Grid.Row="1">
                     <controls:ListView.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="1*" />
                         <DataGridTextColumn Header="Installationspfad" Binding="{Binding InstallationPath}" Width="2*" />
