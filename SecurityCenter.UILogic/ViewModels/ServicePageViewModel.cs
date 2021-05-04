@@ -15,6 +15,7 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             ServiceCollection services = new ServiceCollection(SystemAccess.GetServices().OrderBy(s => s.ServiceName).ToList());
             Services = new ServiceCollectionViewModel(services);
+            FilteredServices = Services.AsEnumerable();
         }
 
         private ServiceCollectionViewModel services;
