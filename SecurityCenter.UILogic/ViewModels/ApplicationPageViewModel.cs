@@ -39,8 +39,7 @@ namespace SecurityCenter.UILogic.ViewModels
             set
             {
                 SetProperty(ref filterText, value);
-
-                FilteredApplications = Applications.Where(a => Regex.IsMatch(a.Name, filterText));
+                FilteredApplications = Applications.Where(a => Regex.IsMatch(a.Name.ToLowerInvariant(), filterText.ToLowerInvariant()));
             }
         }
     }
