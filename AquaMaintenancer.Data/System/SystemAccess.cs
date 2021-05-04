@@ -190,7 +190,8 @@ namespace AquaMaintenancer.Data.System
                         TimeGenerated = (DateTime)e.TimeCreated,
                         EntryType = e.LevelDisplayName,
                         Message = e.FormatDescription(),
-                        Level = (byte)e.Level
+                        Level = (byte)e.Level,
+                        Source = e.ProviderName
                     };
 
                     records.Add(windowsEvent);

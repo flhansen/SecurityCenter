@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" SnapsToDevicePixels="True">
+             d:DesignHeight="800" d:DesignWidth="1400" SnapsToDevicePixels="True">
     <UserControl.Resources>
         <conv:WindowsEventToBarChartDataConverter x:Key="WindowsEventToBarChartDataConverter" />
         <conv:StringListToBrushListConverter x:Key="StringListToBrushListConverter" />
@@ -78,7 +78,13 @@
                         <controls:ListView.Columns>
                             <DataGridTextColumn Header="Zeitpunkt" Binding="{Binding TimeString}">
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Quelle" Binding="{Binding Source}" />
+                            <DataGridTextColumn Header="Quelle" Binding="{Binding SourceShort}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                        <Setter Property="ToolTip" Value="{Binding Source}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Ebene" Binding="{Binding EntryType}" />
                             <DataGridTextColumn Header="Nachricht" Binding="{Binding MessageShort}">
                                 <DataGridTextColumn.CellStyle>

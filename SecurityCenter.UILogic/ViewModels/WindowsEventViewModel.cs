@@ -51,9 +51,14 @@ namespace SecurityCenter.UILogic.ViewModels
             get => Model.Message;
         }
 
-        public string Source
+        public string SourceShort
         {
             get => Shorten(Model.Source, 20);
+        }
+
+        public string Source
+        {
+            get => Model.Source;
         }
 
         public string EntryType
