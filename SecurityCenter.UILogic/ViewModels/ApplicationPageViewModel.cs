@@ -40,7 +40,7 @@ namespace SecurityCenter.UILogic.ViewModels
                 SetProperty(ref filterText, value);
 
                 string[] tokens = filterText.Split(' ');
-                FilteredApplications = Applications.Where(a => tokens.Any(t => a.Name.Contains(t)));
+                FilteredApplications = Applications.Where(a => tokens.Any(t => a.Name.ToLowerInvariant().Contains(t.ToLowerInvariant())));
             }
         }
     }
