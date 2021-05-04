@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using AquaMaintenancer.Business.Models;
+using System.Text.RegularExpressions;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -21,6 +22,24 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => services;
             set => SetProperty(ref services, value);
+        }
+
+        private IEnumerable<ServiceViewModel> filteredServices;
+        public IEnumerable<ServiceViewModel> FilteredServices
+        {
+            get => filteredServices;
+            set => SetProperty(ref filteredServices, value);
+        }
+
+        private string filterText;
+        public string FilterText
+        {
+            get => filterText;
+            set
+            {
+                SetProperty(ref filterText, value);
+                FilteredServices = Services.Where(vm => Regex.IsMatch(vm.Name.ToLowerInvariant(), filterText.ToLowerInvariant()));
+            }
         }
     }
 }
