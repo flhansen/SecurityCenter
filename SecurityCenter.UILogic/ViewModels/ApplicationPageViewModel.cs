@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -39,8 +40,7 @@ namespace SecurityCenter.UILogic.ViewModels
             {
                 SetProperty(ref filterText, value);
 
-                string[] tokens = filterText.Split(' ');
-                FilteredApplications = Applications.Where(a => tokens.Any(t => a.Name.ToLowerInvariant().Contains(t.ToLowerInvariant())));
+                FilteredApplications = Applications.Where(a => Regex.IsMatch(a.Name, filterText));
             }
         }
     }
