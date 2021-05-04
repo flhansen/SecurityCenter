@@ -78,7 +78,7 @@
                         IsSelected="{Binding CurrentPageViewModel,
                             Converter={StaticResource PageViewModelToBoolConverter},
                             ConverterParameter={x:Type vm:UpdatePageViewModel}}"
-                        Title="Updated"
+                        Title="Updates"
                         Icon="Wrench"
                         Command="{Binding UpdatePageSelectionCommand}" />
                 </controls:VerticalMenu>
