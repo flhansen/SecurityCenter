@@ -71,10 +71,12 @@
     <Compile Include="Theme\Components\ListView.cs" />
     <Compile Include="Theme\Components\MenuItem.cs" />
     <Compile Include="Theme\Components\OverviewCard.cs" />
+    <Compile Include="Theme\Components\PieChart.cs" />
     <Compile Include="Theme\Components\PrimaryButton.cs" />
     <Compile Include="Theme\Components\ProgressBar.cs" />
     <Compile Include="Theme\Components\RotatableImage.cs" />
     <Compile Include="Theme\Components\ScrollBar.cs" />
+    <Compile Include="Theme\Components\Select.cs" />
     <Compile Include="Theme\Components\SideMenu.cs" />
     <Compile Include="Theme\Components\SideMenuSection.cs" />
     <Compile Include="Theme\Components\TextField.cs" />
@@ -84,11 +86,13 @@
     <Compile Include="Theme\Converter\BoolToGridLengthConverter.cs" />
     <Compile Include="Theme\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\IconToVisibilityConverter.cs" />
+    <Compile Include="Theme\Converter\InvertedNullToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\PageViewModelToBoolConverter.cs" />
     <Compile Include="Theme\Converter\StringListToBrushListConverter.cs" />
     <Compile Include="Theme\Converter\StringToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\UpperCaseConverter.cs" />
     <Compile Include="Theme\Converter\WindowsEventToBarChartDataConverter.cs" />
+    <Compile Include="Theme\Converter\WindowsEventToPieChartDataConverter.cs" />
     <Compile Include="Theme\CustomProperties\ContainerSpacing.cs" />
     <Compile Include="UpdatePage.xaml.cs">
       <DependentUpon>UpdatePage.xaml</DependentUpon>
@@ -212,6 +216,10 @@
     <Page Include="Theme\Styles\ScrollBars.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Theme\Styles\Select.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\Styles\TextFields.xaml">
       <Generator>MSBuild:Compile</Generator>

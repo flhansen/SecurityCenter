@@ -10,6 +10,7 @@
              d:DesignHeight="800" d:DesignWidth="1400" SnapsToDevicePixels="True">
     <UserControl.Resources>
         <conv:WindowsEventToBarChartDataConverter x:Key="WindowsEventToBarChartDataConverter" />
+        <conv:WindowsEventToPieChartDataConverter x:Key="WindowsEventToPieChartDataConverter" />
         <conv:StringListToBrushListConverter x:Key="StringListToBrushListConverter" />
     </UserControl.Resources>
     <Border Padding="48">
@@ -70,7 +71,8 @@
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="8*" />
                 </Grid.ColumnDefinitions>
-                <controls:Card Title="Ereignisdiagramm" Grid.Column="0" Margin="0, 0, 48, 0">
+                <controls:Card Title="Ereignisdiagramm" Grid.Column="0" Margin="0, 0, 48, 0" FitContent="False">
+                    <controls:PieChart ChartData="{Binding WindowsEvents, Converter={StaticResource WindowsEventToPieChartDataConverter}}" Colors="{Binding PieChartColors, Converter={StaticResource StringListToBrushListConverter}}" />
                 </controls:Card>
 
                 <controls:Card Title="Ereignisprotokoll" Grid.Column="1" Padding="0" FitContent="False">

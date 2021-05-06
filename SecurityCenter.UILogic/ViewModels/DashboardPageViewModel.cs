@@ -21,6 +21,7 @@ namespace SecurityCenter.UILogic.ViewModels
             SystemInformation = new SystemInformationViewModel(SystemAccess.GetSystemInformation());
             BarChartSubCategories = new List<string>() { "Kritisch", "Fehler", "Warnung" };
             BarChartColors = new List<string>() { "#5D4ADA", "#66CA67", "#2E9BFF" };
+            PieChartColors = new List<string>() { "#5D4ADA", "#66CA67", "#2E9BFF" };
 
             LoadWindowsEventsAsync();
         }
@@ -65,6 +66,13 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => barChartColors;
             set => SetProperty(ref barChartColors, value);
+        }
+
+        private List<string> pieChartColors = new List<string>();
+        public List<string> PieChartColors
+        {
+            get => pieChartColors;
+            set => SetProperty(ref pieChartColors, value);
         }
 
         private void LoadWindowsEventsAsync()
