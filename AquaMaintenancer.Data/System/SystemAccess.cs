@@ -15,6 +15,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using WUApiLib;
 
 namespace AquaMaintenancer.Data.System
 {
@@ -201,14 +202,43 @@ namespace AquaMaintenancer.Data.System
             return records;
         }
 
-        public static SystemInformation GetSystemInformation()
+        public static string ExtractKbNumber(string updateName)
+        {
+            return Regex.Match(updateName, @"KB(?<kbNumber>\d*)").Groups["kbNumber"].Value;
+        }
+
+        public static WindowsUpdateCollection GetAvailableUpdates()
+        {
+            WindowsUpdateCollection updates = new WindowsUpdateCollection();
+
+            UpdateSession session = new UpdateSession();
+            var searchResult = session.CreateUpdateSearcher().Search("IsInstalled=0 and Type='Software' and IsHidden=0");
+
+            foreach (IUpdate update in searchResult.Updates)
+            {
+                WindowsUpdate model = new WindowsUpdate
+                {
+                    Update = update,
+                    Description = update.Description,
+                    Name = update.Title,
+                    ReleaseDate = update.LastDeploymentChangeTime,
+                    KbNumber = ExtractKbNumber(update.Title)
+                };
+
+                updates.Add(model);
+            }
+
+            return updates;
+        }
+
+        public static Business.Models.SystemInformation GetSystemInformation()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
             ManagementObject osInfoObject = searcher.Get().Cast<ManagementObject>().FirstOrDefault();
 
             ComputerInfo computerInfo = new ComputerInfo();
 
-            SystemInformation info = new SystemInformation
+            Business.Models.SystemInformation info = new Business.Models.SystemInformation
             {
                 ComputerName = Environment.MachineName,
                 UserName = Environment.UserName,

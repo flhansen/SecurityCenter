@@ -56,12 +56,25 @@
     <Compile Include="Models\ApplicationCollection.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\SystemInformation.cs" />
+    <Compile Include="Models\WindowsUpdate.cs" />
+    <Compile Include="Models\WindowsUpdateCollection.cs" />
     <Compile Include="Models\WindowsEvent.cs" />
     <Compile Include="Models\WindowsEventCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WUApiLib">
+      <Guid>{B596CC9F-56E5-419E-A622-E01BB457431E}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
