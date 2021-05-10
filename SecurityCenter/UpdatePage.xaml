@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
+    </UserControl.Resources>
     <Border Padding="48">
         <controls:Card Title="Verfügbare Updates" FitContent="False" Padding="0">
             <Grid>
@@ -16,7 +22,12 @@
                 </Grid.RowDefinitions>
 
                 <Border Padding="24" Grid.Row="0">
-                    <controls:PrimaryButton HorizontalAlignment="Left" Command="{Binding InstallUpdatesCommand}">Updates installieren</controls:PrimaryButton>
+                    <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="8" HorizontalAlignment="Right">
+                        <controls:PrimaryButton Command="{Binding InstallUpdatesCommand}" IsEnabled="{Binding IsLoadingUpdates, Converter={StaticResource BoolNegationConverter}}">Updates installieren</controls:PrimaryButton>
+                        <controls:PrimaryButton Padding="7,5" Command="{Binding RefreshAvailableUpdatesCommand}" IsEnabled="{Binding IsLoadingUpdates, Converter={StaticResource BoolNegationConverter}}">
+                            <fa:ImageAwesome Foreground="{StaticResource TextColor}" Icon="Refresh" Spin="{Binding IsLoadingUpdates}" Width="14" />
+                        </controls:PrimaryButton>
+                    </StackPanel>
                 </Border>
                 
                 <controls:ListView Grid.Row="1" ItemsSource="{Binding AvailableUpdates}" AutoGenerateColumns="False">

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -13,14 +14,42 @@ namespace SecurityCenter.UILogic.ViewModels
     {
         public UpdatePageViewModel()
         {
-            AvailableUpdates = new WindowsUpdateCollectionViewModel(SystemAccess.GetAvailableUpdates());
-            InstallUpdatesCommand = new RelayCommand(InstallUpdatesAction);
+            LoadAvailableUpdates();
+            InstallUpdatesCommand = new RelayCommand(InstallUpdates);
+            RefreshAvailableUpdatesCommand = new RelayCommand(RefreshAvailableUpdates);
+        }
+
+        private async void LoadAvailableUpdates()
+        {
+            await Task.Run(() =>
+            {
+                // Make the list empty.
+                AvailableUpdates = new WindowsUpdateCollectionViewModel();
+
+                // Load new list of updates.
+                IsLoadingUpdates = true;
+                AvailableUpdates = new WindowsUpdateCollectionViewModel(SystemAccess.GetAvailableUpdates());
+                IsLoadingUpdates = false;
+            });
         }
 
         public ICommand InstallUpdatesCommand { get; private set; }
-        private void InstallUpdatesAction(object sender)
+        private void InstallUpdates(object sender)
         {
             var selectedUpdates = AvailableUpdates.Where(x => x.IsSelected);
+        }
+
+        public ICommand RefreshAvailableUpdatesCommand { get; private set; }
+        private void RefreshAvailableUpdates(object sender)
+        {
+            LoadAvailableUpdates();
+        }
+
+        private bool isLoadingUpdates;
+        public bool IsLoadingUpdates
+        {
+            get => isLoadingUpdates;
+            set => SetProperty(ref isLoadingUpdates, value);
         }
 
         private WindowsUpdateCollectionViewModel availableUpdates;

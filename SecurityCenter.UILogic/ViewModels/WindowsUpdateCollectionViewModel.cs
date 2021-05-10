@@ -11,6 +11,11 @@ namespace SecurityCenter.UILogic.ViewModels
 {
     public class WindowsUpdateCollectionViewModel : ViewModelCollectionBase<WindowsUpdateViewModel, WindowsUpdate>
     {
+        public WindowsUpdateCollectionViewModel() : base()
+        {
+
+        }
+
         public WindowsUpdateCollectionViewModel(ObservableCollection<WindowsUpdate> updates) : base(updates)
         {
 

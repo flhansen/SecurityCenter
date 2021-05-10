@@ -15,6 +15,10 @@ namespace SecurityCenter.UILogic.ViewModels.Core
         public ObservableCollection<TModel> Collection { get; private set; }
         private bool syncDisabled = false;
 
+        public ViewModelCollectionBase() : base(new ObservableCollection<TViewModel>())
+        {
+        }
+
         public ViewModelCollectionBase(ObservableCollection<TModel> collection)
         {
             Collection = collection;

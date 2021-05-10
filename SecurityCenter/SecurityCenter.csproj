@@ -84,6 +84,7 @@
     <Compile Include="Theme\Components\UserComponent.cs" />
     <Compile Include="Theme\Components\VerticalMenu.cs" />
     <Compile Include="Theme\Components\VerticalMenuItem.cs" />
+    <Compile Include="Theme\Converter\BoolNegationConverter.cs" />
     <Compile Include="Theme\Converter\BoolToGridLengthConverter.cs" />
     <Compile Include="Theme\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\IconToVisibilityConverter.cs" />
