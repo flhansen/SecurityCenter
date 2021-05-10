@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Theme\Components\BarChart.cs" />
     <Compile Include="Theme\Components\Card.cs" />
+    <Compile Include="Theme\Components\CheckBox.cs" />
     <Compile Include="Theme\Components\ListView.cs" />
     <Compile Include="Theme\Components\MenuItem.cs" />
     <Compile Include="Theme\Components\OverviewCard.cs" />
@@ -192,6 +193,10 @@
     <Page Include="Theme\Styles\Cards.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Theme\Styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\Styles\Lists.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -14,6 +14,13 @@ namespace SecurityCenter.UILogic.ViewModels
         {
         }
 
+        private bool isSelected;
+        public bool IsSelected
+        {
+            get => isSelected;
+            set => SetProperty(ref isSelected, value);
+        }
+
         public string Name
         {
             get => Model.Name;

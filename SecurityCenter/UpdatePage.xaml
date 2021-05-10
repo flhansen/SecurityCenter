@@ -16,12 +16,18 @@
                 </Grid.RowDefinitions>
 
                 <Border Padding="24" Grid.Row="0">
-                    <controls:PrimaryButton HorizontalAlignment="Left">Updates installieren</controls:PrimaryButton>
+                    <controls:PrimaryButton HorizontalAlignment="Left" Command="{Binding InstallUpdatesCommand}">Updates installieren</controls:PrimaryButton>
                 </Border>
                 
-                <controls:ListView Grid.Row="1" ItemsSource="{Binding AvailableUpdates}">
+                <controls:ListView Grid.Row="1" ItemsSource="{Binding AvailableUpdates}" AutoGenerateColumns="False">
                     <controls:ListView.Columns>
-                        <DataGridCheckBoxColumn />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <controls:CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="KB-Nummer" Binding="{Binding KbNumber}" Width="1*" />
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
                         <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="4*" />
