@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WUApiLib;
 
-namespace AquaMaintenancer.Business.Models
+namespace SecurityCenter.Business.Models
 {
     public class WindowsUpdate
     {

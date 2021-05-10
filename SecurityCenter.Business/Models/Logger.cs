@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AquaMaintenancer.Business.Models
+namespace SecurityCenter.Business.Models
 {
     public enum LogLevel
     {

@@ -7,7 +7,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AquaMaintenancer.Data.System
+namespace SecurityCenter.Data.System
 {
     public static class ServiceHelper
     {

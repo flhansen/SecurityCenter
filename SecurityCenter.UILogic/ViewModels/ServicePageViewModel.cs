@@ -1,10 +1,10 @@
-﻿using AquaMaintenancer.Data.System;
+﻿using SecurityCenter.Data.System;
 using SecurityCenter.UILogic.ViewModels.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using AquaMaintenancer.Business.Models;
+using SecurityCenter.Business.Models;
 using System.Text.RegularExpressions;
 
 namespace SecurityCenter.UILogic.ViewModels

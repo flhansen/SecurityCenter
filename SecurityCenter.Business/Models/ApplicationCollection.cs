@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AquaMaintenancer.Business.Models
+namespace SecurityCenter.Business.Models
 {
-    public class WindowsUpdateCollection : ObservableCollection<WindowsUpdate>
+    public class ApplicationCollection : ObservableCollection<Application>
     {
     }
 }

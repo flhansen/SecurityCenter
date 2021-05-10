@@ -1,4 +1,4 @@
-﻿using AquaMaintenancer.Business.Models;
+﻿using SecurityCenter.Business.Models;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -17,7 +17,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WUApiLib;
 
-namespace AquaMaintenancer.Data.System
+namespace SecurityCenter.Data.System
 {
     public static class SystemAccess
     {
