@@ -19,12 +19,12 @@
                     <controls:PrimaryButton HorizontalAlignment="Left">Updates installieren</controls:PrimaryButton>
                 </Border>
                 
-                <controls:ListView Grid.Row="1">
+                <controls:ListView Grid.Row="1" ItemsSource="{Binding AvailableUpdates}">
                     <controls:ListView.Columns>
                         <DataGridCheckBoxColumn />
-                        <DataGridTextColumn Header="KB-Nummer" Width="1*" />
-                        <DataGridTextColumn Header="Name" Width="2*" />
-                        <DataGridTextColumn Header="Beschreibung" Width="4*" />
+                        <DataGridTextColumn Header="KB-Nummer" Binding="{Binding KbNumber}" Width="1*" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
+                        <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="4*" />
                     </controls:ListView.Columns>
                 </controls:ListView>
             </Grid>
