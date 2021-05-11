@@ -37,15 +37,18 @@ namespace SecurityCenter.UILogic.ViewModels
         public ICommand InstallUpdatesCommand { get; private set; }
         private void InstallUpdates(object sender)
         {
-            ShowUpdateDialog = true;
-            var selectedUpdates = AvailableUpdates.Where(x => x.IsSelected);
+            var selectedUpdates = AvailableUpdates.Where(x => x.IsSelected).ToList();
 
-            // TODO: Implement me!
+            if (selectedUpdates.Count > 0)
+            {
+                ShowUpdateDialog = true;
+            }
         }
 
         public ICommand CancelUpdateInstallationCommand { get; private set; }
         private void CancelUpdateInstallation(object sender)
         {
+            // TODO: Implement logic to cancel the currently running download / installation process
             ShowUpdateDialog = false;
         }
 
