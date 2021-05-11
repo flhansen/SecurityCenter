@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Theme/Styles/ScrollBars.xaml" />
                 <ResourceDictionary Source="Theme/Styles/Menus.xaml" />
                 <ResourceDictionary Source="Theme/Styles/CheckBox.xaml" />
+                <ResourceDictionary Source="Theme/Styles/Dialog.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

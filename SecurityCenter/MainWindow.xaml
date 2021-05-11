@@ -16,6 +16,7 @@
     </Window.DataContext>
     <Window.Resources>
         <conv:PageViewModelToBoolConverter x:Key="PageViewModelToBoolConverter" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
         <DataTemplate DataType="{x:Type vm:DashboardPageViewModel}">
             <local:DashboardPage />
@@ -105,6 +106,23 @@
         </controls:SideMenu>
 
         <ContentControl Grid.Column="1" x:Name="CurrentPage" Content="{Binding CurrentPageViewModel}" />
+
+        <controls:Dialog
+            DialogWidth="450"
+            Title="Update Agent"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Visibility="{Binding UpdatePageViewModel.ShowUpdateDialog,
+                Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical">
+                <controls:DialogContent>
+                    <controls:DialogDescription>Updates werden heruntergeladen und installiert. Bitte warten...</controls:DialogDescription>
+                    <controls:ProgressBar Label="Lade Updates herunter..." Value="33" />
+                </controls:DialogContent>
+                <controls:DialogActions>
+                    <controls:TextButton Command="{Binding UpdatePageViewModel.CancelUpdateInstallationCommand}">Abbrechen</controls:TextButton>
+                </controls:DialogActions>
+            </StackPanel>
+        </controls:Dialog>
     </Grid>
-    
 </Window>

@@ -13,38 +13,40 @@
     <UserControl.Resources>
         <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
     </UserControl.Resources>
-    <Border Padding="48">
-        <controls:Card Title="Verfügbare Updates" FitContent="False" Padding="0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
+    <Grid>
+        <Border Padding="48">
+            <controls:Card Title="Verfügbare Updates" FitContent="False" Padding="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
 
-                <Border Padding="24" Grid.Row="0">
-                    <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="8" HorizontalAlignment="Right">
-                        <controls:PrimaryButton Command="{Binding InstallUpdatesCommand}" IsEnabled="{Binding IsLoadingUpdates, Converter={StaticResource BoolNegationConverter}}">Updates installieren</controls:PrimaryButton>
-                        <controls:PrimaryButton Padding="7,5" Command="{Binding RefreshAvailableUpdatesCommand}" IsEnabled="{Binding IsLoadingUpdates, Converter={StaticResource BoolNegationConverter}}">
-                            <fa:ImageAwesome Foreground="{StaticResource TextColor}" Icon="Refresh" Spin="{Binding IsLoadingUpdates}" Width="14" />
-                        </controls:PrimaryButton>
-                    </StackPanel>
-                </Border>
-                
-                <controls:ListView Grid.Row="1" ItemsSource="{Binding AvailableUpdates}" AutoGenerateColumns="False">
-                    <controls:ListView.Columns>
-                        <DataGridTemplateColumn>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <controls:CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="KB-Nummer" Binding="{Binding KbNumber}" Width="1*" />
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
-                        <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="4*" />
-                    </controls:ListView.Columns>
-                </controls:ListView>
-            </Grid>
-        </controls:Card>
-    </Border>
+                    <Border Padding="24" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="8" HorizontalAlignment="Right">
+                            <controls:PrimaryButton Command="{Binding InstallUpdatesCommand}" IsEnabled="{Binding IsLoadingUpdates, Converter={StaticResource BoolNegationConverter}}">Updates installieren</controls:PrimaryButton>
+                            <controls:PrimaryButton Padding="7,5" Command="{Binding RefreshAvailableUpdatesCommand}" IsEnabled="{Binding IsLoadingUpdates, Converter={StaticResource BoolNegationConverter}}">
+                                <fa:ImageAwesome Foreground="{StaticResource TextColor}" Icon="Refresh" Spin="{Binding IsLoadingUpdates}" Width="14" />
+                            </controls:PrimaryButton>
+                        </StackPanel>
+                    </Border>
+                    
+                    <controls:ListView Grid.Row="1" ItemsSource="{Binding AvailableUpdates}" AutoGenerateColumns="False">
+                        <controls:ListView.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <controls:CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="KB-Nummer" Binding="{Binding KbNumber}" Width="1*" />
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
+                            <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="4*" />
+                        </controls:ListView.Columns>
+                    </controls:ListView>
+                </Grid>
+            </controls:Card>
+        </Border>
+    </Grid>
 </UserControl>

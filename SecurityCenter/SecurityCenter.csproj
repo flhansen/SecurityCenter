@@ -69,6 +69,10 @@
     <Compile Include="Theme\Components\BarChart.cs" />
     <Compile Include="Theme\Components\Card.cs" />
     <Compile Include="Theme\Components\CheckBox.cs" />
+    <Compile Include="Theme\Components\Dialog.cs" />
+    <Compile Include="Theme\Components\DialogActions.cs" />
+    <Compile Include="Theme\Components\DialogContent.cs" />
+    <Compile Include="Theme\Components\DialogDescription.cs" />
     <Compile Include="Theme\Components\ListView.cs" />
     <Compile Include="Theme\Components\MenuItem.cs" />
     <Compile Include="Theme\Components\OverviewCard.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="Theme\Components\Select.cs" />
     <Compile Include="Theme\Components\SideMenu.cs" />
     <Compile Include="Theme\Components\SideMenuSection.cs" />
+    <Compile Include="Theme\Components\TextButton.cs" />
     <Compile Include="Theme\Components\TextField.cs" />
     <Compile Include="Theme\Components\UserComponent.cs" />
     <Compile Include="Theme\Components\VerticalMenu.cs" />
@@ -196,6 +201,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Theme\Styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\Styles\Dialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

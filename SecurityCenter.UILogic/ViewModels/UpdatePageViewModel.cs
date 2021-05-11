@@ -17,6 +17,7 @@ namespace SecurityCenter.UILogic.ViewModels
             LoadAvailableUpdates();
             InstallUpdatesCommand = new RelayCommand(InstallUpdates);
             RefreshAvailableUpdatesCommand = new RelayCommand(RefreshAvailableUpdates);
+            CancelUpdateInstallationCommand = new RelayCommand(CancelUpdateInstallation);
         }
 
         private async void LoadAvailableUpdates()
@@ -36,13 +37,29 @@ namespace SecurityCenter.UILogic.ViewModels
         public ICommand InstallUpdatesCommand { get; private set; }
         private void InstallUpdates(object sender)
         {
+            ShowUpdateDialog = true;
             var selectedUpdates = AvailableUpdates.Where(x => x.IsSelected);
+
+            // TODO: Implement me!
+        }
+
+        public ICommand CancelUpdateInstallationCommand { get; private set; }
+        private void CancelUpdateInstallation(object sender)
+        {
+            ShowUpdateDialog = false;
         }
 
         public ICommand RefreshAvailableUpdatesCommand { get; private set; }
         private void RefreshAvailableUpdates(object sender)
         {
             LoadAvailableUpdates();
+        }
+
+        private bool showUpdateDialog;
+        public bool ShowUpdateDialog
+        {
+            get => showUpdateDialog;
+            set => SetProperty(ref showUpdateDialog, value);
         }
 
         private bool isLoadingUpdates;

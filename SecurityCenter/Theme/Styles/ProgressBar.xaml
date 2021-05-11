@@ -17,8 +17,8 @@
                 <ControlTemplate TargetType="{x:Type controls:ProgressBar}">
                     <StackPanel Orientation="Vertical" prop:ContainerSpacing.Spacing="8">
                         <TextBlock Foreground="{StaticResource TextColor}"
-                                   Visibility="{TemplateBinding LoadingInfo, Converter={StaticResource StringToVisibilityConverter}}"
-                                   Text="{TemplateBinding LoadingInfo, Converter={StaticResource UpperCaseConverter}}"
+                                   Visibility="{TemplateBinding Label, Converter={StaticResource StringToVisibilityConverter}}"
+                                   Text="{TemplateBinding Label, Converter={StaticResource UpperCaseConverter}}"
                                    FontFamily="{StaticResource Roboto}"
                                    FontWeight="Bold"
                                    FontSize="12"

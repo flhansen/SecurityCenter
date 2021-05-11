@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,10 +11,24 @@ namespace SecurityCenter.Theme.Components
     {
         private Border path;
         private Border indicator;
+
         static ProgressBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
         }
+
+        public ProgressBar()
+        {
+            Loaded += OnLoad;
+        }
+
+        private void OnLoad(object sender, RoutedEventArgs e)
+        {
+            indicator = GetTemplateChild("Indicator") as Border;
+            path = GetTemplateChild("Path") as Border;
+            UpdateIndicator();
+        }
+
         /// <summary>
         /// The fillvalue of the progressbar. Value between 0.0 and 100.0
         /// </summary>
@@ -30,46 +45,31 @@ namespace SecurityCenter.Theme.Components
         private static void HandlePropertyChanged(object d, DependencyPropertyChangedEventArgs e)
         {
             ProgressBar pgb = d as ProgressBar;
-            pgb.ChangeProgressValue((double)e.NewValue);
+            pgb.UpdateIndicator();
         }
         /// <summary>
         /// The displayed text above the progressbar.
         /// </summary>
-        public string LoadingInfo
+        public string Label
         {
-            get => (string)GetValue(LoadingInfoProperty);
-            set => SetValue(LoadingInfoProperty, value);
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
         }
 
-        public static readonly DependencyProperty LoadingInfoProperty = DependencyProperty.Register(
-            nameof(LoadingInfo), typeof(string), typeof(ProgressBar),
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
+            nameof(Label), typeof(string), typeof(ProgressBar),
             new PropertyMetadata(string.Empty));
         
         /// <summary>
         /// Converts the given value to the ui-value
         /// </summary>
         /// <param name="value"></param>
-        private void ChangeProgressValue(double value)
+        private void UpdateIndicator()
         {
-            if (indicator != null || path != null)
+            if (indicator != null && path != null)
             {
-                indicator.Width = value * (path.ActualWidth / 100);
+                indicator.Width = Value * (path.ActualWidth / 100);
                 indicator.InvalidateVisual();
-            }
-        }
-
-        /// <summary>
-        /// Gets the ui-elements and stored them.
-        /// </summary>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-            indicator = GetTemplateChild("Indicator") as Border;
-            path = GetTemplateChild("Path") as Border;
-
-            if (indicator == null || path == null)
-            {
-                throw new NullReferenceException("Templatepart not found");
             }
         }
     }
