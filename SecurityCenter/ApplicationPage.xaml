@@ -23,6 +23,30 @@
                         <DataGridTextColumn Header="Installationspfad" Binding="{Binding InstallationPath}" Width="2*" />
                         <DataGridTextColumn Header="Version" Binding="{Binding Version}" Width="1*" />
                         <DataGridTextColumn Header="Hersteller" Binding="{Binding Manufacturer}" Width="1*" />
+                        <DataGridTemplateColumn Width="Auto" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <controls:PrimaryButton BorderBrush="{StaticResource AttentionColor}" 
+                                                            Background="Transparent" 
+                                                            Margin="0,-5"
+                                                            Icon="Trash"
+                                                            Foreground="{StaticResource AttentionColor}"
+                                                            Visibility="Hidden"
+                                                            x:Name="HiddenDeleteButton"
+                                                            Command="{Binding UninstallApplicationCommand}">Deinstallieren</controls:PrimaryButton>
+                                    <DataTemplate.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Visibility" Value="Visible" TargetName="HiddenDeleteButton" />
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </controls:ListView.Columns>
                 </controls:ListView>
             </Grid>

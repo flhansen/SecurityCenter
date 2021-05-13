@@ -6,6 +6,8 @@ using System.Text;
 using System.Linq;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using SecurityCenter.UILogic.Commands;
+using System.Windows.Input;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
