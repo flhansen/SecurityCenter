@@ -42,6 +42,14 @@ namespace SecurityCenter.UILogic.ViewModels
             {
                 SetProperty(ref filterText, value);
                 FilteredApplications = Applications.Where(a => Regex.IsMatch(a.Name.ToLowerInvariant(), filterText.ToLowerInvariant()));
+                int test = Applications.Where(a => string.IsNullOrEmpty(a.UninstallationPath)).Count();
+                IEnumerable<ApplicationViewModel> list = Applications.Where(a => string.IsNullOrEmpty(a.UninstallationPath));
+                foreach (ApplicationViewModel entry in list)
+                {
+                    Console.WriteLine(entry.Name);
+                }
+                Console.WriteLine(test);
+                Console.WriteLine(list);
             }
         }
     }
