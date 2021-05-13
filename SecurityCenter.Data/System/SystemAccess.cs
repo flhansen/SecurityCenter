@@ -57,6 +57,30 @@ namespace SecurityCenter.Data.System
             return applications;
         }
 
+        public static void UninstallApplication(string path)
+        {
+             ProcessStartInfo startInfo = new ProcessStartInfo(path);
+
+            int indexOfExe = path.IndexOf(".exe");
+            if (indexOfExe > 0 && indexOfExe < 9)
+            {
+                string uninstallString = path.Replace(@"""", string.Empty);
+                string uninstallerPath = uninstallString.Substring(0, indexOfExe + 4);
+                startInfo.FileName = uninstallerPath;
+
+                if ( uninstallerPath.Length != uninstallString.Length)
+                {
+                    string args = uninstallString.Substring(uninstallerPath.Length);
+                    if (!string.IsNullOrEmpty(args))
+                    {
+                        startInfo.UseShellExecute = false;
+                        startInfo.Arguments = args;
+                    }
+                }
+            }
+            Process.Start(startInfo).WaitForExit();
+        }
+
         static private string removeSpecialChars(string str)
         {
             return Regex.Replace(str, "[^a-zA-Z0-9._]", string.Empty);
