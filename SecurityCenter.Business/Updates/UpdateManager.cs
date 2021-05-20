@@ -5,18 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using WUApiLib;
 
-namespace SecurityCenter.UILogic.Updates
+namespace SecurityCenter.Business.Updates
 {
     public class UpdateManager
     {
         #region Events
         public event EventHandler<UpdateDownloadProgressChangedEventArgs> UpdateDownloadProgressChanged;
         public event EventHandler<UpdateDownloadCompletedEventArgs> UpdateDownloadCompleted;
+        public event EventHandler<UpdateDownloadCanceledEventArgs> UpdateDownloadCanceled;
         public event EventHandler<UpdateInstallationProgressChangedEventArgs> UpdateInstallationProgressChanged;
         public event EventHandler<UpdateInstallationCompletedEventArgs> UpdateInstallationCompleted;
+        public event EventHandler<UpdateInstallationCanceledEventArgs> UpdateInstallationCanceled;
+        #endregion
+
+        #region Members
+        private object currentJob;
+        #endregion
+
+        #region Properties
+        public IUpdateDownloader Downloader { get; private set; }
+        public IUpdateInstaller Installer { get; private set; }
         #endregion
 
         #region Methods
+        public void Cancel()
+        {
+            if (currentJob is IDownloadJob)
+                ((IDownloadJob)currentJob).RequestAbort();
+            else if (currentJob is IInstallationJob)
+                ((IInstallationJob)currentJob).RequestAbort();
+        }
+
         /// <summary>
         /// Starts the download of updates using the Windows Update API.
         /// </summary>
@@ -28,9 +47,11 @@ namespace SecurityCenter.UILogic.Updates
             var completedCallback = new UpdateDownloadCompletedCallback(this);
 
             UpdateSession session = new UpdateSession();
-            UpdateDownloader downloader = session.CreateUpdateDownloader();
-            downloader.Updates = updates;
-            return downloader.BeginDownload(progressChangedCallback, completedCallback, null);
+            Downloader = session.CreateUpdateDownloader();
+            Downloader.Updates = updates;
+            IDownloadJob job = Downloader.BeginDownload(progressChangedCallback, completedCallback, null);
+            currentJob = job;
+            return job;
         }
 
         /// <summary>
@@ -44,9 +65,11 @@ namespace SecurityCenter.UILogic.Updates
             var completedCallback = new UpdateInstallationCompletedCallback(this);
 
             UpdateSession session = new UpdateSession();
-            IUpdateInstaller installer = session.CreateUpdateInstaller();
-            installer.Updates = updates;
-            return installer.BeginInstall(progressChangedCallback, completedCallback, null);
+            Installer = session.CreateUpdateInstaller();
+            Installer.Updates = updates;
+            IInstallationJob job = Installer.BeginInstall(progressChangedCallback, completedCallback, null);
+            currentJob = job;
+            return job;
         }
         #endregion
 
@@ -73,7 +96,10 @@ namespace SecurityCenter.UILogic.Updates
 
             public void Invoke(IDownloadJob downloadJob, IDownloadProgressChangedCallbackArgs callbackArgs)
             {
-                UpdateManager.UpdateDownloadProgressChanged?.Invoke(this, new UpdateDownloadProgressChangedEventArgs());
+                UpdateManager.UpdateDownloadProgressChanged?.Invoke(this, new UpdateDownloadProgressChangedEventArgs
+                {
+                    Progress = callbackArgs.Progress
+                });
             }
         }
 
@@ -85,7 +111,22 @@ namespace SecurityCenter.UILogic.Updates
 
             public void Invoke(IDownloadJob downloadJob, IDownloadCompletedCallbackArgs callbackArgs)
             {
-                UpdateManager.UpdateDownloadCompleted?.Invoke(this, new UpdateDownloadCompletedEventArgs());
+                IDownloadResult result = UpdateManager.Downloader.EndDownload(downloadJob);
+
+                if (result.ResultCode == OperationResultCode.orcSucceeded)
+                {
+                    UpdateManager.UpdateDownloadCompleted?.Invoke(this, new UpdateDownloadCompletedEventArgs
+                    {
+                        Job = downloadJob
+                    });
+                }
+                else
+                {
+                    UpdateManager.UpdateDownloadCanceled?.Invoke(this, new UpdateDownloadCanceledEventArgs
+                    {
+                        Job = downloadJob
+                    });
+                }
             }
         }
 
@@ -97,7 +138,10 @@ namespace SecurityCenter.UILogic.Updates
 
             public void Invoke(IInstallationJob installationJob, IInstallationProgressChangedCallbackArgs callbackArgs)
             {
-                UpdateManager.UpdateInstallationProgressChanged?.Invoke(this, new UpdateInstallationProgressChangedEventArgs());
+                UpdateManager.UpdateInstallationProgressChanged?.Invoke(this, new UpdateInstallationProgressChangedEventArgs
+                {
+                    Progress = callbackArgs.Progress
+                });
             }
         }
 
@@ -109,7 +153,19 @@ namespace SecurityCenter.UILogic.Updates
 
             public void Invoke(IInstallationJob installationJob, IInstallationCompletedCallbackArgs callbackArgs)
             {
-                UpdateManager.UpdateInstallationCompleted?.Invoke(this, new UpdateInstallationCompletedEventArgs());
+                IInstallationResult result = UpdateManager.Installer.EndInstall(installationJob);
+
+                if (result.ResultCode == OperationResultCode.orcSucceeded)
+                {
+                    UpdateManager.UpdateInstallationCompleted?.Invoke(this, new UpdateInstallationCompletedEventArgs());
+                }
+                else
+                {
+                    UpdateManager.UpdateInstallationCanceled?.Invoke(this, new UpdateInstallationCanceledEventArgs
+                    {
+                        Job = installationJob
+                    });
+                }
             }
         }
         #endregion

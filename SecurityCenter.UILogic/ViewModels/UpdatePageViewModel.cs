@@ -7,31 +7,88 @@ using System.Text;
 using System.Linq;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using SecurityCenter.Business.Updates;
+using WUApiLib;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
     public class UpdatePageViewModel : ViewModelBase
     {
+        private UpdateManager updateManager;
+
         public UpdatePageViewModel()
         {
             LoadAvailableUpdates();
             InstallUpdatesCommand = new RelayCommand(InstallUpdates);
             RefreshAvailableUpdatesCommand = new RelayCommand(RefreshAvailableUpdates);
             CancelUpdateInstallationCommand = new RelayCommand(CancelUpdateInstallation);
+
+            updateManager = new UpdateManager();
+            updateManager.UpdateDownloadProgressChanged += UpdateDownloadProgressChanged;
+            updateManager.UpdateDownloadCompleted += UpdateDownloadCompleted;
+            updateManager.UpdateDownloadCanceled += UpdateDownloadCanceled;
+            updateManager.UpdateInstallationProgressChanged += UpdateInstallationProgressChanged;
+            updateManager.UpdateInstallationCompleted += UpdateInstallationCompleted;
+            updateManager.UpdateInstallationCanceled += UpdateInstallationCanceled;
+        }
+
+        private void UpdateDownloadProgressChanged(object sender, UpdateDownloadProgressChangedEventArgs e)
+        {
+            UpdateProgress = e.Progress.PercentComplete;
+        }
+
+        private void UpdateDownloadCompleted(object sender, UpdateDownloadCompletedEventArgs e)
+        {
+            if (e.Job.IsCompleted)
+            {
+                // Set the download progress bar to 100%
+                UpdateProgress = 100;
+
+                // Begin to install the updates
+                UpdateText = "Installiere Updates...";
+                updateManager.InstallUpdates(e.Job.Updates);
+            }
+        }
+        
+        private void UpdateDownloadCanceled(object sender, UpdateDownloadCanceledEventArgs e)
+        {
+            ShowUpdateDialog = false;
+            RefreshAvailableUpdates(null);
+        }
+
+        private void UpdateInstallationProgressChanged(object sender, UpdateInstallationProgressChangedEventArgs e)
+        {
+            UpdateProgress = e.Progress.PercentComplete;
+        }
+
+        private void UpdateInstallationCompleted(object sender, UpdateInstallationCompletedEventArgs e)
+        {
+            ShowUpdateDialog = false;
+            RefreshAvailableUpdates(null);
+        }
+
+        private void UpdateInstallationCanceled(object sender, UpdateInstallationCanceledEventArgs e)
+        {
+            ShowUpdateDialog = false;
+            RefreshAvailableUpdates(null);
         }
 
         private async void LoadAvailableUpdates()
         {
-            await Task.Run(() =>
+            // Only start a new update scan process, if there is no other runnning at the moment.
+            if (!IsLoadingUpdates)
             {
-                // Make the list empty.
-                AvailableUpdates = new WindowsUpdateCollectionViewModel();
+                await Task.Run(() =>
+                {
+                    // Make the list empty.
+                    AvailableUpdates = new WindowsUpdateCollectionViewModel();
 
-                // Load new list of updates.
-                IsLoadingUpdates = true;
-                AvailableUpdates = new WindowsUpdateCollectionViewModel(SystemAccess.GetAvailableUpdates());
-                IsLoadingUpdates = false;
-            });
+                    // Load new list of updates.
+                    IsLoadingUpdates = true;
+                    AvailableUpdates = new WindowsUpdateCollectionViewModel(SystemAccess.GetAvailableUpdates());
+                    IsLoadingUpdates = false;
+                });
+            }
         }
 
         public ICommand InstallUpdatesCommand { get; private set; }
@@ -41,15 +98,25 @@ namespace SecurityCenter.UILogic.ViewModels
 
             if (selectedUpdates.Count > 0)
             {
+                // Show the update dialog, which contains visual feedback for the user
+                // who wants to install new updates.
                 ShowUpdateDialog = true;
+                UpdateText = "Lade Updates herunter...";
+
+                // Build a collection of updates for the update manager.
+                UpdateCollection updates = new UpdateCollection();
+                selectedUpdates.ForEach(x => updates.Add(x.Model.Update));
+
+                // Start the update process by download the updates first.
+                // If this is finished, the installation will automatically begin.
+                updateManager.DownloadUpdates(updates);
             }
         }
 
         public ICommand CancelUpdateInstallationCommand { get; private set; }
         private void CancelUpdateInstallation(object sender)
         {
-            // TODO: Implement logic to cancel the currently running download / installation process
-            ShowUpdateDialog = false;
+            updateManager.Cancel();
         }
 
         public ICommand RefreshAvailableUpdatesCommand { get; private set; }
@@ -77,6 +144,20 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             get => availableUpdates;
             set => SetProperty(ref availableUpdates, value);
+        }
+
+        private double updateProgress = 0.0;
+        public double UpdateProgress
+        {
+            get => updateProgress;
+            set => SetProperty(ref updateProgress, value);
+        }
+
+        private string updateText = string.Empty;
+        public string UpdateText
+        {
+            get => updateText;
+            set => SetProperty(ref updateText, value);
         }
     }
 }

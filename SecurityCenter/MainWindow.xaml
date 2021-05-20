@@ -117,7 +117,7 @@
             <StackPanel Orientation="Vertical">
                 <controls:DialogContent>
                     <controls:DialogDescription>Updates werden heruntergeladen und installiert. Bitte warten...</controls:DialogDescription>
-                    <controls:ProgressBar Label="Lade Updates herunter..." Value="33" />
+                    <controls:ProgressBar Label="{Binding UpdatePageViewModel.UpdateText}" Value="{Binding UpdatePageViewModel.UpdateProgress}" />
                 </controls:DialogContent>
                 <controls:DialogActions>
                     <controls:TextButton Command="{Binding UpdatePageViewModel.CancelUpdateInstallationCommand}">Abbrechen</controls:TextButton>
