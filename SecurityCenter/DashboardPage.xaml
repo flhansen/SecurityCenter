@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="3*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <controls:Card Grid.Column="0" Title="Systeminformationen" FontFamily="{StaticResource Roboto}" FontSize="14">
+                <controls:Card Grid.Column="0" Title="Systeminformationen" FontSize="14">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

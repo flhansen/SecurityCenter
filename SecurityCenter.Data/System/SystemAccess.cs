@@ -164,6 +164,15 @@ namespace SecurityCenter.Data.System
             return antiViruses;
         }
 
+        public static SecurityStatus GetSecurityStatus()
+        {
+            return new SecurityStatus
+            {
+                AntiViruses = GetAntiViruses(),
+                FirewallInformation = GetFirewallInformation()
+            };
+        }
+
         public static WindowsEventCollection GetEvents(DateTime until)
         {
             string[] logNames = { "Security", "Application", "System" };

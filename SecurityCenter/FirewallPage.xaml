@@ -3,10 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:local="clr-namespace:SecurityCenter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.Resources>
+        <conv:BoolToProtectionStatusStringConverter x:Key="BoolToProtectionStatusStringConverter" />
+    </UserControl.Resources>
+    <Border Padding="48">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <controls:Card Title="Sicherheitsstatus" FontSize="14">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="0" Margin="0, 0, 24, 8">Aktive Anti-Viren-Software</TextBlock>
+                    <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="0" Text="{Binding SecurityStatus.AntiVirusSoftware}" />
+
+                    <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="1" Margin="0, 0, 24, 8">Aktive Firewall</TextBlock>
+                    <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="1" Text="{Binding SecurityStatus.ActiveFirewallName}" />
+
+                    <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="2" Margin="0, 0, 24, 8">Öffentliches Profil</TextBlock>
+                    <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="2" Text="{Binding SecurityStatus.IsPublicProfileProtected, Converter={StaticResource BoolToProtectionStatusStringConverter}}" />
+
+                    <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="3" Margin="0, 0, 24, 8">Privates Profil</TextBlock>
+                    <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="3" Text="{Binding SecurityStatus.IsPrivateProfileProtected, Converter={StaticResource BoolToProtectionStatusStringConverter}}" />
+
+                    <TextBlock Foreground="{StaticResource TextColor}" Opacity="0.5" Grid.Column="0" Grid.Row="4" Margin="0, 0, 24, 0">Domänenprofil</TextBlock>
+                    <TextBlock Foreground="{StaticResource TextColor}" Grid.Column="1" Grid.Row="4" Text="{Binding SecurityStatus.IsDomainProfileProtected, Converter={StaticResource BoolToProtectionStatusStringConverter}}" />
+                    
+                </Grid>
+            </controls:Card>
+        </Grid>
+    </Border>
 </UserControl>
