@@ -50,6 +50,7 @@
     <Compile Include="Models\FirewallInformation.cs" />
     <Compile Include="Models\LoadingProgress.cs" />
     <Compile Include="Models\Logger.cs" />
+    <Compile Include="Models\PortScan.cs" />
     <Compile Include="Models\SecurityStatus.cs" />
     <Compile Include="Models\ServiceCollection.cs" />
     <Compile Include="Models\AntiVirusCollection.cs" />
