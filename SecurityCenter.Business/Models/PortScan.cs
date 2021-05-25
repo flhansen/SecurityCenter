@@ -18,5 +18,16 @@ namespace SecurityCenter.Business.Models
         public bool InterpretOSFingerprint { get; set; }
         public bool SaveResultsInFile { get; set; }
         public string SaveFileName { get; set; }
+
+        public static PortScan Default => new PortScan
+        {
+            Destination = IPAddress.Parse("127.0.0.1"),
+            StartPort = 20,
+            EndPort = 9999,
+            IsAggressive = true,
+            ScanIndividualPorts = true,
+            ScanRunningServices = true,
+            InterpretOSFingerprint = true
+        };
     }
 }

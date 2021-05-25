@@ -31,36 +31,36 @@
                     <controls:PrimaryButton Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search">Scan starten</controls:PrimaryButton>
 
                     <!-- The target, which should be scanned against -->
-                    <controls:TextField Label="Ziel" HorizontalAlignment="Left" Width="400" />
+                    <controls:TextField Label="Ziel" HorizontalAlignment="Left" Width="400" Text="{Binding PortScanViewModel.Destination, Mode=TwoWay}" />
                     <controls:HorizontalLine />
 
                     <!-- Port scan range settings -->
                     <StackPanel props:ContainerSpacing.Spacing="16">
-                        <controls:CheckBox CheckBoxLabel="Individuelle Ports scannen" />
+                        <controls:CheckBox CheckBoxLabel="Individuelle Ports scannen" IsChecked="{Binding PortScanViewModel.ScanIndividualPorts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
-                            <controls:TextField Label="Startport" Width="100" />
-                            <controls:TextField Label="Endport" Width="100" />
+                            <controls:TextField Label="Startport" Width="100" Text="{Binding PortScanViewModel.StartPort, Mode=TwoWay}" />
+                            <controls:TextField Label="Endport" Width="100" Text="{Binding PortScanViewModel.EndPort, Mode=TwoWay}" />
                         </StackPanel>
                     </StackPanel>
                     <controls:HorizontalLine />
 
                     <!-- Setting if the port scan should be executed aggressive -->
-                    <controls:CheckBox CheckBoxLabel="Aggressiven Test durchführen" />
+                    <controls:CheckBox CheckBoxLabel="Aggressiven Test durchführen" IsChecked="{Binding PortScanViewModel.IsAggressive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <controls:HorizontalLine />
 
                     <!-- Setting if the port scan should try to identify running services -->
-                    <controls:CheckBox CheckBoxLabel="Versuchen laufende Dienste zu erkennen" />
+                    <controls:CheckBox CheckBoxLabel="Versuchen laufende Dienste zu erkennen" IsChecked="{Binding PortScanViewModel.ScanRunningServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <controls:HorizontalLine />
 
                     <!-- Setting if the port scan should try to interpret the os fingerprint -->
-                    <controls:CheckBox CheckBoxLabel="Fingerprint des Betriebssystems erkennen" />
+                    <controls:CheckBox CheckBoxLabel="Fingerprint des Betriebssystems erkennen" IsChecked="{Binding PortScanViewModel.InterpretOSFingerprint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <controls:HorizontalLine />
 
                     <!-- Setting all results should be written into a file -->
                     <StackPanel props:ContainerSpacing.Spacing="16">
-                        <controls:CheckBox CheckBoxLabel="Ergebnisse in eine Datei speichern" />
+                        <controls:CheckBox CheckBoxLabel="Ergebnisse in eine Datei speichern" IsChecked="{Binding PortScanViewModel.SaveResultsInFile, Mode=TwoWay}" />
                         <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
-                            <controls:TextField Label="Pfad der Datei" />
+                            <controls:TextField Label="Pfad der Datei" Text="{Binding PortScanViewModel.SaveFileName, Mode=TwoWay}" />
                             <controls:PrimaryButton VerticalAlignment="Bottom">Durchsuchen...</controls:PrimaryButton>
                         </StackPanel>
                     </StackPanel>

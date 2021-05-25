@@ -27,6 +27,12 @@ namespace SecurityCenter.UILogic.ViewModels
             set => Model.ScanIndividualPorts = value;
         }
 
+        public bool InterpretOSFingerprint
+        {
+            get => Model.InterpretOSFingerprint;
+            set => Model.InterpretOSFingerprint = value;
+        }
+
         public string StartPort
         {
             get => Model.StartPort.ToString();
