@@ -4,9 +4,80 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="1440">
+    <Border Padding="48">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Port scanning settings -->
+            <controls:Card Title="Portscanner" Width="450">
+                <StackPanel props:ContainerSpacing.Spacing="24">
+
+                    <!-- Warning text to make sure, the user knows what he's doing -->
+                    <controls:DialogDescription TextWrapping="Wrap">
+                        Dieser Prozess ist Zeil eines Penetrationstests und könnte
+                        eventuell Schaden anrichten bzw. laufende Dienste stark
+                        strapazieren. Bitte gehe sicher, dass die Ausführung vom
+                        Systemadministrator geduldet ist.
+                    </controls:DialogDescription>
+
+                    <!-- Port scan button to start scanning process -->
+                    <controls:PrimaryButton Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search">Scan starten</controls:PrimaryButton>
+
+                    <!-- The target, which should be scanned against -->
+                    <controls:TextField Label="Ziel" HorizontalAlignment="Left" Width="400" />
+                    <controls:HorizontalLine />
+
+                    <!-- Port scan range settings -->
+                    <StackPanel props:ContainerSpacing.Spacing="16">
+                        <controls:CheckBox CheckBoxLabel="Individuelle Ports scannen" />
+                        <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                            <controls:TextField Label="Startport" Width="100" />
+                            <controls:TextField Label="Endport" Width="100" />
+                        </StackPanel>
+                    </StackPanel>
+                    <controls:HorizontalLine />
+
+                    <!-- Setting if the port scan should be executed aggressive -->
+                    <controls:CheckBox CheckBoxLabel="Aggressiven Test durchführen" />
+                    <controls:HorizontalLine />
+
+                    <!-- Setting if the port scan should try to identify running services -->
+                    <controls:CheckBox CheckBoxLabel="Versuchen laufende Dienste zu erkennen" />
+                    <controls:HorizontalLine />
+
+                    <!-- Setting if the port scan should try to interpret the os fingerprint -->
+                    <controls:CheckBox CheckBoxLabel="Fingerprint des Betriebssystems erkennen" />
+                    <controls:HorizontalLine />
+
+                    <!-- Setting all results should be written into a file -->
+                    <StackPanel props:ContainerSpacing.Spacing="16">
+                        <controls:CheckBox CheckBoxLabel="Ergebnisse in eine Datei speichern" />
+                        <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                            <controls:TextField Label="Pfad der Datei" />
+                            <controls:PrimaryButton VerticalAlignment="Bottom">Durchsuchen...</controls:PrimaryButton>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+            </controls:Card>
+
+            <!-- Scanned ports list -->
+            <controls:Card Grid.Column="1" Title="Ports" Margin="48, 0, 0, 0" Padding="0">
+                <controls:ListView>
+                    <controls:ListView.Columns>
+                        <DataGridTextColumn Header="Ports" />
+                        <DataGridTextColumn Header="Protokoll" />
+                        <DataGridTextColumn Header="Beschreibung" />
+                    </controls:ListView.Columns>
+                </controls:ListView>
+            </controls:Card>
+        </Grid>
+    </Border>
 </UserControl>
