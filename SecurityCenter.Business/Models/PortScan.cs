@@ -10,7 +10,8 @@ namespace SecurityCenter.Business.Models
     public class PortScan
     {
         public IPAddress Destination { get; set; }
-        public IEnumerable<int> Ports { get; set; }
+        public int StartPort { get; set; }
+        public int EndPort { get; set; }
         public bool ScanIndividualPorts { get; set; }
         public bool IsAggressive { get; set; }
         public bool ScanRunningServices { get; set; }
