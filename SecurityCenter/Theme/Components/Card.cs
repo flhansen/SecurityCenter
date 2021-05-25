@@ -23,10 +23,12 @@ namespace SecurityCenter.Theme.Components
 
         private void HandleSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.HeightChanged)
+            if (e.HeightChanged && Template != null)
             {
                 ContentPresenter presenter = Template.FindName("PART_ContentContainer", this) as ContentPresenter;
-                ActualContentHeight = presenter.ActualHeight;
+
+                if (presenter != null) 
+                    ActualContentHeight = presenter.ActualHeight;
             }
         }
 

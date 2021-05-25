@@ -20,6 +20,8 @@
                 <ResourceDictionary Source="Theme/Styles/Menus.xaml" />
                 <ResourceDictionary Source="Theme/Styles/CheckBox.xaml" />
                 <ResourceDictionary Source="Theme/Styles/Dialog.xaml" />
+                <ResourceDictionary Source="Theme/Styles/Select.xaml" />
+                <ResourceDictionary Source="Theme/Styles/HorizontalLine.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

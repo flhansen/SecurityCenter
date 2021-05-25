@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:ServiceStatusToStringConverter x:Key="ServiceStatusToStringConverter" />
+    </UserControl.Resources>
     <Border Padding="48">
         <controls:Card Title="Dienste" Padding="0" FitContent="False">
             <Grid>
@@ -22,7 +26,13 @@
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
                         <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="2*" />
                         <DataGridTextColumn Header="Starttyp" Binding="{Binding StartType}" Width="1*" />
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="1*" />
+                        <DataGridTemplateColumn Header="Status">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <controls:Select ItemsSource="{Binding PossibleStatusTypes}" SelectedItem="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </controls:ListView.Columns>
                 </controls:ListView>
             </Grid>

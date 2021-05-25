@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +74,7 @@
     <Compile Include="Theme\Components\DialogActions.cs" />
     <Compile Include="Theme\Components\DialogContent.cs" />
     <Compile Include="Theme\Components\DialogDescription.cs" />
+    <Compile Include="Theme\Components\HorizontalLine.cs" />
     <Compile Include="Theme\Components\ListView.cs" />
     <Compile Include="Theme\Components\MenuItem.cs" />
     <Compile Include="Theme\Components\OverviewCard.cs" />
@@ -96,12 +98,14 @@
     <Compile Include="Theme\Converter\IconToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\InvertedNullToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\PageViewModelToBoolConverter.cs" />
+    <Compile Include="Theme\Converter\ServiceStatusToStringConverter.cs" />
     <Compile Include="Theme\Converter\StringListToBrushListConverter.cs" />
     <Compile Include="Theme\Converter\StringToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\UpperCaseConverter.cs" />
     <Compile Include="Theme\Converter\WindowsEventToBarChartDataConverter.cs" />
     <Compile Include="Theme\Converter\WindowsEventToPieChartDataConverter.cs" />
     <Compile Include="Theme\CustomProperties\ContainerSpacing.cs" />
+    <Compile Include="Theme\Extensions\EnumCollectionExtension.cs" />
     <Compile Include="UpdatePage.xaml.cs">
       <DependentUpon>UpdatePage.xaml</DependentUpon>
     </Compile>
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\Styles\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\Styles\HorizontalLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -78,7 +78,7 @@
                                       Height="Auto"
                                       ClickMode="Press"
                                       IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-                                      Template="{StaticResource CustomToggleButtonTemplate}" />
+                                      Style="{StaticResource CustomToggleButtonTemplate}" />
                         <ContentPresenter x:Name="Content"
                                           Margin="12,8,12,8"
                                           IsHitTestVisible="False"

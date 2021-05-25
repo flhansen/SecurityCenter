@@ -21,7 +21,7 @@
                             <Border Padding="{TemplateBinding Padding}">
                                 <ContentPresenter />
                             </Border>
-                            <Border Height="1" Background="#FFFFFF" Opacity="0.05" />
+                            <controls:HorizontalLine />
                         </StackPanel>
                     
                 </ControlTemplate>

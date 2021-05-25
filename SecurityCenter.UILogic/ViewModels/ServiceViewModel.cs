@@ -2,6 +2,7 @@
 using SecurityCenter.UILogic.ViewModels.Core;
 using System;
 using System.Collections.Generic;
+using System.ServiceProcess;
 using System.Text;
 
 namespace SecurityCenter.UILogic.ViewModels
@@ -28,10 +29,18 @@ namespace SecurityCenter.UILogic.ViewModels
             get => Model.StartMode.ToString();
         }
 
-        public string Status
+        public ServiceControllerStatus Status
         {
-            get => Model.Status.ToString();
+            get => Model.Status;
+            set => Model.ChangeState(value);
         }
+
+        public IEnumerable<ServiceControllerStatus> PossibleStatusTypes => new List<ServiceControllerStatus>
+        {
+            ServiceControllerStatus.Running,
+            ServiceControllerStatus.Stopped,
+            ServiceControllerStatus.Paused
+        };
         
     }
 }

@@ -12,7 +12,7 @@
             <conv:IconToVisibilityConverter x:Key="IconToVisibilityConverter" />
         </Style.Resources>
         <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="Background" Value="{StaticResource TertiaryColor}" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="16,5" />
