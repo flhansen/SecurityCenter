@@ -39,7 +39,7 @@
                                                             Foreground="{StaticResource AttentionColor}"
                                                             Visibility="Hidden"
                                                             x:Name="HiddenDeleteButton"
-                                                            Command="{Binding UninstallApplicationCommand}">Deinstallieren</controls:PrimaryButton>
+                                                            Command="{Binding Path=DataContext.UninstallApplicationCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ApplicationPage}}}" CommandParameter="{Binding UninstallationPath}">Deinstallieren</controls:PrimaryButton>
                                     <DataTemplate.Triggers>
                                         <MultiDataTrigger>
                                             <MultiDataTrigger.Conditions>

@@ -10,13 +10,6 @@ namespace SecurityCenter.UILogic.ViewModels
     {
         public ApplicationViewModel(Application model) : base(model)
         {
-            UninstallApplicationCommand = new RelayCommand(UninstallApplication); 
-        }
-
-        public ICommand UninstallApplicationCommand { get; private set; }
-        private void UninstallApplication(object obj)
-        {
-            SystemAccess.UninstallApplication(UninstallationPath);   
         }
 
         public string Name

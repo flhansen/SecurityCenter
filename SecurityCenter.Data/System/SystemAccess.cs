@@ -59,7 +59,7 @@ namespace SecurityCenter.Data.System
 
         public static void UninstallApplication(string path)
         {
-             ProcessStartInfo startInfo = new ProcessStartInfo(path);
+            ProcessStartInfo startInfo = new ProcessStartInfo(path);
 
             int indexOfExe = path.IndexOf(".exe");
             if (indexOfExe > 0 && indexOfExe < 9)
@@ -68,7 +68,7 @@ namespace SecurityCenter.Data.System
                 string uninstallerPath = uninstallString.Substring(0, indexOfExe + 4);
                 startInfo.FileName = uninstallerPath;
 
-                if ( uninstallerPath.Length != uninstallString.Length)
+                if (uninstallerPath.Length != uninstallString.Length)
                 {
                     string args = uninstallString.Substring(uninstallerPath.Length);
                     if (!string.IsNullOrEmpty(args))
@@ -78,7 +78,14 @@ namespace SecurityCenter.Data.System
                     }
                 }
             }
-            Process.Start(startInfo).WaitForExit();
+
+            Process process = new Process
+            {
+                StartInfo = startInfo
+            };
+
+            process.Start();
+            process.WaitForExit();
         }
 
         static private string removeSpecialChars(string str)

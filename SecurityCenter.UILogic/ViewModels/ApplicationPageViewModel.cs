@@ -16,8 +16,16 @@ namespace SecurityCenter.UILogic.ViewModels
 
         public ApplicationPageViewModel()
         {
+            UninstallApplicationCommand = new RelayCommand(UninstallApplication); 
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             FilteredApplications = Applications.AsEnumerable();
+        }
+
+        public ICommand UninstallApplicationCommand { get; private set; }
+        private void UninstallApplication(object obj)
+        {
+            string uninstallPath = obj as string;
+            SystemAccess.UninstallApplication(uninstallPath);
         }
 
         private ApplicationCollectionViewModel applications;
