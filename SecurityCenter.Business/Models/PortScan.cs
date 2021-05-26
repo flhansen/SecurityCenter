@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using SecurityCenter;
 
 namespace SecurityCenter.Business.Models
 {
@@ -30,5 +31,6 @@ namespace SecurityCenter.Business.Models
             ScanRunningServices = true,
             InterpretOSFingerprint = true
         };
+
     }
 }

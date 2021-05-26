@@ -85,5 +85,11 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SecurityCenter.ScanEngine\SecurityCenter.ScanEngine.vcxproj">
+      <Project>{5bcc4d6e-91e3-4f34-a109-89202f7bd7be}</Project>
+      <Name>SecurityCenter.ScanEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
