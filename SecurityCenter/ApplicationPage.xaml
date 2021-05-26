@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:local="clr-namespace:SecurityCenter"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400">
+    
+    <UserControl.Resources>
+        <conv:StringToBoolConverter x:Key="StringToBoolConverter" />
+    </UserControl.Resources>
+    
     <Border Padding="48">
         <controls:Card Title="Installierte Anwendungen" Padding="0" FitContent="False">
             <Grid>
@@ -23,6 +29,31 @@
                         <DataGridTextColumn Header="Installationspfad" Binding="{Binding InstallationPath}" Width="2*" />
                         <DataGridTextColumn Header="Version" Binding="{Binding Version}" Width="1*" />
                         <DataGridTextColumn Header="Hersteller" Binding="{Binding Manufacturer}" Width="1*" />
+                        <DataGridTemplateColumn Width="Auto" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <controls:PrimaryButton BorderBrush="{StaticResource AttentionColor}" 
+                                                            Background="Transparent" 
+                                                            Margin="0,-5"
+                                                            Icon="Trash"
+                                                            Foreground="{StaticResource AttentionColor}"
+                                                            Visibility="Hidden"
+                                                            x:Name="HiddenDeleteButton"
+                                                            Command="{Binding Path=DataContext.UninstallApplicationCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:ApplicationPage}}}" CommandParameter="{Binding UninstallationPath}">Deinstallieren</controls:PrimaryButton>
+                                    <DataTemplate.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True" />
+                                                <Condition Binding="{Binding UninstallationPath, Converter={StaticResource StringToBoolConverter}}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Visibility" Value="Visible" TargetName="HiddenDeleteButton" />
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </controls:ListView.Columns>
                 </controls:ListView>
             </Grid>

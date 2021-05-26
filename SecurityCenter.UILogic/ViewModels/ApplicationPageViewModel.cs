@@ -6,6 +6,8 @@ using System.Text;
 using System.Linq;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using SecurityCenter.UILogic.Commands;
+using System.Windows.Input;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -14,8 +16,16 @@ namespace SecurityCenter.UILogic.ViewModels
 
         public ApplicationPageViewModel()
         {
+            UninstallApplicationCommand = new RelayCommand(UninstallApplication); 
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             FilteredApplications = Applications.AsEnumerable();
+        }
+
+        public ICommand UninstallApplicationCommand { get; private set; }
+        private void UninstallApplication(object obj)
+        {
+            string uninstallPath = obj as string;
+            SystemAccess.UninstallApplication(uninstallPath);
         }
 
         private ApplicationCollectionViewModel applications;
@@ -40,6 +50,14 @@ namespace SecurityCenter.UILogic.ViewModels
             {
                 SetProperty(ref filterText, value);
                 FilteredApplications = Applications.Where(a => Regex.IsMatch(a.Name.ToLowerInvariant(), filterText.ToLowerInvariant()));
+                int test = Applications.Where(a => string.IsNullOrEmpty(a.UninstallationPath)).Count();
+                IEnumerable<ApplicationViewModel> list = Applications.Where(a => string.IsNullOrEmpty(a.UninstallationPath));
+                foreach (ApplicationViewModel entry in list)
+                {
+                    Console.WriteLine(entry.Name);
+                }
+                Console.WriteLine(test);
+                Console.WriteLine(list);
             }
         }
     }

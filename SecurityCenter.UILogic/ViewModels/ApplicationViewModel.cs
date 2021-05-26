@@ -1,8 +1,8 @@
 ﻿using SecurityCenter.Business.Models;
+using SecurityCenter.Data.System;
+using SecurityCenter.UILogic.Commands;
 using SecurityCenter.UILogic.ViewModels.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Windows.Input;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -10,7 +10,6 @@ namespace SecurityCenter.UILogic.ViewModels
     {
         public ApplicationViewModel(Application model) : base(model)
         {
-
         }
 
         public string Name
@@ -26,6 +25,11 @@ namespace SecurityCenter.UILogic.ViewModels
         public string InstallationPath
         {
             get => Model.ExecutablePath;
+        }
+
+        public string UninstallationPath
+        {
+            get => Model.UninstallPath;
         }
 
         public string Version

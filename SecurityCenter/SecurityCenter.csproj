@@ -100,6 +100,7 @@
     <Compile Include="Theme\Converter\PageViewModelToBoolConverter.cs" />
     <Compile Include="Theme\Converter\ServiceStatusToStringConverter.cs" />
     <Compile Include="Theme\Converter\StringListToBrushListConverter.cs" />
+    <Compile Include="Theme\Converter\StringToBoolConverter.cs" />
     <Compile Include="Theme\Converter\StringToVisibilityConverter.cs" />
     <Compile Include="Theme\Converter\UpperCaseConverter.cs" />
     <Compile Include="Theme\Converter\WindowsEventToBarChartDataConverter.cs" />

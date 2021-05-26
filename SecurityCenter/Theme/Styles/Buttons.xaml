@@ -14,6 +14,9 @@
         <Setter Property="FontFamily" Value="{StaticResource Roboto}"/>
         <Setter Property="Background" Value="{StaticResource TertiaryColor}" />
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="16,5" />
         <Setter Property="Cursor" Value="Hand" />
@@ -22,7 +25,10 @@
                 <ControlTemplate TargetType="{x:Type controls:PrimaryButton}">
 
                     <Grid>
-                        <Border Background="#000000" CornerRadius="3" />
+                        <Border Background="Transparent" 
+                                CornerRadius="3" 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}" />
                         <Border x:Name="HoverBorder" Background="{TemplateBinding Background}" CornerRadius="3" />
                         <Border Padding="{TemplateBinding Padding}">
                             <StackPanel Orientation="Horizontal" prop:ContainerSpacing.Spacing="8">
