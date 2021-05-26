@@ -1,4 +1,5 @@
 ﻿using SecurityCenter.Business.Models;
+using SecurityCenter.UILogic.Commands;
 using SecurityCenter.UILogic.ViewModels.Core;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -13,6 +15,21 @@ namespace SecurityCenter.UILogic.ViewModels
     {
         public PortScanViewModel(PortScan model) : base(model)
         {
+            ScanCommand = new RelayCommand(Scan);
+        }
+
+        public ICommand ScanCommand { get; private set; }
+        private async void Scan(object obj)
+        {
+            await Model.ScanPorts();
+            OpenPorts = Model.ScannedPorts.Where(x => x.Value).Select(x => x.Key).ToList();
+        }
+
+        private List<int> openPorts = new List<int>();
+        public List<int> OpenPorts
+        {
+            get => openPorts;
+            set => SetProperty(ref openPorts, value);
         }
 
         public string Destination

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -11,6 +12,7 @@ namespace SecurityCenter.Business.Models
 {
     public class PortScan
     {
+        public Dictionary<int, bool> ScannedPorts { get; set; } = new Dictionary<int, bool>();
         public IPAddress Destination { get; set; }
         public int StartPort { get; set; }
         public int EndPort { get; set; }
@@ -31,6 +33,39 @@ namespace SecurityCenter.Business.Models
             ScanRunningServices = true,
             InterpretOSFingerprint = true
         };
+
+        private async Task CheckPort(int port)
+        {
+            bool isPortOpen = false;
+
+            using (TcpClient client = new TcpClient())
+            {
+                try
+                {
+                    await client.ConnectAsync(Destination, port);
+                    isPortOpen = true;
+                }
+                catch
+                {
+                }
+            }
+
+            ScannedPorts.Add(port, isPortOpen);
+        }
+
+        public async Task ScanPorts()
+        {
+            int[] ports = Enumerable.Range(StartPort, EndPort - StartPort + 1).ToArray();
+            Task[] tasks = new Task[ports.Length];
+
+            for (int i = 0; i < ports.Length; i++)
+            {
+                Trace.WriteLine($"Checking port {ports[i]}");
+                tasks[i] = CheckPort(ports[i]);
+            }
+
+            await Task.WhenAll(tasks);
+        }
 
     }
 }

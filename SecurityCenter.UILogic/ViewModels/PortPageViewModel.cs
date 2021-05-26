@@ -13,11 +13,11 @@ namespace SecurityCenter.UILogic.ViewModels
             PortScanViewModel = new PortScanViewModel(PortScan.Default);
         }
 
-        private PortScanViewModel portScan;
+        private PortScanViewModel portScanViewModel;
         public PortScanViewModel PortScanViewModel
         {
-            get => portScan;
-            set => SetProperty(ref portScan, value);
+            get => portScanViewModel;
+            set => SetProperty(ref portScanViewModel, value);
         }
     }
 

@@ -28,7 +28,7 @@
                     </controls:DialogDescription>
 
                     <!-- Port scan button to start scanning process -->
-                    <controls:PrimaryButton Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search">Scan starten</controls:PrimaryButton>
+                    <controls:PrimaryButton Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search" Command="{Binding PortScanViewModel.ScanCommand}">Scan starten</controls:PrimaryButton>
 
                     <!-- The target, which should be scanned against -->
                     <controls:TextField Label="Ziel" HorizontalAlignment="Left" Width="400" Text="{Binding PortScanViewModel.Destination, Mode=TwoWay}" />
@@ -42,18 +42,6 @@
                             <controls:TextField Label="Endport" Width="100" Text="{Binding PortScanViewModel.EndPort, Mode=TwoWay}" />
                         </StackPanel>
                     </StackPanel>
-                    <controls:HorizontalLine />
-
-                    <!-- Setting if the port scan should be executed aggressive -->
-                    <controls:CheckBox CheckBoxLabel="Aggressiven Test durchführen" IsChecked="{Binding PortScanViewModel.IsAggressive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <controls:HorizontalLine />
-
-                    <!-- Setting if the port scan should try to identify running services -->
-                    <controls:CheckBox CheckBoxLabel="Versuchen laufende Dienste zu erkennen" IsChecked="{Binding PortScanViewModel.ScanRunningServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <controls:HorizontalLine />
-
-                    <!-- Setting if the port scan should try to interpret the os fingerprint -->
-                    <controls:CheckBox CheckBoxLabel="Fingerprint des Betriebssystems erkennen" IsChecked="{Binding PortScanViewModel.InterpretOSFingerprint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <controls:HorizontalLine />
 
                     <!-- Setting all results should be written into a file -->
@@ -70,9 +58,9 @@
 
             <!-- Scanned ports list -->
             <controls:Card Grid.Column="1" Title="Ports" Margin="48, 0, 0, 0" Padding="0">
-                <controls:ListView>
+                <controls:ListView ItemsSource="{Binding PortScanViewModel.OpenPorts}" AutoGenerateColumns="False">
                     <controls:ListView.Columns>
-                        <DataGridTextColumn Header="Ports" />
+                        <DataGridTextColumn Header="Ports" Binding="{Binding}" />
                         <DataGridTextColumn Header="Protokoll" />
                         <DataGridTextColumn Header="Beschreibung" />
                     </controls:ListView.Columns>
