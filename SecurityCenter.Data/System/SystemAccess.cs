@@ -19,8 +19,15 @@ using WUApiLib;
 
 namespace SecurityCenter.Data.System
 {
+    /// <summary>
+    /// Helper class to access system information.
+    /// </summary>
     public static class SystemAccess
     {
+        /// <summary>
+        /// Reads out all applications of the system.
+        /// </summary>
+        /// <returns>The collection of applications</returns>
         public static ApplicationCollection GetApplications()
         {
             ApplicationCollection applications = new ApplicationCollection();
@@ -57,6 +64,10 @@ namespace SecurityCenter.Data.System
             return applications;
         }
 
+        /// <summary>
+        /// Uninstalls an application using the uninstaller shell command.
+        /// </summary>
+        /// <param name="path"></param>
         public static void UninstallApplication(string path)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo(path);
@@ -88,11 +99,20 @@ namespace SecurityCenter.Data.System
             process.WaitForExit();
         }
 
+        /// <summary>
+        /// Removes all special characters of a string.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         static private string removeSpecialChars(string str)
         {
             return Regex.Replace(str, "[^a-zA-Z0-9._]", string.Empty);
         }
 
+        /// <summary>
+        /// Reads all services of the system.
+        /// </summary>
+        /// <returns>The collection of services.</returns>
         public static ServiceCollection GetServices()
         {
             ServiceCollection services = new ServiceCollection();
@@ -114,6 +134,10 @@ namespace SecurityCenter.Data.System
             return services;
         }
 
+        /// <summary>
+        /// Reads out information of the windows defender firewall.
+        /// </summary>
+        /// <returns>The firewall information</returns>
         public static FirewallInformation GetFirewallInformation()
         {
             FirewallInformation firewallInfo = new FirewallInformation();
@@ -163,6 +187,10 @@ namespace SecurityCenter.Data.System
             return firewallInfo;
         }
 
+        /// <summary>
+        /// Reads out all the running anti virus softwares.
+        /// </summary>
+        /// <returns>The collection of running anti viruses.</returns>
         public static AntiVirusCollection GetAntiViruses()
         {
             AntiVirusCollection antiViruses = new AntiVirusCollection();
@@ -195,6 +223,10 @@ namespace SecurityCenter.Data.System
             return antiViruses;
         }
 
+        /// <summary>
+        /// Reads out the security status of the system.
+        /// </summary>
+        /// <returns>The security status</returns>
         public static SecurityStatus GetSecurityStatus()
         {
             return new SecurityStatus
@@ -204,6 +236,11 @@ namespace SecurityCenter.Data.System
             };
         }
 
+        /// <summary>
+        /// Reads out all windows events until the specified timestamp.
+        /// </summary>
+        /// <param name="until"></param>
+        /// <returns>The collection of windows events.</returns>
         public static WindowsEventCollection GetEvents(DateTime until)
         {
             string[] logNames = { "Security", "Application", "System" };
@@ -247,6 +284,10 @@ namespace SecurityCenter.Data.System
             return Regex.Match(updateName, @"KB(?<kbNumber>\d*)").Groups["kbNumber"].Value;
         }
 
+        /// <summary>
+        /// Checks avalable updates.
+        /// </summary>
+        /// <returns>Available updates</returns>
         public static WindowsUpdateCollection GetAvailableUpdates()
         {
             WindowsUpdateCollection updates = new WindowsUpdateCollection();
@@ -271,6 +312,10 @@ namespace SecurityCenter.Data.System
             return updates;
         }
 
+        /// <summary>
+        /// Reads out basic information of the system.
+        /// </summary>
+        /// <returns>Informations about the system</returns>
         public static Business.Models.SystemInformation GetSystemInformation()
         {
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
