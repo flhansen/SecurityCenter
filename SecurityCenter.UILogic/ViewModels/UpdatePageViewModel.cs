@@ -41,8 +41,8 @@ namespace SecurityCenter.UILogic.ViewModels
         {
             if (e.Job.IsCompleted)
             {
-                // Set the download progress bar to 100%
-                UpdateProgress = 100;
+                // Reset the progress bar for installation process.
+                UpdateProgress = 0;
 
                 // Begin to install the updates
                 UpdateText = "Installiere Updates...";
