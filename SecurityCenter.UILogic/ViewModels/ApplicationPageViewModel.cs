@@ -12,9 +12,15 @@ using System.Threading.Tasks;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
+    /// <summary>
+    /// ViewModel class for the application page.
+    /// </summary>
     public class ApplicationPageViewModel : ViewModelBase
     {
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ApplicationPageViewModel()
         {
             // Initialize all the commands.
@@ -26,7 +32,13 @@ namespace SecurityCenter.UILogic.ViewModels
             FilteredApplications = Applications.AsEnumerable();
         }
 
+        /// <summary>
+        /// Command to refresh the applications.
+        /// </summary>
         public ICommand RefreshApplicationsCommand { get; private set; }
+        /// <summary>
+        /// Method to refresh the applications.
+        /// </summary>
         private void RefreshApplications(object obj)
         {
             if (!IsRefreshingApplications)
@@ -44,35 +56,65 @@ namespace SecurityCenter.UILogic.ViewModels
             }
         }
 
+        /// <summary>
+        /// Command to uninstall a specific application.
+        /// </summary>
         public ICommand UninstallApplicationCommand { get; private set; }
+        /// <summary>
+        /// Method to uninstall a specific application.
+        /// </summary>
         private void UninstallApplication(object obj)
         {
             string uninstallPath = obj as string;
             SystemAccess.UninstallApplication(uninstallPath);
         }
 
+        /// <summary>
+        /// Collection of applications.
+        /// </summary>
         private ApplicationCollectionViewModel applications;
+        /// <summary>
+        /// Collection of applications.
+        /// </summary>
         public ApplicationCollectionViewModel Applications
         {
             get => applications;
             set => SetProperty(ref applications, value);
         }
 
+        /// <summary>
+        /// List of applications filtered by FilterText property.
+        /// </summary>
         private IEnumerable<ApplicationViewModel> filteredApplications;
+        /// <summary>
+        /// List of applications filtered by FilterText property.
+        /// </summary>
         public IEnumerable<ApplicationViewModel> FilteredApplications
         {
             get => filteredApplications;
             set => SetProperty(ref filteredApplications, value);
         }
 
+        /// <summary>
+        /// Returns true, if the viewmodel is in refreshing state.
+        /// </summary>
         private bool isRefreshingApplications = false;
+        /// <summary>
+        /// Returns true, if the viewmodel is in refreshing state.
+        /// </summary>
         public bool IsRefreshingApplications
         {
             get => isRefreshingApplications;
             set => SetProperty(ref isRefreshingApplications, value);
         }
 
+        /// <summary>
+        /// String, which is used to filter the application collection.
+        /// </summary>
         private string filterText;
+        /// <summary>
+        /// String, which is used to filter the application collection.
+        /// </summary>
         public string FilterText
         {
             get => filterText;

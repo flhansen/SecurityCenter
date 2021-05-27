@@ -9,16 +9,24 @@ using System.Threading.Tasks;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
+    /// <summary>
+    /// The collection class for windows event viewmodels.
+    /// </summary>
     public class WindowsEventCollectionViewModel : ViewModelCollectionBase<WindowsEventViewModel, WindowsEvent>
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public WindowsEventCollectionViewModel() : base(new List<WindowsEventViewModel>())
         {
-
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="windowsEvents">The collection of windows event models</param>
         public WindowsEventCollectionViewModel(ObservableCollection<WindowsEvent> windowsEvents) : base(windowsEvents)
         {
-
         }
     }
 }

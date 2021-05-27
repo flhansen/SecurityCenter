@@ -9,13 +9,23 @@ using System.Threading.Tasks;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
+    /// <summary>
+    /// The collection class for windows update viewmodels.
+    /// </summary>
     public class WindowsUpdateCollectionViewModel : ViewModelCollectionBase<WindowsUpdateViewModel, WindowsUpdate>
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public WindowsUpdateCollectionViewModel() : base()
         {
 
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="updates">The collection of update models</param>
         public WindowsUpdateCollectionViewModel(ObservableCollection<WindowsUpdate> updates) : base(updates)
         {
 
