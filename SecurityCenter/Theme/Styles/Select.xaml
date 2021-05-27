@@ -114,7 +114,7 @@
                                   MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
                                   MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
 
-                                <Border Background="#000000" Opacity="0.1" />
+                                <Border Background="{StaticResource BackgroundCardsColor}" CornerRadius="3" Opacity="1" />
                                 <Border BorderThickness="1" BorderBrush="#000" Opacity="0.2" />
 
                                 <ScrollViewer x:Name="ScrollContent">
