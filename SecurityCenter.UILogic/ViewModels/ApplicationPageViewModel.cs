@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using SecurityCenter.UILogic.Commands;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -16,9 +17,31 @@ namespace SecurityCenter.UILogic.ViewModels
 
         public ApplicationPageViewModel()
         {
-            UninstallApplicationCommand = new RelayCommand(UninstallApplication); 
+            // Initialize all the commands.
+            UninstallApplicationCommand = new RelayCommand(UninstallApplication);
+            RefreshApplicationsCommand = new RelayCommand(RefreshApplications);
+
+            // Get all applications of this system and store them into the ViewModel.
             Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
             FilteredApplications = Applications.AsEnumerable();
+        }
+
+        public ICommand RefreshApplicationsCommand { get; private set; }
+        private void RefreshApplications(object obj)
+        {
+            if (!IsRefreshingApplications)
+            {
+                IsRefreshingApplications = true;
+
+                Task.Run(() =>
+                {
+                    Applications = new ApplicationCollectionViewModel(SystemAccess.GetApplications());
+                    FilteredApplications = Applications.AsEnumerable();
+                    FilterText = "";
+
+                    IsRefreshingApplications = false;
+                });
+            }
         }
 
         public ICommand UninstallApplicationCommand { get; private set; }
@@ -42,6 +65,13 @@ namespace SecurityCenter.UILogic.ViewModels
             set => SetProperty(ref filteredApplications, value);
         }
 
+        private bool isRefreshingApplications = false;
+        public bool IsRefreshingApplications
+        {
+            get => isRefreshingApplications;
+            set => SetProperty(ref isRefreshingApplications, value);
+        }
+
         private string filterText;
         public string FilterText
         {
@@ -50,14 +80,6 @@ namespace SecurityCenter.UILogic.ViewModels
             {
                 SetProperty(ref filterText, value);
                 FilteredApplications = Applications.Where(a => Regex.IsMatch(a.Name.ToLowerInvariant(), filterText.ToLowerInvariant()));
-                int test = Applications.Where(a => string.IsNullOrEmpty(a.UninstallationPath)).Count();
-                IEnumerable<ApplicationViewModel> list = Applications.Where(a => string.IsNullOrEmpty(a.UninstallationPath));
-                foreach (ApplicationViewModel entry in list)
-                {
-                    Console.WriteLine(entry.Name);
-                }
-                Console.WriteLine(test);
-                Console.WriteLine(list);
             }
         }
     }

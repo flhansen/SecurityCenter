@@ -4,12 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <conv:ServiceStatusToStringConverter x:Key="ServiceStatusToStringConverter" />
+        <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
     </UserControl.Resources>
     <Border Padding="48">
         <controls:Card Title="Dienste" Padding="0" FitContent="False">
@@ -18,8 +21,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border Padding="24" Grid.Row="0" HorizontalAlignment="Left">
-                    <controls:TextField Label="Filter" Icon="Search" Width="400" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+                <Border Padding="24" Grid.Row="0" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                        <controls:TextField Label="Filter" Icon="Search" Width="400" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+                        <controls:PrimaryButton Padding="7,5" VerticalAlignment="Bottom" Command="{Binding RefreshServicesCommand}" IsEnabled="{Binding IsRefreshing, Converter={StaticResource BoolNegationConverter}}">
+                            <fa:ImageAwesome Icon="Refresh" Width="14" Foreground="{StaticResource TextColor}" Spin="{Binding IsRefreshing}" />
+                        </controls:PrimaryButton>
+                    </StackPanel>
                 </Border>
                 <controls:ListView ItemsSource="{Binding FilteredServices}" AutoGenerateColumns="False" Grid.Row="1">
                     <controls:ListView.Columns>

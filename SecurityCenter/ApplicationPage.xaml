@@ -5,12 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400">
     
     <UserControl.Resources>
         <conv:StringToBoolConverter x:Key="StringToBoolConverter" />
+        <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
     </UserControl.Resources>
     
     <Border Padding="48">
@@ -20,8 +23,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <Border Padding="24" HorizontalAlignment="Left" Grid.Row="0">
-                    <controls:TextField Label="Filter" Icon="Search" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="400" />
+                <Border Padding="24" HorizontalAlignment="Right" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                        <controls:TextField Label="Filter" Icon="Search" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="400" />
+                        <controls:PrimaryButton Padding="7,5" VerticalAlignment="Bottom" Command="{Binding RefreshApplicationsCommand}" IsEnabled="{Binding IsRefreshingApplications, Converter={StaticResource BoolNegationConverter}}">
+                            <fa:ImageAwesome Icon="Refresh" Width="14" Foreground="{StaticResource TextColor}" Spin="{Binding IsRefreshingApplications}" />
+                        </controls:PrimaryButton>
+                    </StackPanel>
                 </Border>
                 <controls:ListView ItemsSource="{Binding FilteredApplications}" AutoGenerateColumns="False" Grid.Row="1">
                     <controls:ListView.Columns>
