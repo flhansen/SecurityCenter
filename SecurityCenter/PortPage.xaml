@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
@@ -11,6 +12,7 @@
              d:DesignHeight="800" d:DesignWidth="1440">
     <UserControl.Resources>
         <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
     <Border Padding="48">
         <Grid>
@@ -32,7 +34,10 @@
                     </controls:DialogDescription>
 
                     <!-- Port scan button to start scanning process -->
-                    <controls:PrimaryButton IsEnabled="{Binding PortScanViewModel.IsScanning, Converter={StaticResource BoolNegationConverter}}" Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search" Command="{Binding PortScanViewModel.ScanCommand}">Scan starten</controls:PrimaryButton>
+                    <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                        <controls:PrimaryButton IsEnabled="{Binding PortScanViewModel.IsScanning, Converter={StaticResource BoolNegationConverter}}" Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search" Command="{Binding PortScanViewModel.ScanCommand}">Scan starten</controls:PrimaryButton>
+                        <fa:ImageAwesome Icon="Spinner" Height="18" Foreground="{StaticResource TextColor}" Spin="True" Visibility="{Binding PortScanViewModel.IsScanning, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    </StackPanel>
 
                     <!-- The target, which should be scanned against -->
                     <controls:TextField Label="Ziel" HorizontalAlignment="Left" Width="400" Text="{Binding PortScanViewModel.Destination, Mode=TwoWay}" />
