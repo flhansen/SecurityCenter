@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Linq;
+using System.Windows.Input;
 
 namespace SecurityCenter.Theme.Components
 {
@@ -294,6 +295,8 @@ namespace SecurityCenter.Theme.Components
         public List<FormattedText> CategoryLabels { get; private set; }
         public List<FormattedText> SubCategoryLegendLabels { get; private set; }
 
+        private Point mousePos = new Point();
+
         public BarChart()
         {
             BrushConverter bc = new BrushConverter();
@@ -313,6 +316,12 @@ namespace SecurityCenter.Theme.Components
             ValueLabels = GetValueLabels(5);
             CategoryLabels = GetCategoryLabels();
             SubCategoryLegendLabels = GetSubCategoryLabels(SubCategories);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            mousePos = e.GetPosition(this);
+            InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext ctx)
@@ -532,6 +541,22 @@ namespace SecurityCenter.Theme.Components
                     // Draw the bar
                     ctx.DrawRectangle(transparentBrush, null, new Rect(dx, height, BarWidth, zero - height));
                     ctx.DrawRectangle(brush, null, new Rect(dx, height, BarWidth, 4));
+
+                    // Draw value label on top of the bar, if the mouse is over it.
+                    if (mousePos.X >= dx && mousePos.X <= dx + BarWidth)
+                    {
+                        FormattedText valueLabel = new FormattedText(
+                            values[j].ToString(),
+                            CultureInfo.CurrentCulture,
+                            FlowDirection.LeftToRight,
+                            new Typeface("Roboto"),
+                            ValueLabelSize,
+                            PenAxis.Brush,
+                            1.25
+                        );
+
+                        ctx.DrawText(valueLabel, new Point(dx + BarWidth / 2 - valueLabel.Width / 2, height + 8));
+                    }
                 }
             }
         }
