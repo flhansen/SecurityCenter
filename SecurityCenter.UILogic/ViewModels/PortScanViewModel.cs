@@ -22,8 +22,22 @@ namespace SecurityCenter.UILogic.ViewModels
         private async void Scan(object obj)
         {
             IsScanning = true;
-            await Model.ScanPorts();
 
+            // Popular ports being used.
+            int[] ports = { 22, 23, 80, 443, 445 };
+
+            if (ScanIndividualPorts)
+            {
+                // Construct an array of ports using start and end port, such that
+                // every port is in [StartPort; EndPort].
+                ports = Enumerable.Range(StartPort, EndPort - StartPort + 1)
+                    .ToArray();
+            }
+
+            // Start scanning ports.
+            await Model.ScanPorts(ports);
+
+            // Read out scanned ports, which are open and sort them.
             OpenPorts = Model.ScannedPorts
                 .Where(x => x.Value)
                 .Select(x => x.Key)
@@ -65,16 +79,16 @@ namespace SecurityCenter.UILogic.ViewModels
             set => Model.InterpretOSFingerprint = value;
         }
 
-        public string StartPort
+        public int StartPort
         {
-            get => Model.StartPort.ToString();
-            set => Model.StartPort = int.Parse(value);
+            get => Model.StartPort;
+            set => Model.StartPort = value;
         }
 
-        public string EndPort
+        public int EndPort
         {
-            get => Model.EndPort.ToString();
-            set => Model.EndPort = int.Parse(value);
+            get => Model.EndPort;
+            set => Model.EndPort = value;
         }
 
         public bool IsAggressive

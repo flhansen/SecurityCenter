@@ -58,15 +58,10 @@ namespace SecurityCenter.Business.Models
             ScannedPorts.Add(port, isPortOpen);
         }
 
-        public async Task ScanPorts()
+        public async Task ScanPorts(int[] ports)
         {
             // Remove all previous scanned ports from the dictionary.
             ScannedPorts.Clear();
-
-            // Construct an array of ports using start and end port, such that
-            // every port is in [StartPort; EndPort].
-            int[] ports = Enumerable.Range(StartPort, EndPort - StartPort + 1)
-                .ToArray();
 
             // This array stores all tasks used to scan a port respectively. It
             // is used to check if all tasks are done.
