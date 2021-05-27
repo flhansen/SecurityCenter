@@ -4,9 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
+             xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="800" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
+    </UserControl.Resources>
+    <Border Padding="48">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Port scanning settings -->
+            <controls:Card Title="Portscanner" Width="450">
+                <StackPanel props:ContainerSpacing.Spacing="24">
+
+                    <!-- Warning text to make sure, the user knows what he's doing -->
+                    <controls:DialogDescription TextWrapping="Wrap">
+                        Dieser Prozess ist Zeil eines Penetrationstests und könnte
+                        eventuell Schaden anrichten bzw. laufende Dienste stark
+                        strapazieren. Bitte gehe sicher, dass die Ausführung vom
+                        Systemadministrator geduldet ist.
+                    </controls:DialogDescription>
+
+                    <!-- Port scan button to start scanning process -->
+                    <controls:PrimaryButton IsEnabled="{Binding PortScanViewModel.IsScanning, Converter={StaticResource BoolNegationConverter}}" Background="{StaticResource SecondaryColor}" HorizontalAlignment="Left" Icon="Search" Command="{Binding PortScanViewModel.ScanCommand}">Scan starten</controls:PrimaryButton>
+
+                    <!-- The target, which should be scanned against -->
+                    <controls:TextField Label="Ziel" HorizontalAlignment="Left" Width="400" Text="{Binding PortScanViewModel.Destination, Mode=TwoWay}" />
+                    <controls:HorizontalLine />
+
+                    <!-- Port scan range settings -->
+                    <StackPanel props:ContainerSpacing.Spacing="16">
+                        <controls:CheckBox CheckBoxLabel="Individuelle Ports scannen" IsChecked="{Binding PortScanViewModel.ScanIndividualPorts, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                            <controls:TextField Label="Startport" Width="100" Text="{Binding PortScanViewModel.StartPort, Mode=TwoWay}" />
+                            <controls:TextField Label="Endport" Width="100" Text="{Binding PortScanViewModel.EndPort, Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <controls:HorizontalLine />
+
+                </StackPanel>
+            </controls:Card>
+
+            <!-- Scanned ports list -->
+            <controls:Card Grid.Column="1" Title="Ports" Margin="48, 0, 0, 0" Padding="0" FitContent="False">
+                <controls:ListView ItemsSource="{Binding PortScanViewModel.OpenPorts}" AutoGenerateColumns="False">
+                    <controls:ListView.Columns>
+                        <DataGridTextColumn Header="Ports" Binding="{Binding}" />
+                        <DataGridTextColumn Header="Protokoll" />
+                        <DataGridTextColumn Header="Beschreibung" />
+                    </controls:ListView.Columns>
+                </controls:ListView>
+            </controls:Card>
+        </Grid>
+    </Border>
 </UserControl>

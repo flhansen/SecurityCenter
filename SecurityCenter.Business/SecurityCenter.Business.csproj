@@ -50,6 +50,7 @@
     <Compile Include="Models\FirewallInformation.cs" />
     <Compile Include="Models\LoadingProgress.cs" />
     <Compile Include="Models\Logger.cs" />
+    <Compile Include="Models\PortScan.cs" />
     <Compile Include="Models\SecurityStatus.cs" />
     <Compile Include="Models\ServiceCollection.cs" />
     <Compile Include="Models\AntiVirusCollection.cs" />
@@ -83,6 +84,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SecurityCenter.ScanEngine\SecurityCenter.ScanEngine.vcxproj">
+      <Project>{5bcc4d6e-91e3-4f34-a109-89202f7bd7be}</Project>
+      <Name>SecurityCenter.ScanEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
