@@ -38,32 +38,46 @@ namespace SecurityCenter.Business.Models
         {
             bool isPortOpen = false;
 
+            // Create new TCP client to be able to connect to remote services.
             using (TcpClient client = new TcpClient())
             {
                 try
                 {
+                    // Try to connect to target by iterating over all specified
+                    // ports. This is kinda like a brute force attack.
                     await client.ConnectAsync(Destination, port);
+
+                    // If the client was able to connect to an enpoint, the
+                    // port must be open.
                     isPortOpen = true;
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
+            // Insert the result into the port state dictionary.
             ScannedPorts.Add(port, isPortOpen);
         }
 
         public async Task ScanPorts()
         {
-            int[] ports = Enumerable.Range(StartPort, EndPort - StartPort + 1).ToArray();
+            // Remove all previous scanned ports from the dictionary.
+            ScannedPorts.Clear();
+
+            // Construct an array of ports using start and end port, such that
+            // every port is in [StartPort; EndPort].
+            int[] ports = Enumerable.Range(StartPort, EndPort - StartPort + 1)
+                .ToArray();
+
+            // This array stores all tasks used to scan a port respectively. It
+            // is used to check if all tasks are done.
             Task[] tasks = new Task[ports.Length];
 
+            // Start all of the scanning tasks and add them to the array. Every
+            // task checks one part and uses one virtual core of the CPU.
             for (int i = 0; i < ports.Length; i++)
-            {
-                Trace.WriteLine($"Checking port {ports[i]}");
                 tasks[i] = CheckPort(ports[i]);
-            }
 
+            // Wait until all tasks are done.
             await Task.WhenAll(tasks);
         }
 
