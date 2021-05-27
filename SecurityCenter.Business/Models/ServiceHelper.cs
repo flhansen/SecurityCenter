@@ -7,7 +7,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecurityCenter.Data.System
+namespace SecurityCenter.Business.Models
 {
     public static class ServiceHelper
     {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ServiceProcess;
 using System.Text;
+using System.Linq;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
@@ -24,10 +25,13 @@ namespace SecurityCenter.UILogic.ViewModels
             get => Model.DisplayName;
         }
 
-        public string StartType
+        public ServiceStartMode StartType
         {
-            get => Model.StartMode.ToString();
+            get => Model.StartMode;
+            set => Model.ChangeStartType(value);
         }
+
+        public IEnumerable<ServiceStartMode> PossibleStartTypes => Enum.GetValues(typeof(ServiceStartMode)).Cast<ServiceStartMode>();
 
         public ServiceControllerStatus Status
         {

@@ -25,7 +25,13 @@
                     <controls:ListView.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" />
                         <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" Width="2*" />
-                        <DataGridTextColumn Header="Starttyp" Binding="{Binding StartType}" Width="1*" />
+                        <DataGridTemplateColumn Header="Starttyp" Width="1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <controls:Select ItemsSource="{Binding PossibleStartTypes}" SelectedItem="{Binding StartType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Status">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

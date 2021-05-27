@@ -57,6 +57,7 @@
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ApplicationCollection.cs" />
     <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\ServiceHelper.cs" />
     <Compile Include="Models\SystemInformation.cs" />
     <Compile Include="Models\WindowsUpdate.cs" />
     <Compile Include="Models\WindowsUpdateCollection.cs" />

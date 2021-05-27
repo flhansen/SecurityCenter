@@ -39,5 +39,16 @@ namespace SecurityCenter.Business.Models
             Controller.WaitForStatus(value);
             Status = Controller.Status;
         }
+
+        public void ChangeStartType(ServiceStartMode value)
+        {
+            try
+            {
+                ServiceHelper.ChangeStartMode(Controller, value);
+            }
+            catch { }
+
+            StartMode = Controller.StartType;
+        }
     }
 }
