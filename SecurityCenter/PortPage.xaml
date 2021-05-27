@@ -48,15 +48,6 @@
                     </StackPanel>
                     <controls:HorizontalLine />
 
-                    <!-- Setting all results should be written into a file -->
-                    <StackPanel props:ContainerSpacing.Spacing="16">
-                        <controls:CheckBox CheckBoxLabel="Ergebnisse in eine Datei speichern" IsChecked="{Binding PortScanViewModel.SaveResultsInFile, Mode=TwoWay}" />
-                        <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
-                            <controls:TextField Label="Pfad der Datei" Text="{Binding PortScanViewModel.SaveFileName, Mode=TwoWay}" />
-                            <controls:PrimaryButton VerticalAlignment="Bottom">Durchsuchen...</controls:PrimaryButton>
-                        </StackPanel>
-                    </StackPanel>
-
                 </StackPanel>
             </controls:Card>
 
