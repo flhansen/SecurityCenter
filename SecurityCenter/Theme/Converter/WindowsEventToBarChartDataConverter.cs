@@ -1,4 +1,4 @@
-﻿using SecurityCenter.Theme.Components;
+﻿using SecurityCenter.Theme.Controls;
 using SecurityCenter.UILogic.ViewModels;
 using System;
 using System.Collections.Generic;

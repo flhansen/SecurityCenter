@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
-    public class TextButton : Button
+    public class DialogDescription : TextBlock
     {
     }
 }

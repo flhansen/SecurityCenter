@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
     public class Select : ComboBox
     {

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
 
     public class UserComponentData

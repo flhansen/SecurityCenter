@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
              mc:Ignorable="d" 

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
-    public class ListView : DataGrid
+    public class VerticalMenu : StackPanel
     {
     }
 }

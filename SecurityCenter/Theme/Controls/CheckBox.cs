@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
     public class CheckBox : System.Windows.Controls.CheckBox
     {

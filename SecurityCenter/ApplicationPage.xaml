@@ -6,7 +6,7 @@
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:local="clr-namespace:SecurityCenter"
              xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
-             xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1400">

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Controls;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
-    public class VerticalMenu : StackPanel
+    public class SideMenuSection : ContentControl
     {
     }
 }

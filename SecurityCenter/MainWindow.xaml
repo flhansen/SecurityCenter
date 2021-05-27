@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+        xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
         xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
         xmlns:local="clr-namespace:SecurityCenter"
         xmlns:vm="clr-namespace:SecurityCenter.UILogic.ViewModels;assembly=SecurityCenter.UILogic"

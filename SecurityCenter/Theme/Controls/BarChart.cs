@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Linq;
 using System.Windows.Input;
 
-namespace SecurityCenter.Theme.Components
+namespace SecurityCenter.Theme.Controls
 {
     public class BarChartData
     {

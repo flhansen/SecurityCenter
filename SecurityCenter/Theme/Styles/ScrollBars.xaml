@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+                    xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
                     xmlns:local="clr-namespace:SecurityCenter.Theme.Styles">
 
     <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">

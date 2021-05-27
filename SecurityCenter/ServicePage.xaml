@@ -7,7 +7,7 @@
              xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
-             xmlns:controls="clr-namespace:SecurityCenter.Theme.Components"
+             xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
