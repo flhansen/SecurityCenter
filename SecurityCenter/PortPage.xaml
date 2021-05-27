@@ -61,7 +61,7 @@
             </controls:Card>
 
             <!-- Scanned ports list -->
-            <controls:Card Grid.Column="1" Title="Ports" Margin="48, 0, 0, 0" Padding="0">
+            <controls:Card Grid.Column="1" Title="Ports" Margin="48, 0, 0, 0" Padding="0" FitContent="False">
                 <controls:ListView ItemsSource="{Binding PortScanViewModel.OpenPorts}" AutoGenerateColumns="False">
                     <controls:ListView.Columns>
                         <DataGridTextColumn Header="Ports" Binding="{Binding}" />
