@@ -22,7 +22,12 @@ namespace SecurityCenter.UILogic.ViewModels
         private async void Scan(object obj)
         {
             await Model.ScanPorts();
-            OpenPorts = Model.ScannedPorts.Where(x => x.Value).Select(x => x.Key).ToList();
+
+            OpenPorts = Model.ScannedPorts
+                .Where(x => x.Value)
+                .Select(x => x.Key)
+                .OrderBy(x => x)
+                .ToList();
         }
 
         private List<int> openPorts = new List<int>();
