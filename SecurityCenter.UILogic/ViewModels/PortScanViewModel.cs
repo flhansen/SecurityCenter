@@ -21,6 +21,7 @@ namespace SecurityCenter.UILogic.ViewModels
         public ICommand ScanCommand { get; private set; }
         private async void Scan(object obj)
         {
+            IsScanning = true;
             await Model.ScanPorts();
 
             OpenPorts = Model.ScannedPorts
@@ -28,6 +29,15 @@ namespace SecurityCenter.UILogic.ViewModels
                 .Select(x => x.Key)
                 .OrderBy(x => x)
                 .ToList();
+
+            IsScanning = false;
+        }
+
+        private bool isScanning = false;
+        public bool IsScanning
+        {
+            get => isScanning;
+            set => SetProperty(ref isScanning, value);
         }
 
         private List<int> openPorts = new List<int>();
