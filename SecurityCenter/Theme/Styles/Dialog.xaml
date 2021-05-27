@@ -50,6 +50,7 @@
         <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
         <Setter Property="Opacity" Value="0.5" />
+        <Setter Property="LineHeight" Value="18" />
     </Style>
 
     <Style TargetType="{x:Type controls:DialogContent}">
