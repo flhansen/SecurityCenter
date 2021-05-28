@@ -24,7 +24,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <controls:PrimaryButton x:Name="ExecutionButton" Padding="7, 5" Visibility="Hidden">
+                                    <controls:PrimaryButton x:Name="ExecutionButton" CommandParameter="{Binding Model}" Command="{Binding DataContext.ScriptExecutionCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" Padding="7, 5" Visibility="Hidden">
                                         <fa:ImageAwesome Icon="Play" Width="8" Foreground="{StaticResource TextColor}" HorizontalAlignment="Center" />
                                     </controls:PrimaryButton>
 

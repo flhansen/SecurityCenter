@@ -85,9 +85,8 @@ namespace SecurityCenter.Business.Plugins
             Process process = new Process();
             process.StartInfo = new ProcessStartInfo
             {
-                FileName = Path,
-                CreateNoWindow = true,
-                WindowStyle = ProcessWindowStyle.Hidden
+                FileName = "powershell.exe",
+                Arguments = $"& {Path}"
             };
 
             process.Start();
