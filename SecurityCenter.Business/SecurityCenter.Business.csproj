@@ -63,6 +63,7 @@
     <Compile Include="Models\WindowsUpdateCollection.cs" />
     <Compile Include="Models\WindowsEvent.cs" />
     <Compile Include="Models\WindowsEventCollection.cs" />
+    <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Updates\UpdateDownloadCanceledEventArgs.cs" />
     <Compile Include="Updates\UpdateDownloadCompletedEventArgs.cs" />
