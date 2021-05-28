@@ -266,7 +266,7 @@ namespace SecurityCenter.Data.System
                     WindowsEvent windowsEvent = new WindowsEvent
                     {
                         TimeGenerated = (DateTime)e.TimeCreated,
-                        EntryType = e.LevelDisplayName,
+                        EntryType = GetLevelDisplayName((byte)e.Level),
                         Message = e.FormatDescription(),
                         Level = (byte)e.Level,
                         Source = e.ProviderName
@@ -277,6 +277,25 @@ namespace SecurityCenter.Data.System
             }
 
             return records;
+        }
+
+        private static string GetLevelDisplayName(byte level)
+        {
+            switch (level)
+            {
+                default:
+                    return "LogAlways";
+                case 1:
+                    return "Critical";
+                case 2:
+                    return "Error";
+                case 3:
+                    return "Warning";
+                case 4:
+                    return "Informational";
+                case 5:
+                    return "Verbose";
+            }   
         }
 
         public static string ExtractKbNumber(string updateName)
@@ -293,20 +312,29 @@ namespace SecurityCenter.Data.System
             WindowsUpdateCollection updates = new WindowsUpdateCollection();
 
             UpdateSession session = new UpdateSession();
-            var searchResult = session.CreateUpdateSearcher().Search("IsInstalled=0 and Type='Software' and IsHidden=0");
+            var updateSearcher = session.CreateUpdateSearcher();
 
-            foreach (IUpdate update in searchResult.Updates)
+            try
             {
-                WindowsUpdate model = new WindowsUpdate
-                {
-                    Update = update,
-                    Description = update.Description,
-                    Name = update.Title,
-                    ReleaseDate = update.LastDeploymentChangeTime,
-                    KbNumber = ExtractKbNumber(update.Title)
-                };
+                var searchResult = updateSearcher.Search("IsInstalled=0 and Type='Software' and IsHidden=0");
 
-                updates.Add(model);
+                foreach (IUpdate update in searchResult.Updates)
+                {
+                    WindowsUpdate model = new WindowsUpdate
+                    {
+                        Update = update,
+                        Description = update.Description,
+                        Name = update.Title,
+                        ReleaseDate = update.LastDeploymentChangeTime,
+                        KbNumber = ExtractKbNumber(update.Title)
+                    };
+
+                    updates.Add(model);
+                }
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.Message);
             }
 
             return updates;
