@@ -56,6 +56,8 @@
     <Compile Include="ViewModels\FirewallPageViewModel.cs" />
     <Compile Include="ViewModels\PluginPageViewModel.cs" />
     <Compile Include="ViewModels\PortScanViewModel.cs" />
+    <Compile Include="ViewModels\ScriptPluginCollectionViewModel.cs" />
+    <Compile Include="ViewModels\ScriptPluginViewModel.cs" />
     <Compile Include="ViewModels\SecurityStatusViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PortPageViewModel.cs" />

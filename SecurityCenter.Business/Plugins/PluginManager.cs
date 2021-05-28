@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,11 @@ namespace SecurityCenter.Business.Plugins
 {
     public class PluginManager
     {
+        /// <summary>
+        /// Extensions of plugin files, that are allowed.
+        /// </summary>
+        public static readonly string[] AllowedExtensions = { ".ps1", ".sh" };
+
         /// <summary>
         /// The directory, in which the plugins are stored.
         /// </summary>
@@ -23,16 +29,16 @@ namespace SecurityCenter.Business.Plugins
         }
 
         /// <summary>
-        /// The plugin executables.
+        /// The plugin scripts.
         /// </summary>
-        private List<string> plugins;
+        private ScriptPluginCollection scripts = new ScriptPluginCollection();
         /// <summary>
-        /// The plugin executables.
+        /// The plugin scripts.
         /// </summary>
-        public List<string> Plugins
+        public ScriptPluginCollection Scripts
         {
-            get => plugins;
-            private set => plugins = value;
+            get => scripts;
+            set => scripts = value;
         }
 
         /// <summary>
@@ -41,10 +47,22 @@ namespace SecurityCenter.Business.Plugins
         /// <param name="pluginDirectory">The directory, in which the plugins are stored.</param>
         public PluginManager(string pluginDirectory)
         {
-            string[] allowedExtensions = { ".ps1", ".sh" };
-
             PluginDirectory = pluginDirectory;
-            Plugins = LoadPlugins(pluginDirectory, allowedExtensions).ToList();
+
+            if (!Directory.Exists(pluginDirectory))
+            {
+                try
+                {
+                    Directory.CreateDirectory(pluginDirectory);
+                }
+                catch (Exception e)
+                {
+                    Trace.WriteLine(e.Message);
+                    Trace.WriteLine(e.StackTrace);
+                }
+            }
+
+            LoadPlugins();
         }
 
         /// <summary>
@@ -52,13 +70,18 @@ namespace SecurityCenter.Business.Plugins
         /// </summary>
         /// <param name="pluginDirectory">The directory, where the plugins are stored</param>
         /// <param name="allowedExtensions">The extensions, that plugins are allowed to have</param>
-        /// <returns></returns>
-        private IEnumerable<string> LoadPlugins(string pluginDirectory, string[] allowedExtensions)
+        public void LoadPlugins()
         {
+            // Reset the script list.
+            Scripts.Clear();
+
             // Get all the plugin files and filter them by the given extensions.
             IEnumerable<string> plugins = Directory.GetFiles(pluginDirectory)
-                .Where(file => allowedExtensions.Contains(Path.GetExtension(file.ToLower())));
-            return plugins;
+                .Where(file => AllowedExtensions.Contains(Path.GetExtension(file.ToLower())));
+            
+            // Add all script plugins to list.
+            foreach (string plugin in plugins)
+                Scripts.Add(new ScriptPlugin(plugin));
         }
     }
 }
