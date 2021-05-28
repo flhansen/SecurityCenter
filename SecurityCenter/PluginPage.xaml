@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
@@ -20,6 +21,26 @@
                         <DataGridTextColumn Header="Plugin" Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Autor" Binding="{Binding Author}" />
                         <DataGridTextColumn Header="Beschreibung" Binding="{Binding Description}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <controls:PrimaryButton x:Name="ExecutionButton" Padding="7, 5" Visibility="Hidden">
+                                        <fa:ImageAwesome Icon="Play" Width="8" Foreground="{StaticResource TextColor}" HorizontalAlignment="Center" />
+                                    </controls:PrimaryButton>
+
+                                    <DataTemplate.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Visibility" Value="Visible" TargetName="ExecutionButton" />
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </controls:ListView.Columns>
                 </controls:ListView>
             </controls:Card>
