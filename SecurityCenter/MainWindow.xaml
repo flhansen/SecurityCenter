@@ -36,6 +36,9 @@
         <DataTemplate DataType="{x:Type vm:PortPageViewModel}">
             <local:PortPage />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PluginPageViewModel}">
+            <local:PluginPage />
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -82,6 +85,13 @@
                         Title="Updates"
                         Icon="Wrench"
                         Command="{Binding UpdatePageSelectionCommand}" />
+                    <controls:VerticalMenuItem
+                        IsSelected="{Binding CurrentPageViewModel,
+                            Converter={StaticResource PageViewModelToBoolConverter},
+                            ConverterParameter={x:Type vm:PluginPageViewModel}}"
+                        Title="Plugins"
+                        Icon="Plug"
+                        Command="{Binding PluginPageSelectionCommand}" />
                 </controls:VerticalMenu>
             </controls:SideMenuSection>
             <controls:SideMenuSection>

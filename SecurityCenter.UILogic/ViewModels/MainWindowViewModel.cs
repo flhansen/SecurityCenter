@@ -25,6 +25,7 @@ namespace SecurityCenter.UILogic.ViewModels
             UpdatePageSelectionCommand = new RelayCommand(UpdatePageSelectionAction);
             FirewallPageSelectionCommand = new RelayCommand(FirewallPageSelectionAction);
             PortPageSelectionCommand = new RelayCommand(PortPageSelectionAction);
+            PluginPageSelectionCommand = new RelayCommand(PluginPageSelectionAction);
         }
 
         /// <summary>
@@ -56,6 +57,11 @@ namespace SecurityCenter.UILogic.ViewModels
         /// The viewmodel for the port page.
         /// </summary>
         public PortPageViewModel PortPageViewModel { get; set; } = new PortPageViewModel();
+
+        /// <summary>
+        /// The viewmodel for the plugin page.
+        /// </summary>
+        public PluginPageViewModel PluginPageViewModel { get; set; } = new PluginPageViewModel();
 
         /// <summary>
         /// The current selected page viewmodel. This is used to determine which page to be displayed.
@@ -140,6 +146,19 @@ namespace SecurityCenter.UILogic.ViewModels
         private void PortPageSelectionAction(object sender)
         {
             CurrentPageViewModel = PortPageViewModel;
+        }
+
+        /// <summary>
+        /// The command to select the plugin page.
+        /// </summary>
+        public ICommand PluginPageSelectionCommand { get; private set; }
+        /// <summary>
+        /// The method to select the plugin page.
+        /// </summary>
+        /// <param name="obj"></param>
+        private void PluginPageSelectionAction(object obj)
+        {
+            CurrentPageViewModel = PluginPageViewModel;
         }
     }
 }
