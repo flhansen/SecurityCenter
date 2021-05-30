@@ -73,7 +73,7 @@ namespace SecurityCenter.Business.Plugins
         public void LoadPlugins()
         {
             // Reset the script list.
-            Scripts.Clear();
+            Scripts = new ScriptPluginCollection();
 
             // Get all the plugin files and filter them by the given extensions.
             IEnumerable<string> plugins = Directory.GetFiles(pluginDirectory)

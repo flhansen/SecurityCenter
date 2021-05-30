@@ -89,17 +89,11 @@ namespace SecurityCenter.Business.Plugins
             Process process = new Process();
             process.StartInfo = new ProcessStartInfo
             {
-                FileName = Path,
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                WindowStyle = ProcessWindowStyle.Hidden
+                FileName = "powershell.exe",
+                Arguments = $"-NoProfile -ExecutionPolicy unrestricted \"{Path}\"",
             };
 
             process.Start();
-            string output = process.StandardOutput.ReadToEnd();
-            OnOutput?.Invoke(this, new ScriptPluginOutputEventArgs { Output = output });
-            process.WaitForExit();
         }
 
         /// <summary>

@@ -86,7 +86,9 @@ namespace SecurityCenter.UILogic.ViewModels.Core
                     break;
 
                 case NotifyCollectionChangedAction.Reset:
-                    LoadFromCollection(Collection);
+                    Clear();
+                    foreach (TModel model in Collection)
+                        Add(CreateViewModel(model));
                     break;
             }
 

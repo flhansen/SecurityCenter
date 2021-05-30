@@ -4,19 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecurityCenter"
+             xmlns:props="clr-namespace:SecurityCenter.Theme.CustomProperties"
+             xmlns:conv="clr-namespace:SecurityCenter.Theme.Converter"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:controls="clr-namespace:SecurityCenter.Theme.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:BoolNegationConverter x:Key="BoolNegationConverter" />
+    </UserControl.Resources>
     <Border Padding="48">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <controls:Card Title="Plugins" Grid.Row="0" Margin="0, 0, 0, 48" Padding="0">
-                <controls:ListView AutoGenerateColumns="False" ItemsSource="{Binding Scripts}">
+        <controls:Card Title="Plugins" Grid.Row="0" Padding="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Border Padding="24" HorizontalAlignment="Right" Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" props:ContainerSpacing.Spacing="16">
+                        <controls:TextField Label="Filter" Icon="Search" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" Width="400" />
+                        <controls:PrimaryButton Padding="7,5" VerticalAlignment="Bottom" Command="{Binding RefreshScriptsCommand}" IsEnabled="{Binding IsRefreshingScripts, Converter={StaticResource BoolNegationConverter}}">
+                            <fa:ImageAwesome Icon="Refresh" Width="14" Foreground="{StaticResource TextColor}" Spin="{Binding IsRefreshingScripts}" />
+                        </controls:PrimaryButton>
+                    </StackPanel>
+                </Border>
+                <controls:ListView AutoGenerateColumns="False" ItemsSource="{Binding FilteredScripts}" Grid.Row="1">
                     <controls:ListView.Columns>
                         <DataGridTextColumn Header="Plugin" Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Autor" Binding="{Binding Author}" />
@@ -43,13 +55,7 @@
                         </DataGridTemplateColumn>
                     </controls:ListView.Columns>
                 </controls:ListView>
-            </controls:Card>
-
-            <controls:Card Title="Output console" Grid.Row="1" Height="300" FitContent="False" Padding="0">
-                <Grid VerticalAlignment="Stretch">
-                    <Border Background="Black" Opacity="0.33" CornerRadius="0, 0, 7, 7" />
-                </Grid>
-            </controls:Card>
-        </Grid>
+            </Grid>
+        </controls:Card>
     </Border>
 </UserControl>
