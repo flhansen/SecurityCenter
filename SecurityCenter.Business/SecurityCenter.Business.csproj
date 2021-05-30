@@ -66,6 +66,7 @@
     <Compile Include="Plugins\ScriptPlugin.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Plugins\ScriptPluginCollection.cs" />
+    <Compile Include="Plugins\ScriptPluginOutputEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Updates\UpdateDownloadCanceledEventArgs.cs" />
     <Compile Include="Updates\UpdateDownloadCompletedEventArgs.cs" />

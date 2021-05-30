@@ -25,6 +25,10 @@ namespace SecurityCenter.Business.Plugins
             Author = GetScriptPropertyValue(path, "Author");
         }
 
+        #region Events
+        public event EventHandler<ScriptPluginOutputEventArgs> OnOutput;
+        #endregion
+
         /// <summary>
         /// The path to the plugin.
         /// </summary>
@@ -85,11 +89,16 @@ namespace SecurityCenter.Business.Plugins
             Process process = new Process();
             process.StartInfo = new ProcessStartInfo
             {
-                FileName = "powershell.exe",
-                Arguments = $"& {Path}"
+                FileName = Path,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                WindowStyle = ProcessWindowStyle.Hidden
             };
 
             process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            OnOutput?.Invoke(this, new ScriptPluginOutputEventArgs { Output = output });
             process.WaitForExit();
         }
 
