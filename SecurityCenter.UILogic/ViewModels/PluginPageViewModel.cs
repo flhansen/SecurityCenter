@@ -13,20 +13,34 @@ using System.Windows.Input;
 
 namespace SecurityCenter.UILogic.ViewModels
 {
+    /// <summary>
+    /// The ViewModel of the plugin page.
+    /// </summary>
     public class PluginPageViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Directory of plugins.
+        /// </summary>
         public static readonly string PluginDirectory = $"{Environment.CurrentDirectory}/Plugins";
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public PluginPageViewModel()
         {
+            // Command initialization
             ScriptExecutionCommand = new RelayCommand(ScriptExecution);
             RefreshScriptsCommand = new RelayCommand(RefreshScripts);
 
+            // Initialize the plugin manager and set the script list.
             PluginManager = new PluginManager(PluginDirectory);
             Scripts = new ScriptPluginCollectionViewModel(PluginManager.Scripts);
             FilteredScripts = Scripts.AsEnumerable();
         }
 
+        /// <summary>
+        /// The command to execute script plugins.
+        /// </summary>
         public ICommand ScriptExecutionCommand { get; private set; }
         private void ScriptExecution(object obj)
         {
@@ -34,6 +48,9 @@ namespace SecurityCenter.UILogic.ViewModels
             plugin.Execute();
         }
 
+        /// <summary>
+        /// The command to refresh scripts.
+        /// </summary>
         public ICommand RefreshScriptsCommand { get; private set; }
         private void RefreshScripts(object obj)
         {
@@ -53,6 +70,10 @@ namespace SecurityCenter.UILogic.ViewModels
         }
 
         private PluginManager pluginManager;
+
+        /// <summary>
+        /// The plugin manager.
+        /// </summary>
         public PluginManager PluginManager
         {
             get => pluginManager;
@@ -60,6 +81,10 @@ namespace SecurityCenter.UILogic.ViewModels
         }
 
         private ScriptPluginCollectionViewModel scripts;
+
+        /// <summary>
+        /// The script ViewModels.
+        /// </summary>
         public ScriptPluginCollectionViewModel Scripts
         {
             get => scripts;
@@ -67,6 +92,11 @@ namespace SecurityCenter.UILogic.ViewModels
         }
 
         private IEnumerable<ScriptPluginViewModel> filteredScripts;
+
+
+        /// <summary>
+        /// The scripts ViewModels filtered by FilteredText.
+        /// </summary>
         public IEnumerable<ScriptPluginViewModel> FilteredScripts
         {
             get => filteredScripts;
@@ -74,16 +104,18 @@ namespace SecurityCenter.UILogic.ViewModels
         }
 
         private bool isRefreshingScripts;
+
+        /// <summary>
+        /// If the ViewModel is refreshing scripts right now.
+        /// </summary>
         public bool IsRefreshingScripts
         {
             get => isRefreshingScripts;
             set => SetProperty(ref isRefreshingScripts, value);
         }
 
-        /// <summary>
-        /// String, which is used to filter the application collection.
-        /// </summary>
         private string filterText;
+
         /// <summary>
         /// String, which is used to filter the application collection.
         /// </summary>
